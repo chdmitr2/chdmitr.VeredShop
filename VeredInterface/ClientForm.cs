@@ -19,7 +19,12 @@ namespace VeredInterface
             InitializeComponent();
         }
 
-        
+        public ClientForm(Client client) : this()
+        {
+            Client = client;
+            textBox1.Text = client.Name;
+        }
+            
 
         private void ClientForm_Load(object sender, EventArgs e)
         {
@@ -28,10 +33,8 @@ namespace VeredInterface
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Client = new Client()
-            {
-                Name = textBox1.Text
-            };
+            var c = Client ?? new Client();
+            c.Name = textBox1.Text;
             Close();
 
         }

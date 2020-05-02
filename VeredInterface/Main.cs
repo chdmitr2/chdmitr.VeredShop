@@ -21,25 +21,25 @@ namespace VeredInterface
 
         private void productsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var catalogProduct = new Catalog<Product>(db.Products);
+            var catalogProduct = new Catalog<Product>(db.Products,db);
             catalogProduct.Show();
         }
 
         private void sellerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var catalogSeller = new Catalog<Seller>(db.Sellers);
+            var catalogSeller = new Catalog<Seller>(db.Sellers, db);
             catalogSeller.Show();
         }
 
         private void clientToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var catalogClient = new Catalog<Client>(db.Clients);
+            var catalogClient = new Catalog<Client>(db.Clients, db);
             catalogClient.Show();
         }
 
         private void checksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var checkClient = new Catalog<Check>(db.Checks);
+            var checkClient = new Catalog<Check>(db.Checks, db);
             checkClient.Show();
         }
 
@@ -79,6 +79,11 @@ namespace VeredInterface
                 db.SaveChanges();
 
             }
+        }
+
+        private void objectsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

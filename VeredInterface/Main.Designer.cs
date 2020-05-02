@@ -60,6 +60,7 @@
             this.objectsToolStripMenuItem.Name = "objectsToolStripMenuItem";
             this.objectsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.objectsToolStripMenuItem.Text = "Objects";
+            this.objectsToolStripMenuItem.Click += new System.EventHandler(this.objectsToolStripMenuItem_Click);
             // 
             // productsToolStripMenuItem
             // 
@@ -124,7 +125,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Main";
-            this.Text = "Form1";
+            this.Text = "Main";
             this.Load += new System.EventHandler(this.Main_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
