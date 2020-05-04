@@ -14,6 +14,7 @@ namespace VeredBl.Model
         public Cart (Client client)
         {
             Client = client;
+            Products = new Dictionary<Product, int>();
         }
         public void Add(Product product)
         {
@@ -37,6 +38,15 @@ namespace VeredBl.Model
                     yield return product;
                 }
             }
+        }
+        public List<Product> GetAll()
+        {
+            var result = new List<Product>();
+            foreach(Product i in this)
+            {
+                result.Add(i);
+            }
+            return result;
         }
     }
 
