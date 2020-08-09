@@ -1,0 +1,30 @@
+﻿<Window x:Class="VeredShopUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VeredShopUI"
+        mc:Ignorable="d"
+        Title="Vered Application" MouseLeftButtonDown="window_MouseLeftButtonDown" Height="550" Width="970" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid Background="White">
+        <DockPanel HorizontalAlignment="Left" Height="550" LastChildFill="False" VerticalAlignment="Top" Width="225" Background="Black"/>
+        <DockPanel HorizontalAlignment="Left" Height="124" LastChildFill="False" VerticalAlignment="Top" Width="158" Margin="230,0,0,0" Background="white"/>
+        <Button x:Name="btnUsers" Content="         Users &#xa; Only for Manager" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="225" Height="72" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="Users_Click" Margin="0,338,0,0"/>
+        <Button Content=" About" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="225" Margin="0,461,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="About_Click"/>
+        <Image Source="C:\Users\User\source\repos\VeredShop\Pictures\about.png" Margin="10,453,890,18"></Image>
+        <Image Source="C:\Users\User\source\repos\VeredShop\Pictures\Vered.png" Margin="225,0,582,436" OpacityMask="#FF290606" RenderTransformOrigin="0.138,0.452"></Image>
+        <Button Content="" Width="58" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="873,10,0,0" BorderBrush="#FF595151" Foreground="#FFDADADE" Height="59" RenderTransformOrigin="2.094,0.568" Click="Exit_Click">
+            <Button.Background>
+                <ImageBrush ImageSource=" C:\Users\User\source\repos\VeredShop\Pictures\Exit.png"></ImageBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="Storage" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="225" Margin="0,262,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="Storage_Click"/>
+        <Button Content="Buy through POS" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="225" Margin="0,185,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="ToOrder_Click"/>
+        <Button Content="Cart" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="225" Margin="0,109,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="Stock_Click"/>
+        <Button Content="         To Main Menu" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="224" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="OnMain_Click" Margin="-4,0,0,0"/>
+        <Image Source="C:\Users\User\source\repos\VeredShop\Pictures\home.png" Margin="0,10,890,483"></Image>
+        <Image Source="C:\Users\User\source\repos\VeredShop\Pictures\Storage.png" Margin="10,276,880,217"></Image>
+        <Image Source="C:\Users\User\source\repos\VeredShop\Pictures\Cart.png" Margin="0,109,890,384"></Image>
+        <Label Content="Vered Shop" HorizontalAlignment="Left" Margin="449,10,0,0" VerticalAlignment="Top" Width="316" Height="92" FontFamily="Segoe Print" FontSize="48" FontWeight="Bold"/>
+    </Grid>
+</Window>

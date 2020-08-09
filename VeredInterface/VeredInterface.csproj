@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B535DF55-E517-44B9-A294-A0EF4673F72D}</ProjectGuid>
+    <ProjectGuid>{E5829DD8-2470-4817-9113-BE12FC322946}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>VeredInterface</RootNamespace>
     <AssemblyName>VeredInterface</AssemblyName>
@@ -62,24 +62,6 @@
     <Compile Include="Catalog.Designer.cs">
       <DependentUpon>Catalog.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProductForm .cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ProductForm .Designer.cs">
-      <DependentUpon>ProductForm .cs</DependentUpon>
-    </Compile>
-    <Compile Include="SellerForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SellerForm.Designer.cs">
-      <DependentUpon>SellerForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ClientForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ClientForm.Designer.cs">
-      <DependentUpon>ClientForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,15 +72,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Catalog.resx">
       <DependentUpon>Catalog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ProductForm .resx">
-      <DependentUpon>ProductForm .cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SellerForm.resx">
-      <DependentUpon>SellerForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientForm.resx">
-      <DependentUpon>ClientForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

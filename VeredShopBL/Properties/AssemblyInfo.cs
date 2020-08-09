@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("VeredInterface")]
+[assembly: AssemblyTitle("VeredShopBL")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("VeredInterface")]
+[assembly: AssemblyProduct("VeredShopBL")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e5829dd8-2470-4817-9113-be12fc322946")]
+[assembly: Guid("d92e2348-a883-4fdf-8435-298a4ea343b3")]
 
 // Version information for an assembly consists of the following four values:
 //
