@@ -1,0 +1,26 @@
+﻿<Window x:Class="VeredShopUI.About"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VeredShopUI"
+        mc:Ignorable="d"
+        Title="About" MouseLeftButtonDown="window_MouseLeftButtonDown" Height="550" Width="970" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid Background="White">
+        <DockPanel HorizontalAlignment="Left" Height="550" LastChildFill="False" VerticalAlignment="Top" Width="225" Background="Black">
+            <Button x:Name="btnMain" Content="         To Main " Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="224" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="OnMain_Click"/>
+        </DockPanel>
+        <DockPanel HorizontalAlignment="Left" Height="124" LastChildFill="False" VerticalAlignment="Top" Width="158" Margin="230,0,0,0" Background="white"/>
+        <Image Source="C:\Users\User\source\repos\VeredShop\Pictures\Vered.png" Margin="225,0,582,436" OpacityMask="#FF290606" RenderTransformOrigin="0.138,0.452"></Image>
+        <Image Source="C:\Users\User\source\repos\VeredShop\Pictures\pic.jpg" Margin="321,114,82,136" OpacityMask="#FF290606" RenderTransformOrigin="0.138,0.452"></Image>
+        <Button Content="" Width="58" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="873,10,0,0" BorderBrush="#FF595151" Foreground="#FFDADADE" Height="59" RenderTransformOrigin="2.094,0.568" Click="Exit_Click">
+            <Button.Background>
+                <ImageBrush ImageSource=" C:\Users\User\source\repos\VeredShop\Pictures\Exit.png"></ImageBrush>
+            </Button.Background>
+        </Button>
+        <Image Source="C:\Users\User\source\repos\VeredShop\Pictures\home.png" Margin="0,10,890,483"></Image>
+        <Label Content="Vered Shop" HorizontalAlignment="Left" Margin="449,10,0,0" VerticalAlignment="Top" Width="316" Height="92" FontFamily="Segoe Print" FontSize="48" FontWeight="Bold"/>
+        <Label Content="email : veredshop26@gmail.com" HorizontalAlignment="Left" Margin="244,484,0,0" VerticalAlignment="Top" Width="629" Height="56" FontFamily="Segoe Print" FontSize="24" FontWeight="Bold"/>
+        <Label Content="st. Vered 26,Kiriat Motzkin phone: 077-320-6317" HorizontalAlignment="Left" Margin="244,428,0,0" VerticalAlignment="Top" Width="687" Height="56" FontFamily="Segoe Print" FontSize="24" FontWeight="Bold"/>
+    </Grid>
+</Window>

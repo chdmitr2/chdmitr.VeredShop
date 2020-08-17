@@ -38,7 +38,9 @@ namespace VeredShopUI
         }
         private void OnMain_Click(object sender, RoutedEventArgs e)
         {
-
+            Menu menu = new Menu();
+            menu.Show();
+            this.Close();
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)

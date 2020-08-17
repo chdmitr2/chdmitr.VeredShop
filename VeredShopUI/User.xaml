@@ -22,21 +22,24 @@
         <Image x:Name="imgHome" Source="C:\Users\User\source\repos\VeredShop\Pictures\home.png" Margin="0,10,890,483"/>
 
 
-        <TextBox x:Name="txbxEmail" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="105" Margin="801,150,0,0"/>
-        <Label x:Name="lblName" Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="472,107,0,0" FontSize="16" Width="123" FontFamily="Segoe Print" FontWeight="Bold"/>
-        <Label x:Name="lblPrice" Content="PhoneNumber:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="652,107,0,0" RenderTransformOrigin="-0.003,0.564" FontSize="16" Width="126" FontFamily="Segoe Print" FontWeight="Bold"/>
-        <TextBox x:Name="txbxUserName" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" Margin="472,150,0,0" RenderTransformOrigin="-0.083,0.765"/>
+        <TextBox x:Name="txbxPassword" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="105" Margin="801,150,0,0"/>
+        <Label x:Name="lblName" Content="LastName:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="472,107,0,0" FontSize="16" Width="123" FontFamily="Segoe Print" FontWeight="Bold"/>
+        <Label x:Name="lblPrice" Content="Email:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="652,107,0,0" RenderTransformOrigin="-0.003,0.564" FontSize="16" Width="126" FontFamily="Segoe Print" FontWeight="Bold"/>
+        <TextBox x:Name="txbxUserLastName" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" Margin="472,150,0,0" RenderTransformOrigin="-0.083,0.765"/>
         <DataGrid  x:Name="clientGrid" HorizontalAlignment="Left" Height="123" Margin="297,214,0,0" VerticalAlignment="Top"  Width="609" AlternatingRowBackground="LightSkyBlue" SelectionChanged="userGrid_SelectionChanged">
         </DataGrid>
-        <Label x:Name="lblCount" Content="Email:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="801,107,0,0" RenderTransformOrigin="-0.003,0.564" FontSize="16" Width="63" FontFamily="Segoe Print" FontWeight="Bold"></Label>
-        <TextBox x:Name="txbxPhoneNumber" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" Margin="652,150,0,0" RenderTransformOrigin="-0.083,0.765"  />
-        <Label x:Name="lblProductID" Content="ID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="297,107,0,0" FontSize="16" Width="123" FontFamily="Segoe Print" FontWeight="Bold"/>
+        <Label x:Name="lblCount" Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="801,107,0,0" RenderTransformOrigin="-0.003,0.564" FontSize="16" Width="105" FontFamily="Segoe Print" FontWeight="Bold"></Label>
+        <TextBox x:Name="txbxEmail" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" Margin="652,150,0,0" RenderTransformOrigin="-0.083,0.765"  />
+        <Label x:Name="lblProductID" Content="FirstName:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="297,107,0,0" FontSize="16" Width="123" FontFamily="Segoe Print" FontWeight="Bold"/>
         <Label x:Name="lblUsers" Content="Users" HorizontalAlignment="Left" Margin="518,0,0,0" VerticalAlignment="Top" Width="316" Height="92" FontFamily="Segoe Print" FontSize="48" FontWeight="Bold"/>
-        <TextBox x:Name="txbxUserID" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" Margin="297,150,0,0" RenderTransformOrigin="-0.083,0.765" />
+        <TextBox x:Name="txbxUserFirstName" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" Margin="297,150,0,0" RenderTransformOrigin="-0.083,0.765" />
         <DataGrid  x:Name="sellerGrid" HorizontalAlignment="Left" Height="62" Margin="297,371,0,0" VerticalAlignment="Top"  Width="609" AlternatingRowBackground="LightSkyBlue" SelectionChanged="userGrid_SelectionChanged"/>
         <DataGrid  x:Name="storekeeperGrid" HorizontalAlignment="Left" Height="62" Margin="297,464,0,0" VerticalAlignment="Top"  Width="609" AlternatingRowBackground="LightSkyBlue" SelectionChanged="userGrid_SelectionChanged"/>
         <Label x:Name="lblClients" Content="Clients" HorizontalAlignment="Left" Margin="548,175,0,0" VerticalAlignment="Top" Width="89" Height="39" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold"/>
         <Label x:Name="lblSellers" Content="Sellers" HorizontalAlignment="Left" Margin="548,337,0,0" VerticalAlignment="Top" Width="89" Height="39" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold"/>
         <Label x:Name="lblStorekeepers" Content="Storekeepers" HorizontalAlignment="Left" Margin="518,425,0,0" VerticalAlignment="Top" Width="134" Height="39" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold"/>
+        <CheckBox x:Name="chkbx1"  HorizontalAlignment="Left" Margin="264,272,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chkbx2"  HorizontalAlignment="Left" Margin="264,396,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chkbx3"  HorizontalAlignment="Left" Margin="264,492,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

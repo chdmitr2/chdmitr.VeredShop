@@ -10,10 +10,8 @@
         <DockPanel HorizontalAlignment="Left" Height="550" LastChildFill="False" VerticalAlignment="Top" Width="230" Background="Black">
             <Button Content="         To Main " Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="224" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="OnMain_Click"/>
         </DockPanel>
-        <Button Content="About" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="0,454,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="Button_Click"/>
-        <Image Source="C:\Users\User\source\repos\VeredShop\Pictures\about.png" Margin="10,453,890,18"></Image>
         <TextBox Name="NameBox"  HorizontalAlignment="Left" Height="50" TextWrapping="Wrap" VerticalAlignment="Top" Width="378" Margin="555,122,0,0" FontSize="36" TextDecorations="{x:Null}" FontFamily="{DynamicResource MainFont}" FontStyle="Italic"/>
-        <TextBox Name="LoginBox" HorizontalAlignment="Left" Height="50" TextWrapping="Wrap" VerticalAlignment="Top" Width="378" Margin="555,245,0,0" FontSize="34" TextDecorations="{x:Null}" FontFamily="{DynamicResource MainFont}" FontStyle="Italic"/>
+        <TextBox Name="EmailBox" HorizontalAlignment="Left" Height="50" TextWrapping="Wrap" VerticalAlignment="Top" Width="378" Margin="555,245,0,0" FontSize="34" TextDecorations="{x:Null}" FontFamily="{DynamicResource MainFont}" FontStyle="Italic"/>
         <Label Content="First Name" HorizontalAlignment="Left" Margin="240,107,0,0" VerticalAlignment="Top" FontFamily="Segoe Print" FontSize="32" FontWeight="Bold" Width="204" FontStyle="Italic"/>
         <Button Content="Create and access" Foreground="White" HorizontalAlignment="Left" Margin="418,454,0,0" VerticalAlignment="Top" Width="292" Height="54" Background="#FF060202" FontSize="24" Click="Registration_Click"/>
         <TextBox Name="SurnameBox" HorizontalAlignment="Left" Height="50" TextWrapping="Wrap" VerticalAlignment="Top" Width="378" Margin="555,183,0,0" FontSize="36" TextDecorations="{x:Null}" FontFamily="{DynamicResource MainFont}" FontStyle="Italic"/>
@@ -21,10 +19,15 @@
         <Label Content="Last Name" HorizontalAlignment="Left" Margin="240,167,0,0" VerticalAlignment="Top" FontFamily="Segoe Print" FontSize="32" FontWeight="Bold" Width="227" FontStyle="Italic"/>
         <Label Content="Email" HorizontalAlignment="Left" Margin="240,229,0,0" VerticalAlignment="Top" FontFamily="Segoe Print" FontSize="32" FontWeight="Bold" Width="184" FontStyle="Italic"/>
         <Label Content="Password" HorizontalAlignment="Left" Margin="240,295,0,0" VerticalAlignment="Top" FontFamily="Segoe Print" FontSize="32" FontWeight="Bold" Width="204" FontStyle="Italic"/>
-        <Label Content="Create User" HorizontalAlignment="Left" Margin="449,10,0,0" VerticalAlignment="Top" Width="316" Height="92" FontFamily="Segoe Print" FontSize="48" FontWeight="Bold"/>
+        <Label Content="Create User" HorizontalAlignment="Left" Margin="394,10,0,0" VerticalAlignment="Top" Width="316" Height="92" FontFamily="Segoe Print" FontSize="48" FontWeight="Bold"/>
         <PasswordBox x:Name="PassBox2" PasswordChar="•" HorizontalAlignment="Left" Height="50"  VerticalAlignment="Top" Width="378" Margin="555,360,0,0" FontSize="36" FontFamily="{DynamicResource MainFont}" FontStyle="Italic"/>
         <Label Content="Repeat password" HorizontalAlignment="Left" Margin="237,356,0,0" VerticalAlignment="Top" FontFamily="Segoe Print" FontSize="32" FontWeight="Bold" Width="313" FontStyle="Italic" RenderTransformOrigin="0.491,2.092"/>
         <Image Source="C:\Users\User\source\repos\VeredShop\Pictures\home.png" Margin="0,10,890,483"/>
+        <Button Content="" Width="58" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="873,10,0,0" BorderBrush="#FF595151" Foreground="#FFDADADE" Height="59" RenderTransformOrigin="2.094,0.568" Click="Exit_Click">
+            <Button.Background>
+                <ImageBrush ImageSource=" C:\Users\User\source\repos\VeredShop\Pictures\Exit.png"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>
 

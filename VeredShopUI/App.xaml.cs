@@ -13,5 +13,8 @@ namespace VeredShopUI
     /// </summary>
     public partial class App : Application
     {
+
+      
+        
     }
 }

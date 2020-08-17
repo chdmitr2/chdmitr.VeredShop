@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO.Packaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,48 +10,32 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VeredShopBL.VeredShopModel;
 
 namespace VeredShopUI
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Enter.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        VeredContext dataBase;
+        VeredContext DB = new VeredContext();
         public MainWindow()
         {
             InitializeComponent();
-            dataBase = new VeredContext();
-
+           
         }
-
         private void window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
+        { 
             this.DragMove();
         }
 
-        private void OnMain_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Stock_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ToOrder_Click(object sender, RoutedEventArgs e)
-        {
-
-        }     
-
         private void About_Click(object sender, RoutedEventArgs e)
         {
-
+            var about = new About();
+            about.Show();
+            this.Close();
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -60,18 +43,73 @@ namespace VeredShopUI
             this.Close();
         }
 
-        private void Storage_Click(object sender, RoutedEventArgs e)
+
+        private void Login_Click(object sender, RoutedEventArgs e)
         {
-            var storageProduct = new Storage();
-            storageProduct.Show();
-            this.Close();
+            if (LoginBox.Text == "admin" && PassBox.Password == "admin")
+            {
+                var menu = new Menu();
+                menu.Show();
+                this.Close();
+            }
+            else
+            {
+
+                try
+                {
+                    var email = DB.Clients.Where(u => u.Email == LoginBox.Text).FirstOrDefault();
+
+                    if ((LoginBox.Text == "") || (PassBox.Password == ""))
+                    {
+                        if (LoginBox.Text == "")
+                        {
+                            MessageBox.Show("Email is Required!", "Caution", MessageBoxButton.OK);
+                            LoginBox.Focus();
+                        }
+                        else if (PassBox.Password == "")
+                        {
+                            MessageBox.Show("Password is Required!", "Caution", MessageBoxButton.OK);
+                            PassBox.Focus();
+                        }
+                    }
+                    else
+                    {
+                        if (email != null)
+                        {
+                            var pass = email.Password;
+                            pass = PassBox.Password;
+                            if (PassBox.Password == pass)
+                            {
+                                MessageBox.Show("Login Successfully!", "Login Success", MessageBoxButton.OK);
+                                var menu = new Menu();
+                                menu.Show();
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Email and Password are wrong!");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Email and Password is invalid");
+                        }
+
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+            }
         }
 
-        private void Users_Click(object sender, RoutedEventArgs e)
+        private void Registration_Click(object sender, RoutedEventArgs e)
         {
-            var shopUsers = new User();
-            shopUsers.Show();
+            Registaration registration = new Registaration();
+            registration.Show();
             this.Close();
+
         }
     }
 }

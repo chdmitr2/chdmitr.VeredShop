@@ -44,24 +44,42 @@ namespace VeredShopUI
 
         private void AddUser_Click(object sender, RoutedEventArgs e)
         {
-            if (txbxUserName.Text == "")
+            if (txbxUserFirstName.Text == "")
             {
                 MessageBox.Show("Name Should be Filled!", "Warning!", MessageBoxButton.OK);
-                txbxUserName.Focus();
+                txbxUserFirstName.Focus();
             }
 
             else
             {
-               
+                if (chkbx1.IsChecked == true)
+                {
                     var client = new Client()
                     {
-                        Name = txbxUserName.Text,
+                        FirstName = txbxUserFirstName.Text,
+                        LastName = txbxUserLastName.Text,
+                        Email = txbxEmail.Text,
+                        Password = txbxPassword.Text,
                     };
                     dataBase.Clients.Add(client);
                     dataBase.SaveChanges();
                     showData();
                     MessageBox.Show("New Client Is Added");
-               
+                }
+
+                if (chkbx2.IsChecked == true)
+                {
+                    var seller = new Seller()
+                    {
+                        Name = txbxUserFirstName.Text,
+                       
+                    };
+                    dataBase.Sellers.Add(seller);
+                    dataBase.SaveChanges();
+                    showData();
+                    MessageBox.Show("New Seller Is Added");
+                }
+
 
             }
         }
@@ -73,12 +91,34 @@ namespace VeredShopUI
 
         private void DeleteUser_Click(object sender, RoutedEventArgs e)
         {
+            var Data = clientGrid.SelectedItem;
+            if (chkbx1.IsChecked == true)
+            {
+                if (MessageBox.Show("Are You Sure Want to Delete This Client?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        var str = (clientGrid.SelectedCells[0].Column.GetCellContent(Data) as TextBlock).Text;
+                        int id = Convert.ToInt32(str);
+                        var delete = dataBase.Clients.Where(i => i.ClientId == id).FirstOrDefault();
+                        dataBase.Clients.Remove(delete);
+                        dataBase.SaveChanges();
+                        MessageBox.Show("Client has been delete.", "Caution", MessageBoxButton.OK);
+                        showData();
 
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+            }   }
         }
 
         private void OnMain_Click(object sender, RoutedEventArgs e)
         {
-
+           Menu menu = new Menu();
+            menu.Show();
+            this.Close();
         }
 
         private void ExitUser_Click(object sender, RoutedEventArgs e)
@@ -95,49 +135,49 @@ namespace VeredShopUI
             if (Data != null)
             {
                 var Id = (clientGrid.SelectedCells[0].Column.GetCellContent(Data) as TextBlock).Text;
-                txbxUserID.Text = Id;
+                txbxUserFirstName.Text = Id;
                 var Name = (clientGrid.SelectedCells[1].Column.GetCellContent(Data) as TextBlock).Text;
-                txbxUserName.Text = Name;
+                txbxUserLastName.Text = Name;
                 
             }
             else
             {
-                txbxUserID.Text = "0";
-                txbxUserName.Text = "Name";
-                txbxPhoneNumber.Text = "Phone";
-                txbxEmail.Text = "Mail";
+                txbxUserFirstName.Text = " ";
+                txbxUserLastName.Text = " ";
+                txbxEmail.Text = " ";
+                txbxPassword.Text = " ";
             }
             if (Data2 != null)
             {
                 var Id = (clientGrid.SelectedCells[0].Column.GetCellContent(Data2) as TextBlock).Text;
-                txbxUserID.Text = Id;
+                txbxUserFirstName.Text = Id;
                 var Name = (clientGrid.SelectedCells[1].Column.GetCellContent(Data2) as TextBlock).Text;
-                txbxUserName.Text = Name;
+                txbxUserLastName.Text = Name;
             }
             else
             {
-                txbxUserID.Text = "0";
-                txbxUserName.Text = "Name";
-                txbxPhoneNumber.Text = "Phone";
-                txbxEmail.Text = "Mail";
+                txbxUserFirstName.Text = " ";
+                txbxUserLastName.Text = " ";
+                txbxEmail.Text = " ";
+                txbxPassword.Text = " ";
             }
             if (Data3 != null)
             {
                 var Id = (clientGrid.SelectedCells[0].Column.GetCellContent(Data3) as TextBlock).Text;
-                txbxUserID.Text = Id;
+                txbxUserFirstName.Text = Id;
                 var Name = (clientGrid.SelectedCells[1].Column.GetCellContent(Data3) as TextBlock).Text;
-                txbxUserName.Text = Name;
+                txbxUserLastName.Text = Name;
                 var Price = (clientGrid.SelectedCells[2].Column.GetCellContent(Data3) as TextBlock).Text;
-                txbxPhoneNumber.Text = Price;
+                txbxEmail.Text = Price;
                 var Count = (clientGrid.SelectedCells[3].Column.GetCellContent(Data3) as TextBlock).Text;
-                txbxEmail.Text = Count;
+                txbxPassword.Text = Count;
             }
             else
             {
-                txbxUserID.Text = "0";
-                txbxUserName.Text = "Name";
-                txbxPhoneNumber.Text = "Phone";
-                txbxEmail.Text = "Mail";
+                txbxUserFirstName.Text = " ";
+                txbxUserLastName.Text = " ";
+                txbxEmail.Text = " ";
+                txbxPassword.Text = " ";
             }
         }
     }

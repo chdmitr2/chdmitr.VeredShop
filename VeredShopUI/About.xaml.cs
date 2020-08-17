@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace VeredShopUI
 {
     /// <summary>
-    /// Interaction logic for Enter.xaml
+    /// Interaction logic for About.xaml
     /// </summary>
-    public partial class Enter : Window
+    public partial class About : Window
     {
-        public Enter()
+        public About()
         {
             InitializeComponent();
         }
@@ -28,24 +28,18 @@ namespace VeredShopUI
             this.DragMove();
         }
 
-        private void About_Click(object sender, RoutedEventArgs e)
+        private void OnMain_Click(object sender, RoutedEventArgs e)
         {
-
+           
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+                this.Close();
+          
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Login_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Registration_Click(object sender, RoutedEventArgs e)
-        {
-
+            this.Close();
         }
     }
 }
