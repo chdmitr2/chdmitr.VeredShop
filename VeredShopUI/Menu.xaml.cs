@@ -44,10 +44,7 @@ namespace VeredShopUI
             this.Close();
         }
 
-        private void Stock_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+      
 
         private void ToOrder_Click(object sender, RoutedEventArgs e)
         {
@@ -70,6 +67,13 @@ namespace VeredShopUI
         {
             var shopUsers = new User();
             shopUsers.Show();
+            this.Close();
+        }
+
+        private void Self_Purchase_Click(object sender, RoutedEventArgs e)
+        {
+            var selfPurchase = new SelfPurchase();
+            selfPurchase.Show();
             this.Close();
         }
     }

@@ -74,6 +74,9 @@
     <Compile Include="Registaration.xaml.cs">
       <DependentUpon>Registaration.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SelfPurchase.xaml.cs">
+      <DependentUpon>SelfPurchase.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Storage.xaml.cs">
       <DependentUpon>Storage.xaml</DependentUpon>
     </Compile>
@@ -101,6 +104,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Registaration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SelfPurchase.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
