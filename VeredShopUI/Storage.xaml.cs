@@ -59,7 +59,8 @@ namespace VeredShopUI
                 {
                     Name = txbxName.Text,
                     Price = Convert.ToDecimal(txbxPrice.Text),
-                    Count = Convert.ToInt32(txbxCount.Text),
+                    Barcode = Convert.ToInt64(txbxBarcode.Text),
+                    CountInStorage = Convert.ToInt32(txbxCountInStorage.Text),
                 };
                     dataBase.Products.Add(product);
                     dataBase.SaveChanges();
@@ -79,7 +80,7 @@ namespace VeredShopUI
             var update = dataBase.Products.Where(i => i.ProductId == id).FirstOrDefault();
             update.Name = txbxName.Text;
             update.Price = Convert.ToDecimal(txbxPrice.Text);
-            update.Count = Convert.ToInt32(txbxCount.Text);
+            update.CountInStorage = Convert.ToInt32(txbxCountInStorage.Text);
             dataBase.SaveChanges();
             showData();
             MessageBox.Show("Data is Updated");
@@ -138,16 +139,22 @@ namespace VeredShopUI
                 txbxProductID.Text = Id;
                 var Name = (storageGrid.SelectedCells[1].Column.GetCellContent(Data) as TextBlock).Text;
                 txbxName.Text = Name;
-                var Price = (storageGrid.SelectedCells[2].Column.GetCellContent(Data) as TextBlock).Text;
+                var Barcode = (storageGrid.SelectedCells[2].Column.GetCellContent(Data) as TextBlock).Text;
+                txbxName.Text = Barcode;
+                var Price = (storageGrid.SelectedCells[3].Column.GetCellContent(Data) as TextBlock).Text;
                 txbxPrice.Text = Price;
-                var Count = (storageGrid.SelectedCells[3].Column.GetCellContent(Data) as TextBlock).Text;
-                txbxCount.Text = Count;
+                var CountInStorage = (storageGrid.SelectedCells[4].Column.GetCellContent(Data) as TextBlock).Text;
+                txbxCountInStorage.Text = CountInStorage;
+                var CountOnShelf = (storageGrid.SelectedCells[5].Column.GetCellContent(Data) as TextBlock).Text;
+                txbxCountOnShelf.Text = CountOnShelf;
             }
             else {
                 txbxProductID.Text = "0";
-                txbxName.Text = "Name";
+                txbxName.Text = "";
+                txbxBarcode.Text = "";
                 txbxPrice.Text = "0.00";
-                txbxCount.Text = "0";
+                txbxCountInStorage.Text = "0"; 
+                txbxCountOnShelf.Text = "0";
             }
 
         }

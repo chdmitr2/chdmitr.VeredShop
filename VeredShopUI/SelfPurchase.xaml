@@ -28,6 +28,7 @@
         <ListBox x:Name="ltbxCart" HorizontalAlignment="Left" Height="305" Margin="524,175,0,0" VerticalAlignment="Top" Width="407" SelectionChanged="ltbxCart_SelectionChanged"/>
         <Label Content="Cart" HorizontalAlignment="Left" Margin="686,79,0,0" VerticalAlignment="Top" Width="79" Height="45" FontFamily="Segoe Print" FontSize="24" FontWeight="Bold"/>
         <Label Content="product           quantity                 price" HorizontalAlignment="Left" Margin="524,129,0,0" VerticalAlignment="Top" Width="407" Height="46" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold"/>
-        <Label Content="Total Price:" HorizontalAlignment="Left" Margin="257,460,0,0" VerticalAlignment="Top" Width="180" Height="47" FontFamily="Segoe Print" FontSize="24" FontWeight="Bold"/>
+        <Label x:Name="tplbl" Content="Total Price:" HorizontalAlignment="Left" Margin="585,493,0,0" VerticalAlignment="Top" Width="180" Height="47" FontFamily="Segoe Print" FontSize="24" FontWeight="Bold"/>
+        <Label x:Name="lblPrice" Content="Label" HorizontalAlignment="Left" Margin="816,502,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.882,0.135" Width="115" Height="38"/>
     </Grid>
 </Window>

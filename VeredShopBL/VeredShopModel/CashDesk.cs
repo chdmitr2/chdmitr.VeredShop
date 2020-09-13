@@ -15,14 +15,14 @@ namespace VeredShopBL.VeredShopModel
 
         public int MaxQueueLength { get; set; }
         public int ExitClient { get; set; }
-        public bool IsModel { get; set; }
+       
 
         public CashDesk(int number,Seller seller)
         {
             Number = number;
             Seller = seller;
             Queue = new Queue<Cart>();
-            IsModel = true;
+            
         }
 
         public void Enqueue(Cart cart)
@@ -51,20 +51,16 @@ namespace VeredShopBL.VeredShopModel
                     Client = card.Client,
                     Created = DateTime.Now
                 };
-                if (!IsModel)
-                {
+               
                     dataBase.Checks.Add(check);
                     dataBase.SaveChanges();
-                }
-                else
-                {
                     check.CheckId = 0;
-                }
+                
                 var sells = new List<Sell>();
 
                 foreach(Product product in card)
                 {
-                    if (product.Count > 0)
+                    if (product.CountInStorage > 0)
                     {
 
 
@@ -72,24 +68,20 @@ namespace VeredShopBL.VeredShopModel
                         {
                             CheckId = check.CheckId,
                             Check = check,
-                            ProductId = product.ProductId,
+                            Barcode = product.Barcode,
                             Product = product
                         };
 
-                        if (!IsModel)
-                        {
                             dataBase.Sells.Add(sell);
-                        }
+                     
 
-                        product.Count--;
+                        product.CountInStorage--;
                         sum += product.Price;
                     }
                 }
 
-                if(!IsModel )
-                {
                     dataBase.SaveChanges();
-                }
+               
             }
             return sum;
         }

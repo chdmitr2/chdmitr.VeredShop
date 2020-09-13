@@ -12,6 +12,7 @@ namespace VeredShopBL.VeredShopModel
         public Client Client { get; set; }
 
         public Dictionary<Product ,int> Products { get; set; }
+        public decimal Price => GetAll().Sum(p => p.Price);
 
         public Cart(Client client)
         {
