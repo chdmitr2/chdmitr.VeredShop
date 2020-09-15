@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
+using System.Windows.Threading;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using VeredShopBL.VeredShopModel;
@@ -23,7 +21,8 @@ namespace VeredShopUI
         VeredContext dataBase; 
         Cart cart;
         Client client;
-        System.Windows.Threading.DispatcherTimer tmrDelay = new System.Windows.Threading.DispatcherTimer();
+        CashDesk cashDesk;
+        DispatcherTimer tmrDelay = new DispatcherTimer();
 
         
 
@@ -32,6 +31,8 @@ namespace VeredShopUI
             dataBase = new VeredContext();
             InitializeComponent();
             cart = new Cart(client);
+            cashDesk = new CashDesk(dataBase.Sellers.FirstOrDefault());
+            
         }
 
         private void window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -46,13 +47,22 @@ namespace VeredShopUI
 
         private void Remove_Product_from_Cart_Click(object sender, RoutedEventArgs e)
         {
+            if (MessageBox.Show("Are You Sure Want to Delete This Product?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    ltbxCart.Items.Remove(product);
+                    MessageBox.Show("Product has been delete from list", "Caution", MessageBoxButton.OK);
+                   
 
+                }
+                catch (Exception)
+                {
+
+                }
+            }
         }
-
-        private void Add_Product_to_Cart_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+ 
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
@@ -61,7 +71,13 @@ namespace VeredShopUI
 
         private void To_Payment_Click(object sender, RoutedEventArgs e)
         {
+                cashDesk.Enqueue(cart);
+                var price = cashDesk.Dequeue();
+                ltbxCart.Items.Clear();
+                cart = new Cart(client);
 
+                MessageBox.Show("Congratulations on your purchase!  Price: " + price, "Purchase succeed!", MessageBoxButton.OK);
+          
         }
 
         private void ltbxCart_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -105,7 +121,9 @@ namespace VeredShopUI
 
                         cart.Add(product);
                         ltbxCart.Items.Add(product);
+                       
                         UpdateLists();
+                        
                     }
                     else
                     {
@@ -120,15 +138,21 @@ namespace VeredShopUI
                     MessageBox.Show(ex.Message);
                 }
             }
-
-
-       
-
+        
         private void UpdateLists()
         {
             ltbxCart.Items.Clear();
-            ltbxCart.Items.Add(cart.GetAll().ToArray());
-           
+            foreach (Product product in cart)
+            {
+                ltbxCart.Items.Add(product);
+            }
+                lblPrice.Content = cart.Price;
+        
+
+          
+            
+
         }
+
     }
 }

@@ -9,33 +9,34 @@ namespace VeredShopBL.VeredShopModel
     public class CashDesk
     {
         VeredContext dataBase = new VeredContext();
-        public int Number { get; set; }
+     
         public Seller Seller { get; set; }
-        public Queue<Cart> Queue { get; set; }
 
-        public int MaxQueueLength { get; set; }
-        public int ExitClient { get; set; }
+        public Client Client { get; set; }
+        public Queue<Cart> Queue { get; set; }
+        public int Count => Queue.Count;
+
+       
        
 
-        public CashDesk(int number,Seller seller)
+        public CashDesk(Seller seller)
         {
-            Number = number;
             Seller = seller;
             Queue = new Queue<Cart>();
             
         }
 
-        public void Enqueue(Cart cart)
+        public CashDesk( Client client)
         {
-            if(Queue.Count <= MaxQueueLength )
-            {
-                Queue.Enqueue(cart);
+           
+            Client = client;
+            Queue = new Queue<Cart>();
 
-            }
-            else
-            {
-                ExitClient++;
-            }
+        }
+
+       public void Enqueue(Cart cart)
+        {
+            Queue.Enqueue(cart);
         }
         public decimal Dequeue()
         {
