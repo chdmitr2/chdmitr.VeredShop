@@ -21,7 +21,7 @@ namespace VeredShopBL.VeredShopModel
 
         public override string ToString()
         {
-            return $"{Name}                     -                         1                       -                    {Price}";
+            return $"{Name}           -            1            -          {Price}";
         }
         public override int GetHashCode()
         {

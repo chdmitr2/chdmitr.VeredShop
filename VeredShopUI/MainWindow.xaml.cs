@@ -21,6 +21,7 @@ namespace VeredShopUI
     public partial class MainWindow : Window
     {
         VeredContext DB = new VeredContext();
+        public Client client { get; set; }
         public MainWindow()
         {
             InitializeComponent();
