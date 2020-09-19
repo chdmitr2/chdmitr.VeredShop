@@ -63,12 +63,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\VeredShopBL\VeredShopBL.csproj">
-      <Project>{D92E2348-A883-4FDF-8435-298A4EA343B3}</Project>
-      <Name>VeredShopBL</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

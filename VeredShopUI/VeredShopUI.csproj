@@ -149,7 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VeredShopBL\VeredShopBL.csproj">
-      <Project>{d92e2348-a883-4fdf-8435-298a4ea343b3}</Project>
+      <Project>{601ec66b-4504-450f-8bd6-a91061117350}</Project>
       <Name>VeredShopBL</Name>
     </ProjectReference>
   </ItemGroup>

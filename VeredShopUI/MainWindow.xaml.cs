@@ -21,7 +21,7 @@ namespace VeredShopUI
     public partial class MainWindow : Window
     {
         VeredContext DB = new VeredContext();
-        public Client client { get; set; }
+        Client client;
         public MainWindow()
         {
             InitializeComponent();
@@ -82,7 +82,8 @@ namespace VeredShopUI
                             if (PassBox.Password == pass)
                             {
                                 MessageBox.Show("Login Successfully!", "Login Success", MessageBoxButton.OK);
-                                var menu = new Menu();
+                                client = DB.Clients.Where(u => u.Email == LoginBox.Text).FirstOrDefault();
+                                var menu = new Menu(client);
                                 menu.Show();
                                 this.Close();
                             }

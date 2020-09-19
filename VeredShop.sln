@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VeredShopBL", "VeredShopBL\VeredShopBL.csproj", "{D92E2348-A883-4FDF-8435-298A4EA343B3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VeredShopUI", "VeredShopUI\VeredShopUI.csproj", "{A929FB05-19E6-47C2-AA4B-0FF24597DDFE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VeredShopBLTests", "VeredShopBLTests\VeredShopBLTests.csproj", "{16BE614B-D643-44EE-8DC6-098C4E0783A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VeredShopBL", "VeredShopBL\VeredShopBL.csproj", "{601EC66B-4504-450F-8BD6-A91061117350}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D92E2348-A883-4FDF-8435-298A4EA343B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D92E2348-A883-4FDF-8435-298A4EA343B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D92E2348-A883-4FDF-8435-298A4EA343B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D92E2348-A883-4FDF-8435-298A4EA343B3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A929FB05-19E6-47C2-AA4B-0FF24597DDFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A929FB05-19E6-47C2-AA4B-0FF24597DDFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A929FB05-19E6-47C2-AA4B-0FF24597DDFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +23,10 @@ Global
 		{16BE614B-D643-44EE-8DC6-098C4E0783A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16BE614B-D643-44EE-8DC6-098C4E0783A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16BE614B-D643-44EE-8DC6-098C4E0783A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{601EC66B-4504-450F-8BD6-A91061117350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{601EC66B-4504-450F-8BD6-A91061117350}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{601EC66B-4504-450F-8BD6-A91061117350}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{601EC66B-4504-450F-8BD6-A91061117350}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

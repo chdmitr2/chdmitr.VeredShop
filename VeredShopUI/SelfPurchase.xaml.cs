@@ -18,13 +18,15 @@ namespace VeredShopUI
    
     public partial class SelfPurchase : Window
     {
+        #region Defining Objets
         VeredContext dataBase; 
         Cart cart;
         Client client;
         CashDesk cashDesk;
         DispatcherTimer tmrDelay = new DispatcherTimer();
+        #endregion
 
-        #region Initializing Self Purchase Window
+        #region Initializing Self Purchase Window (Constructors)
 
         public SelfPurchase()
         {
@@ -32,27 +34,27 @@ namespace VeredShopUI
             InitializeComponent();
             cart = new Cart(client);
             cashDesk = new CashDesk(dataBase.Sellers.FirstOrDefault());
-            var main = new MainWindow();
-            if(main.ShowDialog() == DialogResult.HasValue)
-            {
-                var tempClient= dataBase.Clients.FirstOrDefault(i=> i.FirstName.Equals(main.Client.Name))
-            }
-            if (client != null)
-            {
-                
-                clientLabel.Content = $"Hello, {client.FirstName}";
-                clientLabel.FontSize = 16;
-                clientLabel.FontFamily = new FontFamily("SegoePrint");
-                clientLabel.FontWeight = FontWeights.Bold;
-            }
-            else
-            {
+           
                 clientLabel.FontSize = 20;
                 clientLabel.FontFamily = new FontFamily("SegoePrint");
                 clientLabel.FontWeight = FontWeights.Bold;
                 clientLabel.Content = $"Hello, guest";
-               
-            }
+           
+        }
+       
+        public SelfPurchase(Client client)
+        {
+            dataBase = new VeredContext();
+            InitializeComponent();
+            cart = new Cart(client);
+            cashDesk = new CashDesk(client);
+            
+                clientLabel.Content = $"Hello, {client.FirstName}";
+                clientLabel.FontSize = 16;
+                clientLabel.FontFamily = new FontFamily("SegoePrint");
+                clientLabel.FontWeight = FontWeights.Bold;
+           
+            
         }
         #endregion
 
@@ -113,20 +115,22 @@ namespace VeredShopUI
         }
         #endregion
 
+        #region Payment
         private void To_Payment_Click(object sender, RoutedEventArgs e)
         {
-                cashDesk.Enqueue(cart);
-                var price = cashDesk.Dequeue();
+                var price = cashDesk.Dequeue(cart);
+                MessageBox.Show("Congratulations on your purchase!  Price: " + price, "Purchase succeed!", MessageBoxButton.OK);
                 ltbxCart.Items.Clear();
                 cart = new Cart(client);
-
-                MessageBox.Show("Congratulations on your purchase!  Price: " + price, "Purchase succeed!", MessageBoxButton.OK);         
         }
+        #endregion
 
+        #region ListBox Cart
         private void ltbxCart_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
         }
+        #endregion
 
         #region Add Products To Cart
         private void txbxBarcode_TextChanged(object sender, TextChangedEventArgs e)

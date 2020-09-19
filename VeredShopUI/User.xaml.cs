@@ -71,7 +71,7 @@ namespace VeredShopUI
                 {
                     var seller = new Seller()
                     {
-                        Name = txbxUserFirstName.Text,
+                        FirstName = txbxUserFirstName.Text,
                        
                     };
                     dataBase.Sellers.Add(seller);
@@ -134,10 +134,10 @@ namespace VeredShopUI
 
             if (Data != null)
             {
-                var Id = (clientGrid.SelectedCells[0].Column.GetCellContent(Data) as TextBlock).Text;
-                txbxUserFirstName.Text = Id;
-                var Name = (clientGrid.SelectedCells[1].Column.GetCellContent(Data) as TextBlock).Text;
-                txbxUserLastName.Text = Name;
+                var FirstName = (clientGrid.SelectedCells[0].Column.GetCellContent(Data) as TextBlock).Text;
+                txbxUserFirstName.Text = FirstName;
+                var LastName = (clientGrid.SelectedCells[1].Column.GetCellContent(Data) as TextBlock).Text;
+                txbxUserLastName.Text = LastName;
                 
             }
             else

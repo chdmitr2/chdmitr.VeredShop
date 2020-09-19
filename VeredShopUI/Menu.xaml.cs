@@ -23,6 +23,7 @@ namespace VeredShopUI
     public partial class Menu : Window
     {
         VeredContext dataBase;
+        Client client1;
         public Menu()
         {
 
@@ -30,6 +31,14 @@ namespace VeredShopUI
             InitializeComponent();
             dataBase = new VeredContext();
 
+        }
+
+        public Menu (Client client)
+        {
+
+            InitializeComponent();
+            dataBase = new VeredContext();
+            client1 = client;
         }
 
         private void window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -72,7 +81,7 @@ namespace VeredShopUI
 
         private void Self_Purchase_Click(object sender, RoutedEventArgs e)
         {
-            var selfPurchase = new SelfPurchase();
+            var selfPurchase = new SelfPurchase(client1);
             selfPurchase.Show();
             this.Close();
         }
