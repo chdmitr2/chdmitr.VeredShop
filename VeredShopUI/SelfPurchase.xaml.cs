@@ -118,8 +118,8 @@ namespace VeredShopUI
         #region Payment
         private void To_Payment_Click(object sender, RoutedEventArgs e)
         {
-                var price = cashDesk.Dequeue(cart);
-                MessageBox.Show("Congratulations on your purchase!  Price: " + price, "Purchase succeed!", MessageBoxButton.OK);
+                var price = cashDesk.SelfPurchase(cart);
+                MessageBox.Show("Congratulations on your purchase!  Price: " + price + "Check email to see your invoice", "Purchase succeed! ", MessageBoxButton.OK);
                 ltbxCart.Items.Clear();
                 cart = new Cart(client);
         }

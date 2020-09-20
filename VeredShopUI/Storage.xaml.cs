@@ -57,6 +57,7 @@ namespace VeredShopUI
 
                 var product = new Product()
                 {
+                    StorekeeperId = Convert.ToInt32(txbxStorekeeperID.Text),
                     Name = txbxName.Text,
                     Price = Convert.ToDecimal(txbxPrice.Text),
                     Barcode = Convert.ToInt64(txbxBarcode.Text),
@@ -66,6 +67,12 @@ namespace VeredShopUI
                     dataBase.SaveChanges();
                     showData();
                     MessageBox.Show("New Product Is Added");
+                    txbxStorekeeperID.Clear();
+                    txbxName.Clear();
+                    txbxPrice.Clear();
+                    txbxCountInStorage.Clear();
+                    txbxBarcode.Clear();
+                    txbxCountOnShelf.Clear();
             }
         }
 
@@ -76,14 +83,20 @@ namespace VeredShopUI
 
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            int id = Convert.ToInt32(txbxProductID.Text);
-            var update = dataBase.Products.Where(i => i.ProductId == id).FirstOrDefault();
+            long barcode = Convert.ToInt32(txbxBarcode.Text);
+            var update = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();
             update.Name = txbxName.Text;
             update.Price = Convert.ToDecimal(txbxPrice.Text);
             update.CountInStorage = Convert.ToInt32(txbxCountInStorage.Text);
             dataBase.SaveChanges();
             showData();
             MessageBox.Show("Data is Updated");
+            txbxStorekeeperID.Clear();
+            txbxName.Clear();
+            txbxPrice.Clear();
+            txbxCountInStorage.Clear();
+            txbxBarcode.Clear();
+            txbxCountOnShelf.Clear();
 
         }
 
@@ -93,12 +106,18 @@ namespace VeredShopUI
             {
                 try
                 {
-                    int id = Convert.ToInt32(txbxProductID.Text);
-                    var delete = dataBase.Products.Where(i => i.ProductId == id).FirstOrDefault();
+                    long barcode = Convert.ToInt32(txbxBarcode.Text);
+                    var delete = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();
                     dataBase.Products.Remove(delete);
                     dataBase.SaveChanges();
                     MessageBox.Show("Product has been delete.", "Caution", MessageBoxButton.OK);
                     showData();
+                    txbxStorekeeperID.Clear();
+                    txbxName.Clear();
+                    txbxPrice.Clear();
+                    txbxCountInStorage.Clear();
+                    txbxBarcode.Clear();
+                    txbxCountOnShelf.Clear();
 
                 }
                 catch (Exception)
@@ -136,7 +155,7 @@ namespace VeredShopUI
             if (Data != null)
             {
                 var Id = (storageGrid.SelectedCells[0].Column.GetCellContent(Data) as TextBlock).Text;
-                txbxProductID.Text = Id;
+                txbxStorekeeperID.Text = Id;
                 var Name = (storageGrid.SelectedCells[1].Column.GetCellContent(Data) as TextBlock).Text;
                 txbxName.Text = Name;
                 var Barcode = (storageGrid.SelectedCells[2].Column.GetCellContent(Data) as TextBlock).Text;
@@ -149,7 +168,7 @@ namespace VeredShopUI
                 txbxCountOnShelf.Text = CountOnShelf;
             }
             else {
-                txbxProductID.Text = "0";
+                txbxStorekeeperID.Text = "0";
                 txbxName.Text = "";
                 txbxBarcode.Text = "";
                 txbxPrice.Text = "0.00";
