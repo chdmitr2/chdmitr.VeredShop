@@ -18,9 +18,6 @@ using VeredShopBL.VeredShopModel;
 
 namespace VeredShopUI
 {
-    /// <summary>
-    /// Interaction logic for Storage.xaml
-    /// </summary>
     public partial class Storage : Window
         
     {

@@ -80,25 +80,25 @@ namespace VeredShopBL.VeredShopModel
             receipt +=  "Total price:\t" + sum;
             dataBase.SaveChanges();
 
+            #region Create A Bill
+
             using (PdfDocument document = new PdfDocument())
             {
-                //Add a page to the document
+               
                 PdfPage page = document.Pages.Add();
-
-                //Create PDF graphics for the page
+                
                 PdfGraphics graphics = page.Graphics;
-
-                //Set the standard font
+              
                 PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
-
-                //Draw the text
+              
                 graphics.DrawString(receipt, font, PdfBrushes.Black, new PointF(0, 0));
-
-                //Save the document
+              
                 document.Save("Bill.pdf");
               
             }
+            #endregion
 
+            #region Send Mail With Bill To Client
             if (Client.Email != null)
             {
                 try
@@ -125,9 +125,79 @@ namespace VeredShopBL.VeredShopModel
                 {
                    
                 }
+               
+
             }
+            #endregion
+
             return sum;
         }
+
         #endregion
+
+        #region Buying Through POS
+        public decimal buyThroughPos(Cart cart)
+        {
+            decimal sum = 0;
+
+            var order = new Order()
+            {
+                SellerId = Seller.SellerId,
+
+                ClientId = Client.ClientId,
+
+                Created = DateTime.Now
+            };
+
+            dataBase.Orders.Add(order);
+            dataBase.SaveChanges();
+
+
+            var sells = new List<Sell>();
+
+            foreach (Product product in cart)
+            {
+                if (product.CountInStorage > 0)
+                {
+                    var sell = new Sell()
+                    {
+                        OrderId = order.OrderId,
+                        ProductId = product.ProductId,
+                    };
+                    dataBase.Sells.Add(sell);
+                    long barcode = product.Barcode;
+                    var productCount = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();
+                    receipt += $"{product.Barcode,-20}{product.Name,-20}{product.Price} \n";
+                    productCount.CountInStorage--;
+                    sum += product.Price;
+
+                }
+            }
+            receipt += "Total price:\t" + sum;
+            dataBase.SaveChanges();
+
+            #region Create A Bill
+
+            using (PdfDocument document = new PdfDocument())
+            {
+
+                PdfPage page = document.Pages.Add();
+
+                PdfGraphics graphics = page.Graphics;
+
+                PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
+
+                graphics.DrawString(receipt, font, PdfBrushes.Black, new PointF(0, 0));
+
+                document.Save("Bill.pdf");
+
+            }
+            #endregion
+
+            return sum;
+        }
+     #endregion
+
+
     }
 }

@@ -1,0 +1,34 @@
+﻿<Window x:Class="VeredShopUI.buyThroughPos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VeredShopUI"
+        mc:Ignorable="d"
+        Title="POS" MouseLeftButtonDown="window_MouseLeftButtonDown" Height="550" Width="970" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid Background="White">
+        <DockPanel HorizontalAlignment="Left" Height="550" LastChildFill="False" VerticalAlignment="Top" Width="230" Background="Black">
+            <Button x:Name="btnMenu" Content="         To Menu " Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="ToMenu_Click"/>
+        </DockPanel>
+        <DockPanel HorizontalAlignment="Left" Height="124" LastChildFill="False" VerticalAlignment="Top" Width="158" Margin="230,0,0,0" Background="white"/>
+        <Image Source="C:\Users\User\source\repos\VeredShop\Pictures\Vered.png" Margin="225,0,582,436" OpacityMask="#FF290606" RenderTransformOrigin="0.138,0.452"></Image>
+        <Button Content="" Width="58" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="873,10,0,0" BorderBrush="#FF595151" Foreground="#FFDADADE" Height="59" RenderTransformOrigin="2.094,0.568" Click="Exit_Click">
+            <Button.Background>
+                <ImageBrush ImageSource=" C:\Users\User\source\repos\VeredShop\Pictures\Exit.png"></ImageBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btnToPayment" Content="To Payment" Foreground="AliceBlue" HorizontalAlignment="Left" Width="230" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="To_Payment_Click" Margin="0,440,0,30" RenderTransformOrigin="0.601,0.562"/>
+        <Button x:Name="btnRemoveProductFromCart" Content="Remove" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="0,219,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="Remove_Product_from_Cart_Click"/>
+        <Image Source="C:\Users\User\source\repos\VeredShop\Pictures\home.png" Margin="0,10,890,483"></Image>
+        <Label Content=" POS" HorizontalAlignment="Left" Margin="546,0,0,0" VerticalAlignment="Top" Width="135" Height="92" FontFamily="Segoe Print" FontSize="40" FontWeight="Bold"/>
+        <Label Content="Enter Barcode:  " HorizontalAlignment="Left" Margin="242,190,0,0" VerticalAlignment="Top" Width="207" Height="56" FontFamily="Segoe Print" FontSize="24" FontWeight="Bold"/>
+        <TextBox x:Name="txbxBarcode"  HorizontalAlignment="Left" Height="44" Margin="242,246,0,0" Background="AntiqueWhite" VerticalAlignment="Top" Width="243" FontSize="24" TextChanged="txbxBarcode_TextChanged" />
+        <Label Content="Weights Products" HorizontalAlignment="Left" Margin="242,378,0,0" VerticalAlignment="Top" Width="243" Height="56" FontFamily="Segoe Print" FontSize="24" FontWeight="Bold"/>
+        <ListBox x:Name="ltbxCart" HorizontalAlignment="Left" Height="305" Margin="524,175,0,0" VerticalAlignment="Top" Width="407" SelectionChanged="ltbxCart_SelectionChanged"/>
+        <Label Content="Cart" HorizontalAlignment="Left" Margin="686,79,0,0" VerticalAlignment="Top" Width="79" Height="45" FontFamily="Segoe Print" FontSize="24" FontWeight="Bold"/>
+        <Label Content="product           quantity                 price" HorizontalAlignment="Left" Margin="524,129,0,0" VerticalAlignment="Top" Width="407" Height="46" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold"/>
+        <Label x:Name="tplbl" Content="Total Price:" HorizontalAlignment="Left" Margin="660,493,0,0" VerticalAlignment="Top" Width="180" Height="47" FontFamily="Segoe Print" FontSize="24" FontWeight="Bold"/>
+        <Label x:Name="lblPrice" Content="" HorizontalAlignment="Left" Margin="816,502,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.882,0.135" Width="115" Height="38"/>
+        <Label x:Name="clientLabel" Content="" HorizontalAlignment="Left" Margin="242,129,0,0" VerticalAlignment="Top" Width="260" Height="44"/>
+    </Grid>
+</Window>
