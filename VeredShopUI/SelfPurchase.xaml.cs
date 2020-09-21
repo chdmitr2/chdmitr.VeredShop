@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using VeredShopBL.VeredShopModel;
 using System.Windows.Documents;
 using System.Windows.Media;
+using System.ComponentModel;
 
 namespace VeredShopUI
 {
@@ -119,9 +120,24 @@ namespace VeredShopUI
         private void To_Payment_Click(object sender, RoutedEventArgs e)
         {
                 var price = cashDesk.SelfPurchase(cart);
-                MessageBox.Show("Congratulations on your purchase!  Price: " + price + "Check email to see your invoice", "Purchase succeed! ", MessageBoxButton.OK);
+                MessageBox.Show("Congratulations on your purchase!  Price: " + price + " Check email to see your bill ", "Purchase succeed! ", MessageBoxButton.OK);              
+              
+               if (MessageBox.Show("Do you want to view the bill which send in mail?", "Bill has been created",MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+               { 
+                    try
+                    {                   
+                      System.Diagnostics.Process.Start("Bill.pdf");
+                    }
+                    catch (Exception ex)
+                    {
+                    MessageBox.Show(ex.Message);
+                    }
+               }
+            
+           
                 ltbxCart.Items.Clear();
                 cart = new Cart(client);
+
         }
         #endregion
 
