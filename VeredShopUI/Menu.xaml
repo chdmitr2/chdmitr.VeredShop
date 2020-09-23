@@ -17,7 +17,7 @@
             </Button.Background>
         </Button>
         <Button Content="Storage" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="225" Margin="0,262,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="Storage_Click"/>
-        <Button Content="Buy through POS" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="225" Margin="0,185,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="ToOrder_Click"/>
+        <Button Content="Buy through POS" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="225" Margin="0,185,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="buyThroughPos_Click"/>
         <Button Content="      Self Purchase" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="225" Margin="0,109,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="Self_Purchase_Click"/>
         <Button Content="         To Main " Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="224" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="OnMain_Click" Margin="-4,0,0,0"/>
         <Image Source="C:\Users\User\source\repos\VeredShop\Pictures\home.png" Margin="0,10,890,483"></Image>

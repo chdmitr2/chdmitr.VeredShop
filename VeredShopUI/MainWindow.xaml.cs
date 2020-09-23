@@ -22,6 +22,8 @@ namespace VeredShopUI
     {
         VeredContext DB = new VeredContext();
         Client client;
+        Seller seller;
+        Storekeeper storekeeper;
         public MainWindow()
         {
             InitializeComponent();
@@ -59,6 +61,8 @@ namespace VeredShopUI
                 try
                 {
                     var email = DB.Clients.Where(u => u.Email == LoginBox.Text).FirstOrDefault();
+                    var email2 = DB.Sellers.Where(u => u.Email == LoginBox.Text).FirstOrDefault();
+                    var email3 = DB.Storekeepers.Where(u => u.Email == LoginBox.Text).FirstOrDefault();
 
                     if ((LoginBox.Text == "") || (PassBox.Password == ""))
                     {
@@ -89,7 +93,41 @@ namespace VeredShopUI
                             }
                             else
                             {
-                                MessageBox.Show("Email and Password are wrong!");
+                                MessageBox.Show("Email or Password are wrong!");
+                            }
+                        }
+                        else if(email2 != null)
+                        {
+                            var pass = email2.Password;
+                            pass = PassBox.Password;
+                            if (PassBox.Password == pass)
+                            {
+                                MessageBox.Show("Login Successfully!", "Login Success", MessageBoxButton.OK);
+                                seller = DB.Sellers.Where(u => u.Email == LoginBox.Text).FirstOrDefault();
+                                var menu = new Menu(seller);
+                                menu.Show();
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Email and Password or wrong!");
+                            }
+                        }
+                        else if (email3 != null)
+                        {
+                            var pass = email3.Password;
+                            pass = PassBox.Password;
+                            if (PassBox.Password == pass)
+                            {
+                                MessageBox.Show("Login Successfully!", "Login Success", MessageBoxButton.OK);
+                                storekeeper = DB.Storekeepers.Where(u => u.Email == LoginBox.Text).FirstOrDefault();
+                                var menu = new Menu(storekeeper);
+                                menu.Show();
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Email and Password or wrong!");
                             }
                         }
                         else
@@ -99,9 +137,10 @@ namespace VeredShopUI
 
                     }
                 }
-                catch (Exception)
-                {
 
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
         }

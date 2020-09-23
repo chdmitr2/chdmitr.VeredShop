@@ -24,6 +24,8 @@ namespace VeredShopUI
     {
         VeredContext dataBase;
         Client client1;
+        Seller seller1;
+        Storekeeper storekeeper1;
         public Menu()
         {
 
@@ -41,6 +43,22 @@ namespace VeredShopUI
             client1 = client;
         }
 
+        public Menu(Seller seller)
+        {
+
+            InitializeComponent();
+            dataBase = new VeredContext();
+            seller1 = seller;
+        }
+        public Menu(Storekeeper storekeeper)
+        {
+
+            InitializeComponent();
+            dataBase = new VeredContext();
+            storekeeper1 = storekeeper;
+        }
+
+
         private void window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
@@ -55,9 +73,11 @@ namespace VeredShopUI
 
       
 
-        private void ToOrder_Click(object sender, RoutedEventArgs e)
+        private void buyThroughPos_Click(object sender, RoutedEventArgs e)
         {
-
+            var buyThroughPos = new buyThroughPos(seller1);
+            buyThroughPos.Show();
+            this.Close();
         }
       
         private void Exit_Click(object sender, RoutedEventArgs e)

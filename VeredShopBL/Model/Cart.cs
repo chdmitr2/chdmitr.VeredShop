@@ -11,6 +11,8 @@ namespace VeredShopBL.VeredShopModel
     {
         public Client Client { get; set; }
 
+        public Seller Seller { get; set; }
+
         public Dictionary<Product, int> Products { get; set; }
 
         public decimal Price => GetAll().Sum(p => p.Price);
@@ -20,6 +22,13 @@ namespace VeredShopBL.VeredShopModel
             Client = client;
             Products = new Dictionary<Product, int>();
         }
+        public Cart(Seller seller)
+        {
+            Seller = seller;
+            Products = new Dictionary<Product, int>();
+        }
+
+
         public void Add(Product product)
         {
             if (Products.TryGetValue(product, out int count))

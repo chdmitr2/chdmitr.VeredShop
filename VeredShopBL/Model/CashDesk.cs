@@ -144,7 +144,7 @@ namespace VeredShopBL.VeredShopModel
             {
                 SellerId = Seller.SellerId,
 
-                ClientId = Client.ClientId,
+                ClientId = 5,
 
                 Created = DateTime.Now
             };

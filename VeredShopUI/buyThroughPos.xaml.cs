@@ -26,17 +26,18 @@ namespace VeredShopUI
         VeredContext dataBase;
         Cart cart;
         Client client;
+        Seller seller;
         CashDesk cashDesk;
         DispatcherTimer tmrDelay = new DispatcherTimer();
         #endregion
 
-        #region Initializing Self Purchase Window (Constructors)
+        #region Initializing Buy Through POS Window (Constructors)
 
         public buyThroughPos()
         {
             dataBase = new VeredContext();
             InitializeComponent();
-            cart = new Cart(client);
+            cart = new Cart(seller);
             cashDesk = new CashDesk(dataBase.Sellers.FirstOrDefault());
 
             clientLabel.FontSize = 20;
@@ -50,8 +51,8 @@ namespace VeredShopUI
         {
             dataBase = new VeredContext();
             InitializeComponent();
-            cart = new Cart(client);
-            cashDesk = new CashDesk(client);
+            cart = new Cart(seller);
+            cashDesk = new CashDesk(seller);
 
             clientLabel.Content = $"Seller {seller.FirstName}";
             clientLabel.FontSize = 16;
@@ -122,8 +123,8 @@ namespace VeredShopUI
         #region Payment
         private void To_Payment_Click(object sender, RoutedEventArgs e)
         {
-            var price = cashDesk.SelfPurchase(cart);
-            MessageBox.Show("Congratulations on your purchase!  Price: " + price + " Check email to see your bill ", "Purchase succeed! ", MessageBoxButton.OK);        
+            var price = cashDesk.buyThroughPos(cart);
+            MessageBox.Show("Congratulations on your purchase!  Price: " + price + " Wait to your bill, please ", "Purchase succeed! ", MessageBoxButton.OK);        
                 try
                 {
                     System.Diagnostics.Process.Start("Bill.pdf");
@@ -133,7 +134,7 @@ namespace VeredShopUI
                     MessageBox.Show(ex.Message);
                 }
             ltbxCart.Items.Clear();
-            cart = new Cart(client);
+            cart = new Cart(seller);
 
         }
         #endregion
