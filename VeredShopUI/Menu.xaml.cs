@@ -17,9 +17,6 @@ using VeredShopBL.VeredShopModel;
 
 namespace VeredShopUI
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class Menu : Window
     {
         VeredContext dataBase;
@@ -28,16 +25,11 @@ namespace VeredShopUI
         Storekeeper storekeeper1;
         public Menu()
         {
-
-
             InitializeComponent();
             dataBase = new VeredContext();
-
         }
-
         public Menu (Client client)
         {
-
             InitializeComponent();
             dataBase = new VeredContext();
             client1 = client;
@@ -45,14 +37,12 @@ namespace VeredShopUI
 
         public Menu(Seller seller)
         {
-
             InitializeComponent();
             dataBase = new VeredContext();
             seller1 = seller;
         }
         public Menu(Storekeeper storekeeper)
         {
-
             InitializeComponent();
             dataBase = new VeredContext();
             storekeeper1 = storekeeper;
@@ -71,8 +61,6 @@ namespace VeredShopUI
             this.Close();
         }
 
-      
-
         private void buyThroughPos_Click(object sender, RoutedEventArgs e)
         {
             var buyThroughPos = new buyThroughPos(seller1);
@@ -87,7 +75,7 @@ namespace VeredShopUI
 
         private void Storage_Click(object sender, RoutedEventArgs e)
         {
-            var storageProduct = new Storage();
+            var storageProduct = new Storage(storekeeper1);
             storageProduct.Show();
             this.Close();
         }

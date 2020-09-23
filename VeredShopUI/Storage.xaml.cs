@@ -22,13 +22,32 @@ namespace VeredShopUI
         
     {
         VeredContext dataBase;
+        Storekeeper storekeeper1;
+
+        
         public Storage()
         {
             dataBase = new VeredContext();
             InitializeComponent();
-            showData();            
-            
+            showData();                       
         }
+
+        public Storage(Storekeeper storekeeper)
+        {
+            dataBase = new VeredContext();
+            InitializeComponent();
+            storekeeper1 = storekeeper;
+            int count = 5;
+            var product2 = dataBase.Products.Where(i => i.CountOnShelf < count).FirstOrDefault();
+        
+
+            showData();
+        }
+        private void showData()
+        {
+            storageGrid.ItemsSource = dataBase.Products.ToList();
+        }
+
         private void window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
@@ -42,16 +61,31 @@ namespace VeredShopUI
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            if (txbxName.Text == "")
+            long barcode = Convert.ToInt64(txbxBarcode.Text);
+            int count = Convert.ToInt32(txbxCountInStorage.Text);
+
+            var product1 = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();
+
+            if (txbxBarcode.Text == "")
             {
-                MessageBox.Show("Name Should be Filled!", "Warning!", MessageBoxButton.OK);
-                txbxName.Focus();
+                MessageBox.Show("Barcode Should be Filled!", "Warning!", MessageBoxButton.OK);
+                txbxBarcode.Focus();
             }
-            
+            else if(product1 != null)
+               {
+                product1.CountInStorage += count;
+                dataBase.SaveChanges();
+                showData();
+                MessageBox.Show("Added quantity to existing product");
+                txbxStorekeeperID.Clear();
+                txbxName.Clear();
+                txbxPrice.Clear();
+                txbxCountInStorage.Clear();
+                txbxBarcode.Clear();
+                txbxCountOnShelf.Clear();
+            }
             else
             {
-
-
                 var product = new Product()
                 {
                     StorekeeperId = Convert.ToInt32(txbxStorekeeperID.Text),
@@ -73,10 +107,7 @@ namespace VeredShopUI
             }
         }
 
-        private void showData()
-        {         
-            storageGrid.ItemsSource = dataBase.Products.ToList();
-        }
+       
 
         private void Update_Click(object sender, RoutedEventArgs e)
         {
@@ -85,6 +116,7 @@ namespace VeredShopUI
             update.Name = txbxName.Text;
             update.Price = Convert.ToDecimal(txbxPrice.Text);
             update.CountInStorage = Convert.ToInt32(txbxCountInStorage.Text);
+            update.CountOnShelf = Convert.ToInt32(txbxCountOnShelf.Text);
             dataBase.SaveChanges();
             showData();
             MessageBox.Show("Data is Updated");
@@ -156,7 +188,7 @@ namespace VeredShopUI
                 var Name = (storageGrid.SelectedCells[1].Column.GetCellContent(Data) as TextBlock).Text;
                 txbxName.Text = Name;
                 var Barcode = (storageGrid.SelectedCells[2].Column.GetCellContent(Data) as TextBlock).Text;
-                txbxName.Text = Barcode;
+                txbxBarcode.Text = Barcode;
                 var Price = (storageGrid.SelectedCells[3].Column.GetCellContent(Data) as TextBlock).Text;
                 txbxPrice.Text = Price;
                 var CountInStorage = (storageGrid.SelectedCells[4].Column.GetCellContent(Data) as TextBlock).Text;

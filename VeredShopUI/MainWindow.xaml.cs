@@ -15,9 +15,6 @@ using VeredShopBL.VeredShopModel;
 
 namespace VeredShopUI
 {
-    /// <summary>
-    /// Interaction logic for Enter.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         VeredContext DB = new VeredContext();
