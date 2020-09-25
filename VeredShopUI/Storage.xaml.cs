@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -37,15 +38,25 @@ namespace VeredShopUI
             dataBase = new VeredContext();
             InitializeComponent();
             storekeeper1 = storekeeper;
-            int count = 5;
-            var product2 = dataBase.Products.Where(i => i.CountOnShelf < count).FirstOrDefault();
-        
-
-            showData();
+            showData();                  
         }
         private void showData()
         {
             storageGrid.ItemsSource = dataBase.Products.ToList();
+          //  foreach (DataRowView dr in storageGrid.ItemsSource)
+           // {
+             //   DataGridRow dgr = storageGrid.ItemContainerGenerator.ContainerFromItem(dr) as DataGridRow;
+             //   string text = dr[5].ToString();
+              //  int count = Convert.ToInt32(text);
+              //  if (count < 5)
+               // {
+               //     dgr.Background = Brushes.Red;
+              //  }
+              //  else
+             //   {
+                 //   dgr.Background = Brushes.Green;
+              //  }
+           // }
         }
 
         private void window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -111,21 +122,42 @@ namespace VeredShopUI
 
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            long barcode = Convert.ToInt32(txbxBarcode.Text);
-            var update = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();
-            update.Name = txbxName.Text;
-            update.Price = Convert.ToDecimal(txbxPrice.Text);
-            update.CountInStorage = Convert.ToInt32(txbxCountInStorage.Text);
-            update.CountOnShelf = Convert.ToInt32(txbxCountOnShelf.Text);
-            dataBase.SaveChanges();
-            showData();
-            MessageBox.Show("Data is Updated");
-            txbxStorekeeperID.Clear();
-            txbxName.Clear();
-            txbxPrice.Clear();
-            txbxCountInStorage.Clear();
-            txbxBarcode.Clear();
-            txbxCountOnShelf.Clear();
+            try
+            {
+
+                long barcode = Convert.ToInt32(txbxBarcode.Text);
+                var update = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();             
+                int oldDataOnShelf = update.CountOnShelf;
+                int newDataOnShelf = Convert.ToInt32(txbxCountOnShelf.Text);
+                update.Name = txbxName.Text;
+                update.Price = Convert.ToDecimal(txbxPrice.Text);
+                if(oldDataOnShelf != newDataOnShelf)
+                {
+                    update.CountOnShelf = Convert.ToInt32(txbxCountOnShelf.Text);
+                    int subFromStorage = newDataOnShelf - oldDataOnShelf;
+                    update.CountInStorage -= subFromStorage;
+                }
+                else
+                {
+                    update.CountInStorage = Convert.ToInt32(txbxCountInStorage.Text);
+                    update.CountOnShelf = Convert.ToInt32(txbxCountOnShelf.Text);
+                }
+
+                
+                dataBase.SaveChanges();
+                showData();
+                MessageBox.Show("Data is Updated");
+                txbxStorekeeperID.Clear();
+                txbxName.Clear();
+                txbxPrice.Clear();
+                txbxCountInStorage.Clear();
+                txbxBarcode.Clear();
+                txbxCountOnShelf.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
 
@@ -149,9 +181,9 @@ namespace VeredShopUI
                     txbxCountOnShelf.Clear();
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                   
+                    MessageBox.Show(ex.Message);
                 }
             }
         }
