@@ -26,16 +26,19 @@
         <Label x:Name="lblName" Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="529,105,0,0" FontSize="16" Width="123" FontFamily="Segoe Print" FontWeight="Bold"/>
         <Label x:Name="lblPrice" Content="Price:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="733,107,0,0" RenderTransformOrigin="-0.003,0.564" FontSize="16" Width="103" FontFamily="Segoe Print" FontWeight="Bold"/>
         <TextBox x:Name="txbxName" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" Margin="529,143,0,0" RenderTransformOrigin="-0.083,0.765"/>
-        <DataGrid  x:Name="storageGrid" VirtualizingPanel.IsVirtualizing="False" HorizontalAlignment="Left" Height="273" Margin="297,254,0,0" VerticalAlignment="Top"  Width="609" AlternatingRowBackground="LightSkyBlue" SelectionChanged="storageGrid_SelectionChanged">
+        <DataGrid  x:Name="storageGrid" ItemsSource="{Binding}"  VirtualizingPanel.IsVirtualizing="False" AutoGenerateColumns="True" LoadingRow="storageGrid_LoadingRowEvent"
+                   AutoGeneratingColumn="storageGrid_AutoGenerateColumns" HorizontalAlignment="Left" Height="273" Margin="297,254,0,0" 
+                   VerticalAlignment="Top"  Width="609" AlternatingRowBackground="LightSkyBlue" SelectionChanged="storageGrid_SelectionChanged">
+            
         </DataGrid>
-        <Label x:Name="lblCountInStorage" Content="CountInStorage:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="529,173,0,0" RenderTransformOrigin="-0.003,0.564" FontSize="16" Width="159" FontFamily="Segoe Print" FontWeight="Bold"></Label>
+        <Label x:Name="lblCountInStorage" Content="CountInStorage:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="529,168,0,0" RenderTransformOrigin="-0.003,0.564" FontSize="16" Width="159" FontFamily="Segoe Print" FontWeight="Bold"></Label>
         <TextBox x:Name="txbxPrice" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" Margin="733,143,0,0" RenderTransformOrigin="-0.083,0.765"  />
         <Label x:Name="lblProductID" Content="StorekeeperID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="297,107,0,0" FontSize="16" Width="168" FontFamily="Segoe Print" FontWeight="Bold" RenderTransformOrigin="0.488,-0.566"/>
         <Label x:Name="lblStorage" Content="Storage" HorizontalAlignment="Left" Margin="505,10,0,0" VerticalAlignment="Top" Width="316" Height="92" FontFamily="Segoe Print" FontSize="48" FontWeight="Bold"/>
         <TextBox x:Name="txbxStorekeeperID" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" Margin="297,143,0,0" RenderTransformOrigin="-0.083,0.765" />
         <Label x:Name="lblBarcode" Content="Barcode:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="297,176,0,0" FontSize="16" Width="123" FontFamily="Segoe Print" FontWeight="Bold" RenderTransformOrigin="0.488,-0.566"/>
         <TextBox x:Name="txbxBarcode" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" Margin="297,214,0,0" RenderTransformOrigin="-0.083,0.765" />
-        <Label x:Name="lblCountOnShelf" Content="CountOnShelf:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="733,168,0,0" RenderTransformOrigin="-0.003,0.564" FontSize="16" Width="159" FontFamily="Segoe Print" FontWeight="Bold"/>
+        <Label x:Name="lblCountOnShelf" Content="CountOnShelf:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="733,173,0,0" RenderTransformOrigin="-0.003,0.564" FontSize="16" Width="159" FontFamily="Segoe Print" FontWeight="Bold"/>
         <TextBox x:Name="txbxCountOnShelf" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" Margin="733,211,0,0"/>
     </Grid>
 </Window>

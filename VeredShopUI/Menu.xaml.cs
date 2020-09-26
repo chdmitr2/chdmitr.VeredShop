@@ -33,6 +33,9 @@ namespace VeredShopUI
             InitializeComponent();
             dataBase = new VeredContext();
             client1 = client;
+            btnBuyThrroughPos.Visibility = Visibility.Hidden;
+            btnStorage.Visibility = Visibility.Hidden;
+            btnAllDataShop.Visibility = Visibility.Hidden;
         }
 
         public Menu(Seller seller)
@@ -40,12 +43,17 @@ namespace VeredShopUI
             InitializeComponent();
             dataBase = new VeredContext();
             seller1 = seller;
+            btnStorage.Visibility = Visibility.Hidden;
+            btnAllDataShop.Visibility = Visibility.Hidden;
+
         }
         public Menu(Storekeeper storekeeper)
         {
             InitializeComponent();
             dataBase = new VeredContext();
             storekeeper1 = storekeeper;
+            btnBuyThrroughPos.Visibility = Visibility.Hidden;
+            btnAllDataShop.Visibility = Visibility.Hidden;
         }
 
 

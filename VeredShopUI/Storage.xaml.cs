@@ -40,23 +40,52 @@ namespace VeredShopUI
             storekeeper1 = storekeeper;
             showData();                  
         }
+
+
+        void storageGrid_AutoGenerateColumns(object sender,DataGridAutoGeneratingColumnEventArgs e)
+        {
+            string headername = e.Column.Header.ToString();
+            if (headername == "ProductId" || headername == "Sells" || headername == "Storekeeper")
+                e.Cancel = true;
+        }
+
+        void storageGrid_LoadingRowEvent(object sender, DataGridRowEventArgs e)
+        {
+
+
+            //      DataGridRow row = e.Row;
+            //  DataRowView rView = row.Item as DataRowView;
+            //  foreach (rView in storageGrid.ItemsSource)
+            //  { 
+            //  string text = rView.Row.ItemArray[4].ToString();
+            //  int count = Convert.ToInt32(text);
+            // if (count < 5)
+            //  {
+            //     e.Row.Background = Brushes.Red;
+            //  }
+            //  else
+            //  {
+            //      e.Row.Background = Brushes.Green;
+            // }
+            ///  }
+
+              if (Convert.ToInt32(((DataRowView)e.Row.DataContext).Row.ItemArray[4].ToString()) < 5)
+              {
+             e.Row.Background = new SolidColorBrush(Colors.Red);
+             }
+             else 
+             {
+               e.Row.Background = new SolidColorBrush(Colors.Green);
+              }
+
+
+        }
+
+        
         private void showData()
         {
             storageGrid.ItemsSource = dataBase.Products.ToList();
-          //  foreach (DataRowView dr in storageGrid.ItemsSource)
-           // {
-             //   DataGridRow dgr = storageGrid.ItemContainerGenerator.ContainerFromItem(dr) as DataGridRow;
-             //   string text = dr[5].ToString();
-              //  int count = Convert.ToInt32(text);
-              //  if (count < 5)
-               // {
-               //     dgr.Background = Brushes.Red;
-              //  }
-              //  else
-             //   {
-                 //   dgr.Background = Brushes.Green;
-              //  }
-           // }
+            
         }
 
         private void window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -74,9 +103,7 @@ namespace VeredShopUI
         {
             long barcode = Convert.ToInt64(txbxBarcode.Text);
             int count = Convert.ToInt32(txbxCountInStorage.Text);
-
             var product1 = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();
-
             if (txbxBarcode.Text == "")
             {
                 MessageBox.Show("Barcode Should be Filled!", "Warning!", MessageBoxButton.OK);
@@ -125,25 +152,23 @@ namespace VeredShopUI
             try
             {
 
-                long barcode = Convert.ToInt32(txbxBarcode.Text);
+                long barcode = Convert.ToInt64(txbxBarcode.Text);
                 var update = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();             
                 int oldDataOnShelf = update.CountOnShelf;
                 int newDataOnShelf = Convert.ToInt32(txbxCountOnShelf.Text);
                 update.Name = txbxName.Text;
                 update.Price = Convert.ToDecimal(txbxPrice.Text);
                 if(oldDataOnShelf != newDataOnShelf)
-                {
-                    update.CountOnShelf = Convert.ToInt32(txbxCountOnShelf.Text);
+                {                   
                     int subFromStorage = newDataOnShelf - oldDataOnShelf;
+                    update.CountOnShelf = Convert.ToInt32(txbxCountOnShelf.Text);
                     update.CountInStorage -= subFromStorage;
                 }
                 else
                 {
                     update.CountInStorage = Convert.ToInt32(txbxCountInStorage.Text);
                     update.CountOnShelf = Convert.ToInt32(txbxCountOnShelf.Text);
-                }
-
-                
+                }               
                 dataBase.SaveChanges();
                 showData();
                 MessageBox.Show("Data is Updated");
@@ -192,9 +217,7 @@ namespace VeredShopUI
         {
             this.Close();
         }
-
         
-
         private void Show_Click(object sender, RoutedEventArgs e)
         {
 
@@ -212,23 +235,26 @@ namespace VeredShopUI
 
         private void storageGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
+           
             var Data = storageGrid.SelectedItem;
             if (Data != null)
             {
-                var Id = (storageGrid.SelectedCells[0].Column.GetCellContent(Data) as TextBlock).Text;
-                txbxStorekeeperID.Text = Id;
+                var StorekeeperId = (storageGrid.SelectedCells[0].Column.GetCellContent(Data) as TextBlock).Text;
+                txbxStorekeeperID.Text = StorekeeperId;
                 var Name = (storageGrid.SelectedCells[1].Column.GetCellContent(Data) as TextBlock).Text;
                 txbxName.Text = Name;
                 var Barcode = (storageGrid.SelectedCells[2].Column.GetCellContent(Data) as TextBlock).Text;
                 txbxBarcode.Text = Barcode;
                 var Price = (storageGrid.SelectedCells[3].Column.GetCellContent(Data) as TextBlock).Text;
                 txbxPrice.Text = Price;
-                var CountInStorage = (storageGrid.SelectedCells[4].Column.GetCellContent(Data) as TextBlock).Text;
+                var CountInStorage = (storageGrid.SelectedCells[5].Column.GetCellContent(Data) as TextBlock).Text;
                 txbxCountInStorage.Text = CountInStorage;
-                var CountOnShelf = (storageGrid.SelectedCells[5].Column.GetCellContent(Data) as TextBlock).Text;
+                var CountOnShelf = (storageGrid.SelectedCells[4].Column.GetCellContent(Data) as TextBlock).Text;
                 txbxCountOnShelf.Text = CountOnShelf;
             }
-            else {
+            else 
+            {
                 txbxStorekeeperID.Text = "0";
                 txbxName.Text = "";
                 txbxBarcode.Text = "";
