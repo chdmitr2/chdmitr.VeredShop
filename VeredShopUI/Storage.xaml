@@ -7,7 +7,10 @@
         mc:Ignorable="d"
         Title="Storage" ResizeMode="NoResize" MouseLeftButtonDown="window_MouseLeftButtonDown" Height="550" Width="970" WindowStyle="None" WindowStartupLocation="CenterScreen">
     <Grid Background="White">
-        <DockPanel HorizontalAlignment="Left" Height="550" LastChildFill="False" VerticalAlignment="Top" Width="230" Background="Black"/>
+        <DockPanel HorizontalAlignment="Left" Height="550" LastChildFill="False" VerticalAlignment="Top" Width="230" Background="Black">
+            <Button x:Name="btnSearch" Content="Search" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Center" Width="230" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="Search_Click"/>
+            <Button x:Name="btnPrintProducts" Content="Print Products" Foreground="AliceBlue" HorizontalAlignment="Left" Width="231" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="Print_Click" Margin="-230,450,0,24"/>
+        </DockPanel>
         <DockPanel HorizontalAlignment="Left" Height="124" LastChildFill="False" VerticalAlignment="Top" Width="158" Margin="230,0,0,0" Background="White"/>
         <Image x:Name="imgVered" Source="C:\Users\User\source\repos\VeredShop\Pictures\Vered.png" Margin="225,0,582,436" OpacityMask="#FF290606" RenderTransformOrigin="0.138,0.452"></Image>
         <Button x:Name="btnExit" Content="" Width="58" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="873,10,0,0" BorderBrush="#FF595151" Foreground="#FFDADADE" Height="59" RenderTransformOrigin="2.094,0.568" Click="Exit_Click">
@@ -15,10 +18,10 @@
                 <ImageBrush ImageSource="C:\Users\User\source\repos\VeredShop\Pictures\Exit.png"></ImageBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="btnDelete" Content="Delete" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="0,295,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="Delete_Click"/>
-        <Button x:Name="btnUpdate" Content="Update" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="0,219,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="Update_Click"/>
-        <Button x:Name="btnAdd" Content="Add" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="0,143,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="Add_Click"/>
-        <Button x:Name="btnToMainMenu" Content="      To Main Menu" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="OnMain_Click"/>
+        <Button x:Name="btnDelete" Content="Delete" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="0,316,0,0" Height="72" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="Delete_Click"/>
+        <Button x:Name="btnUpdate" Content="Update" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="0,163,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="Update_Click"/>
+        <Button x:Name="btnAdd" Content="Add" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="0,87,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="Add_Click"/>
+        <Button x:Name="btnToMainMenu" Content="      To Main Menu" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="OnMain_Click" Margin="-5,-2,0,0"/>
         <Image x:Name="imgHome" Source="C:\Users\User\source\repos\VeredShop\Pictures\home.png" Margin="0,10,890,483"/>
 
 
@@ -29,7 +32,7 @@
         <DataGrid  x:Name="storageGrid" ItemsSource="{Binding}"  VirtualizingPanel.IsVirtualizing="False" AutoGenerateColumns="True" LoadingRow="storageGrid_LoadingRowEvent"
                    AutoGeneratingColumn="storageGrid_AutoGenerateColumns" HorizontalAlignment="Left" Height="273" Margin="297,254,0,0" 
                    VerticalAlignment="Top"  Width="609" AlternatingRowBackground="LightSkyBlue" SelectionChanged="storageGrid_SelectionChanged">
-            
+
         </DataGrid>
         <Label x:Name="lblCountInStorage" Content="CountInStorage:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="529,168,0,0" RenderTransformOrigin="-0.003,0.564" FontSize="16" Width="159" FontFamily="Segoe Print" FontWeight="Bold"></Label>
         <TextBox x:Name="txbxPrice" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" Margin="733,143,0,0" RenderTransformOrigin="-0.083,0.765"  />
