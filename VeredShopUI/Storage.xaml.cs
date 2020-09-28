@@ -2,9 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Migrations;
-using System.IO;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
+using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -26,8 +27,9 @@ namespace VeredShopUI
     {
         VeredContext dataBase;
         Storekeeper storekeeper1;
+        string getAllProducts = "\t\tProducts State  " + DateTime.Now + "\t\n\n" + $"{"Barcode",-30}{"Price",-20}{"OnShelf",-20}{"InStorage",-20}{"Product",-20}\n";
 
-        
+
         public Storage()
         {
             dataBase = new VeredContext();
@@ -59,6 +61,11 @@ namespace VeredShopUI
             if (product != null && Convert.ToInt32(product.CountOnShelf.ToString()) < 20)
             {
               e.Row.Background = new SolidColorBrush(Colors.Red);
+
+            }
+            else if (product != null && Convert.ToInt32(product.CountInStorage.ToString()) < 50)
+            {
+              e.Row.Background = new SolidColorBrush(Colors.Yellow);
             }
             else
             {
@@ -236,132 +243,74 @@ namespace VeredShopUI
             }
             else 
             {
-                txbxStorekeeperID.Text = "0";
+                txbxStorekeeperID.Text = "";
                 txbxName.Text = "";
                 txbxBarcode.Text = "";
-                txbxPrice.Text = "0.00";
-                txbxCountInStorage.Text = "0"; 
-                txbxCountOnShelf.Text = "0";
+                txbxPrice.Text = "";
+                txbxCountInStorage.Text = ""; 
+                txbxCountOnShelf.Text = "";
             }
 
         }
         List<Product> search = new List<Product>();
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            txbxStorekeeperID.Visibility = Visibility.Hidden;
-            txbxPrice.Visibility = Visibility.Hidden;
-            lblProductID.Visibility = Visibility.Hidden;
-            lblCountInStorage.Visibility = Visibility.Hidden;
-            lblName.Visibility = Visibility.Hidden;
-            txbxCountOnShelf.Visibility = Visibility.Hidden;
-            lblCountOnShelf.Visibility = Visibility.Hidden;
-            lblCountInStorage.Visibility = Visibility.Hidden;
-            txbxName.Visibility = Visibility.Hidden;
-            lblPrice.Visibility = Visibility.Hidden;
-            txbxCountInStorage.Visibility = Visibility.Hidden;
-            if(txbxBarcode.Text == null)
-            {
-                MessageBox.Show("Enter Barcode Please");
-            }
             search.Clear();
             if(txbxBarcode.Text.Equals(""))
             {
+                MessageBox.Show("Search only with Barcode");
                 search.AddRange(dataBase.Products);
+                txbxStorekeeperID.Clear();
+                txbxName.Clear();
+                txbxPrice.Clear();
+                txbxCountInStorage.Clear();
+                txbxBarcode.Clear();
+                txbxCountOnShelf.Clear();
             }
             else
             {
                 foreach(Product product in dataBase.Products)
                 {
-                    if(product.Barcode.Equals(txbxBarcode.Text))
+                    if(product.Barcode.Equals(Convert.ToInt64(txbxBarcode.Text)))
                     {
-
                         search.Add(product);
                     }
                 }
             }
-
+            
             storageGrid.ItemsSource = search.ToList();
-           
-
-           // DataGridRow row = new DataGridRow();
-            
-           // long barcode = Convert.ToInt64(txbxBarcode.Text);
-            //var search = dataBase.Products.Where(i => i.Barcode.StartsWith(txbxBarcode.Text));
-            
-
-
-
-         //   if (search != null)
-           // {
-          //      row.Background = new SolidColorBrush(Colors.Yellow);
-          //  }
-          //  else
-          //  {
-             //  MessageBox.Show("Product not found");
-          //  }
-           txbxBarcode.Clear();
+            storageGrid.RowBackground = new SolidColorBrush(Colors.Yellow);
+            txbxBarcode.Clear();
 
         }
         private void Print_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                foreach (Product product in dataBase.Products)
+                {
+                    getAllProducts += $"{product.Barcode,-25}{product.Price,-22}{product.CountOnShelf,-22}{product.CountInStorage,-22}{product.Name} \n";
+                }
+                using (PdfDocument document = new PdfDocument())
+                {
+
+                    PdfPage page = document.Pages.Add();
+
+                    PdfGraphics graphics = page.Graphics;
+
+                    PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 10);
+
+                    graphics.DrawString(getAllProducts, font, PdfBrushes.Black, new PointF(0, 0));
+
+                    document.Save("Products State.pdf");
+                }
                
-                DataTable dt = new DataTable();
-                dt = ((DataView)storageGrid.ItemsSource).ToTable();
-
-                string result = WriteDataTable(dt);
-
-                String CSVFilePath = "";
-                
-                if (!File.Exists(CSVFilePath))
-                {
-                    File.Create(CSVFilePath).Close();
-                }
-                File.AppendAllText(CSVFilePath, result, UnicodeEncoding.UTF8);
+                 System.Diagnostics.Process.Start("Products State.pdf");                             
             }
-            catch
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
-        }
-
-        private string WriteDataTable(DataTable dataTable)
-        {
-            string output = "";
-
-            // Need to get the last column so I know when to add a new line instead of comma.
-            string lastColumnName = dataTable.Columns[dataTable.Columns.Count - 1].ColumnName;
-
-            // Get the headers from the datatable.
-            foreach (DataColumn column in dataTable.Columns)
-            {
-                if (lastColumnName != column.ColumnName)
-                {
-                    output += (column.ColumnName.ToString() + ",");
-                }
-                else
-                {
-                    output += (column.ColumnName.ToString() + "\n");
-                }
-            }
-            // Get the actual data from the datatable.
-            foreach (DataRow row in dataTable.Rows)
-            {
-                foreach (DataColumn column in dataTable.Columns)
-                {
-                    if (lastColumnName != column.ColumnName)
-                    {
-                        output += (row[column].ToString() + ",");
-                    }
-                    else
-                    {
-                        output += (row[column].ToString() + "\n");
-                    }
-                }
-            }
-            return output;
-
         }
     }
 }

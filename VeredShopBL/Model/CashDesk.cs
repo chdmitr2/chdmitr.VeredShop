@@ -23,7 +23,7 @@ namespace VeredShopBL.VeredShopModel
 
         Client Client;
 
-        string receipt = "\t\tPurchase in Vered Shop\t\n\n" + $"{"Barcode",-30}{"Product",-20}{"Price"}\n";
+       
 
         #endregion
 
@@ -38,6 +38,9 @@ namespace VeredShopBL.VeredShopModel
             Client = client;
         }
         #endregion
+
+       
+        string receipt = "\t\tPurchase in Vered Shop   " + DateTime.Now +  "\t\n\n" + $"{"Barcode",-30}{"Price",-25}{"Product"}\n";
 
         #region Self Purchase
         public decimal SelfPurchase(Cart cart)
@@ -71,7 +74,7 @@ namespace VeredShopBL.VeredShopModel
                     dataBase.Sells.Add(sell);
                     long barcode = product.Barcode;
                     var productCount = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();
-                    receipt += $"{product.Barcode,-20}{product.Name,-20}{product.Price} \n";
+                    receipt += $"{product.Barcode,-25}{product.Price,-20}{product.Name} \n";
                     productCount.CountInStorage--;
                     sum += product.Price;
                     
@@ -167,7 +170,7 @@ namespace VeredShopBL.VeredShopModel
                     dataBase.Sells.Add(sell);
                     long barcode = product.Barcode;
                     var productCount = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();
-                    receipt += $"{product.Barcode,-20}{product.Name,-20}{product.Price} \n";
+                    receipt += $"{product.Barcode,-20}{product.Price,-20}{product.Name} \n";
                     productCount.CountInStorage--;
                     sum += product.Price;
 
