@@ -297,5 +297,12 @@ namespace VeredShopUI
                 txbxPassword.Text = " ";
             }
         }
+
+        private void History_Click(object sender, RoutedEventArgs e)
+        {
+            History History = new History();
+            History.Show();
+            this.Close();
+        }
     }
 }
