@@ -7,26 +7,37 @@
         mc:Ignorable="d"
       Title="History" Height="550" MouseLeftButtonDown="window_MouseLeftButtonDown" Width="970" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid Background="White" Margin="4,0,-4,0">
-        <DockPanel HorizontalAlignment="Left" Height="550" LastChildFill="False" VerticalAlignment="Top" Width="230" Background="Black">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="83*"/>
+            <ColumnDefinition Width="111*"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel HorizontalAlignment="Left" Height="550" LastChildFill="False" VerticalAlignment="Top" Width="230" Background="Black" Margin="-4,0,0,0">
             <Button Content="  Show" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Center" Width="230" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="ToShow_Click"/>
         </DockPanel>
-        <Button Content="Print" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="230" Margin="0,219,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="ToPrint_Click"/>
-        <Button Content=" Back" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="Back_Click"/>
-        <DataGrid AutoGenerateColumns="True"  x:Name="historyGrid" HorizontalAlignment="Left" Height="290" Margin="276,219,0,0" VerticalAlignment="Top" Width="642" AlternatingRowBackground="LightSkyBlue" SelectionChanged="historyGrid_SelectionChanged"/>
+        <Button Content="Print" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="230" Margin="-4,0,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="ToPrint_Click"/>
+        <Button Content=" Back" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="Back_Click" Margin="-6,0,0,0"/>
+        <DataGrid AutoGenerateColumns="True" AutoGeneratingColumn="historyGrid_AutoGenerateColumns" x:Name="historyGrid" HorizontalAlignment="Left"  Height="290" Margin="276,219,0,0" VerticalAlignment="Top" Width="642" AlternatingRowBackground="LightSkyBlue" SelectionChanged="historyGrid_SelectionChanged" Grid.ColumnSpan="2"/>
         <Label Content="" HorizontalAlignment="Left" Foreground="#FF141313" FontSize="36"  FontWeight="Bold" Margin="248,148,0,0" VerticalAlignment="Top"/>
-        <DatePicker x:Name="DateTo1" HorizontalAlignment="Left" Margin="688,155,0,0" VerticalAlignment="Top" Height="34" Width="152" FontSize="16" PreviewKeyDown="Box_PreviewKeyDown"/>
-        <DatePicker x:Name="DateFrom1" HorizontalAlignment="Left" Margin="454,155,0,0" VerticalAlignment="Top" Height="34" Width="152" FontSize="16" PreviewKeyDown="Box_PreviewKeyDown"/>
+        <DatePicker x:Name="dtpTo" HorizontalAlignment="Left" Margin="361,117,0,0" VerticalAlignment="Top" Height="34" Width="152" FontSize="16" PreviewKeyDown="Box_PreviewKeyDown" Grid.Column="1"/>
+        <DatePicker x:Name="dtpFrom" HorizontalAlignment="Left" Margin="149,117,0,0" VerticalAlignment="Top" Height="34" Width="152" FontSize="16" PreviewKeyDown="Box_PreviewKeyDown" Grid.Column="1"/>
         <Label Content="" HorizontalAlignment="Left" Margin="331,228,0,0" VerticalAlignment="Top" FontStyle="Italic" FontSize="16"/>
-        <Image x:Name="imgVered1" Source="C:\Users\User\source\repos\VeredShop\Pictures\Vered.png" Margin="225,0,582,436" OpacityMask="#FF290606" RenderTransformOrigin="0.138,0.452"/>
-        <Label x:Name="lblStorage1" Content="History" HorizontalAlignment="Left" Margin="480,10,0,0" VerticalAlignment="Top" Width="316" Height="92" FontFamily="Segoe Print" FontSize="48" FontWeight="Bold"/>
-        <Button x:Name="btnExit1" Content="" Width="58" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="873,10,0,0" BorderBrush="#FF595151" Foreground="#FFDADADE" Height="59" RenderTransformOrigin="2.094,0.568" Click="Exit_Click">
+        <Image x:Name="imgVered1" Source="C:\Users\User\source\repos\VeredShop\Pictures\Vered.png" Margin="225,0,27,436" OpacityMask="#FF290606" RenderTransformOrigin="0.138,0.452"/>
+        <Label x:Name="lblStorage1" Content="History" HorizontalAlignment="Left" Margin="65,10,0,0" VerticalAlignment="Top" Width="215" Height="92" FontFamily="Segoe Print" FontSize="48" FontWeight="Bold" Grid.Column="1"/>
+        <Button x:Name="btnExit1" Content="" Width="58" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="458,10,0,0" BorderBrush="#FF595151" Foreground="#FFDADADE" Height="59" RenderTransformOrigin="2.094,0.568" Click="Exit_Click" Grid.Column="1">
             <Button.Background>
                 <ImageBrush ImageSource="C:\Users\User\source\repos\VeredShop\Pictures\Exit.png"/>
             </Button.Background>
         </Button>
-        <Label x:Name="lblDate1" Content="Date" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="292,148,0,0" FontSize="22" Width="66" FontFamily="Segoe Print" FontWeight="Bold" RenderTransformOrigin="0.317,0.414"/>
-        <Label x:Name="lblFrom1" Content="from:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="374,150,0,0" FontSize="20" Width="79" FontFamily="Segoe Print" FontWeight="Bold" RenderTransformOrigin="0.576,0.507"/>
-        <Label x:Name="lblTo2" Content="to:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="632,151,0,0" FontSize="20" Width="40" FontFamily="Segoe Print" FontWeight="Bold"/>
+        <Label x:Name="lblDate1" Content="Search by Date:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="286,110,0,0" FontSize="22" Width="193" FontFamily="Segoe Print" FontWeight="Bold" RenderTransformOrigin="0.317,0.414" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblFrom1" Content="from" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="73,110,0,0" FontSize="20" Width="72" FontFamily="Segoe Print" FontWeight="Bold" RenderTransformOrigin="0.576,0.507" Grid.Column="1"/>
+        <Label x:Name="lblTo2" Content="to" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="315,111,0,0" FontSize="20" Width="40" FontFamily="Segoe Print" FontWeight="Bold" Grid.Column="1"/>
+        <Label x:Name="lblDate1_Copy" Content="Search by Order: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="287,161,0,0" FontSize="22" Width="203" FontFamily="Segoe Print" FontWeight="Bold" RenderTransformOrigin="0.317,0.414" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txbxSearchByOrder" HorizontalAlignment="Right" Height="30" TextWrapping="Wrap" VerticalAlignment="Top" Width="77" Margin="0,175,400,0" RenderTransformOrigin="-0.083,0.765" Grid.Column="1" TextChanged="txbxSearchByOrder_TextChanged" />
+        <CheckBox x:Name="chkbxDate" Content="" HorizontalAlignment="Left" Margin="260,130,0,0" VerticalAlignment="Top" Height="20" Width="30" RenderTransformOrigin="-3.5,4"/>
+        <CheckBox x:Name="chkbxOrder" Content="" HorizontalAlignment="Left" Margin="260,180,0,0" VerticalAlignment="Top" Height="20" Width="30" RenderTransformOrigin="-3.5,4"/>
+        <CheckBox x:Name="chkbxClient" Content="" HorizontalAlignment="Left" Margin="165,180,0,0" VerticalAlignment="Top" Height="20" Width="30" RenderTransformOrigin="-3.5,4" Grid.Column="1"/>
+        <Label x:Name="lblDate1_Copy1" Content="Search by Client: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="187,160,0,0" FontSize="22" Width="203" FontFamily="Segoe Print" FontWeight="Bold" RenderTransformOrigin="0.317,0.414" Grid.Column="1"/>
+        <TextBox x:Name="txbxSearchByClient" HorizontalAlignment="Right" Height="30" TextWrapping="Wrap" VerticalAlignment="Top" Width="77" Margin="0,175,85,0" RenderTransformOrigin="-0.083,0.765" Grid.Column="1" TextChanged="txbxSearchByOrder_TextChanged" />
 
     </Grid>
 </Window>

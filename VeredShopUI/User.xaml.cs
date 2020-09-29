@@ -22,7 +22,7 @@ namespace VeredShopUI
     public partial class User : Window
     {
         VeredContext dataBase;
-  
+
         public User()
         {
             dataBase = new VeredContext();
@@ -32,9 +32,27 @@ namespace VeredShopUI
 
         private void showData()
         {
-           clientGrid.ItemsSource = dataBase.Clients.ToList();
-           sellerGrid.ItemsSource = dataBase.Sellers.ToList();
-           storekeeperGrid.ItemsSource = dataBase.Storekeepers.ToList();
+            clientGrid.ItemsSource = dataBase.Clients.ToList();
+            sellerGrid.ItemsSource = dataBase.Sellers.ToList();
+            storekeeperGrid.ItemsSource = dataBase.Storekeepers.ToList();
+        }
+        void clientGrid_AutoGenerateColumns(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            string headername = e.Column.Header.ToString();
+            if (headername == "Orders")
+                e.Cancel = true;
+        }
+        void sellerGrid_AutoGenerateColumns(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            string headername = e.Column.Header.ToString();
+            if (headername == "Orders")
+                e.Cancel = true;
+        }
+        void storekeeperGrid_AutoGenerateColumns(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            string headername = e.Column.Header.ToString();
+            if (headername == "Products")
+                e.Cancel = true;
         }
 
         #region  Allows A Window To Be Dragged By A Mouse
@@ -43,12 +61,23 @@ namespace VeredShopUI
             this.DragMove();
         }
         #endregion
-       
+
         #region Add User (Client,Seller,Storekeeper)
         private void AddUser_Click(object sender, RoutedEventArgs e)
         {
-           try
-           {
+            try
+            {
+                if ((chkbx1.IsChecked == true && chkbx2.IsChecked == true) || (chkbx1.IsChecked == true && chkbx3.IsChecked == true) ||
+               (chkbx3.IsChecked == true && chkbx2.IsChecked == true) || (chkbx1.IsChecked == true && chkbx2.IsChecked == true && chkbx3.IsChecked == true))
+                {
+                    MessageBox.Show("You can choose only one table!", "Caution", MessageBoxButton.OK);
+                    txbxUserFirstName.Clear();
+                    txbxUserLastName.Clear();
+                    txbxEmail.Clear();
+                    txbxPassword.Clear();
+                    txbxSalary.Clear();
+                }
+
                 if (txbxUserFirstName.Text == "" || txbxUserLastName.Text == "" || txbxEmail.Text == "" || txbxPassword.Text == "")
                 {
                     MessageBox.Show("Name Should be Filled!", "Warning!", MessageBoxButton.OK);
@@ -138,16 +167,107 @@ namespace VeredShopUI
                     txbxPassword.Clear();
                     txbxSalary.Clear();
                 }
-           }
+            }
             catch (Exception ex)
-           {
+            {
                 MessageBox.Show(ex.Message);
-           }
+            }
 
         }
         #endregion
         private void UpdateUser_Click(object sender, RoutedEventArgs e)
         {
+            if ((chkbx1.IsChecked == true && chkbx2.IsChecked == true) || (chkbx1.IsChecked == true && chkbx3.IsChecked == true) ||
+               (chkbx3.IsChecked == true && chkbx2.IsChecked == true) || (chkbx1.IsChecked == true && chkbx2.IsChecked == true && chkbx3.IsChecked == true))
+            {
+                MessageBox.Show("You can choose only one table!", "Caution", MessageBoxButton.OK);
+                txbxUserFirstName.Clear();
+                txbxUserLastName.Clear();
+                txbxEmail.Clear();
+                txbxPassword.Clear();
+                txbxSalary.Clear();
+            }
+            else if (chkbx1.IsChecked == true)
+            {
+                try
+                {
+                    string email = txbxEmail.Text;
+                    var update = dataBase.Clients.Where(i => i.Email == email).FirstOrDefault();
+
+                    update.FirstName = txbxUserFirstName.Text;
+                    update.LastName = txbxUserLastName.Text;
+                    update.Email = txbxEmail.Text;
+                    update.Password = txbxPassword.Text;
+
+                    dataBase.SaveChanges();
+                    showData();
+                    MessageBox.Show("Data is Updated");
+                    txbxUserFirstName.Clear();
+                    txbxUserLastName.Clear();
+                    txbxEmail.Clear();
+                    txbxPassword.Clear();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
+            else if (chkbx2.IsChecked == true)
+            {
+                try
+                {
+                    string email = txbxEmail.Text;
+                    var update = dataBase.Sellers.Where(i => i.Email == email).FirstOrDefault();
+
+                    update.FirstName = txbxUserFirstName.Text;
+                    update.LastName = txbxUserLastName.Text;
+                    update.Email = txbxEmail.Text;
+                    update.Password = txbxPassword.Text;
+                    update.Salary= Convert.ToInt32(txbxSalary.Text);
+
+                    dataBase.SaveChanges();
+                    showData();
+                    MessageBox.Show("Data is Updated");
+                    txbxUserFirstName.Clear();
+                    txbxUserLastName.Clear();
+                    txbxEmail.Clear();
+                    txbxPassword.Clear();
+                    txbxSalary.Clear();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
+           else if (chkbx3.IsChecked == true)
+            {
+                try
+                {
+                    string email = txbxEmail.Text;
+                    var update = dataBase.Storekeepers.Where(i => i.Email == email).FirstOrDefault();
+
+                    update.FirstName = txbxUserFirstName.Text;
+                    update.LastName = txbxUserLastName.Text;
+                    update.Email = txbxEmail.Text;
+                    update.Password = txbxPassword.Text;
+                    update.Salary = Convert.ToInt32(txbxSalary.Text);
+
+                    dataBase.SaveChanges();
+                    showData();
+                    MessageBox.Show("Data is Updated");
+                    txbxUserFirstName.Clear();
+                    txbxUserLastName.Clear();
+                    txbxEmail.Clear();
+                    txbxPassword.Clear();
+                    txbxSalary.Clear();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
 
         }
 
@@ -155,8 +275,23 @@ namespace VeredShopUI
         private void DeleteUser_Click(object sender, RoutedEventArgs e)
         {
             var Data = clientGrid.SelectedItem;
-            if (chkbx1.IsChecked == true)
-            {               
+            var Data2 = sellerGrid.SelectedItem;
+            var Data3 = storekeeperGrid.SelectedItem;
+
+            if ((chkbx1.IsChecked == true && chkbx2.IsChecked == true) || (chkbx1.IsChecked == true && chkbx3.IsChecked == true)||
+                (chkbx3.IsChecked == true && chkbx2.IsChecked == true) ||  (chkbx1.IsChecked == true && chkbx2.IsChecked == true && chkbx3.IsChecked == true))
+            {
+                MessageBox.Show("You can choose only one table!", "Caution", MessageBoxButton.OK);
+                txbxUserFirstName.Clear();
+                txbxUserLastName.Clear();
+                txbxEmail.Clear();
+                txbxPassword.Clear();
+                txbxSalary.Clear();
+            }
+
+            
+            else  if (chkbx1.IsChecked == true)
+            {
                 if (MessageBox.Show("Are You Sure Want to Delete This Client?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     try
@@ -168,6 +303,10 @@ namespace VeredShopUI
                         dataBase.SaveChanges();
                         MessageBox.Show("Client has been delete.", "Caution", MessageBoxButton.OK);
                         showData();
+                        txbxUserFirstName.Clear();
+                        txbxUserLastName.Clear();
+                        txbxEmail.Clear();
+                        txbxPassword.Clear();
 
                     }
                     catch (Exception ex)
@@ -176,10 +315,10 @@ namespace VeredShopUI
                     }
                 }
             }
-        
-            var Data2 = sellerGrid.SelectedItem;
-            if (chkbx2.IsChecked == true)
-            {              
+
+            
+           else  if (chkbx2.IsChecked == true)
+           {
                 if (MessageBox.Show("Are You Sure Want to Delete This Seller?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     try
@@ -191,18 +330,22 @@ namespace VeredShopUI
                         dataBase.SaveChanges();
                         MessageBox.Show("Seller has been delete.", "Caution", MessageBoxButton.OK);
                         showData();
-
+                        txbxUserFirstName.Clear();
+                        txbxUserLastName.Clear();
+                        txbxEmail.Clear();
+                        txbxPassword.Clear();
+                        txbxSalary.Clear();
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message);
                     }
                 }
-            }
+           } 
 
-            var Data3 = storekeeperGrid.SelectedItem;
-            if (chkbx3.IsChecked == true)
-            {               
+           
+             else if (chkbx3.IsChecked == true)
+             {
                 if (MessageBox.Show("Are You Sure Want to Delete This Storekeeper?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     try
@@ -214,7 +357,11 @@ namespace VeredShopUI
                         dataBase.SaveChanges();
                         MessageBox.Show("Storekeeper has been delete.", "Caution", MessageBoxButton.OK);
                         showData();
-
+                        txbxUserFirstName.Clear();
+                        txbxUserLastName.Clear();
+                        txbxEmail.Clear();
+                        txbxPassword.Clear();
+                        txbxSalary.Clear();
                     }
                     catch (Exception ex)
                     {
@@ -229,7 +376,7 @@ namespace VeredShopUI
         #region Back To Main Menu
         private void OnMain_Click(object sender, RoutedEventArgs e)
         {
-           Menu menu = new Menu();
+            Menu menu = new Menu();
             menu.Show();
             this.Close();
         }
@@ -243,66 +390,137 @@ namespace VeredShopUI
         }
         #endregion
 
-        protected void userGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        protected void clientGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var Data = clientGrid.SelectedItem;
-            var Data2 = sellerGrid.SelectedItem;
-            var Data3 = storekeeperGrid.SelectedItem;
+            if (chkbx1.IsChecked == true)
+            {
+                txbxSalary.Visibility = Visibility.Hidden;
+                lblSalary.Visibility = Visibility.Hidden;
+                if (Data != null)
+                {
+                    var FirstName = (clientGrid.SelectedCells[1].Column.GetCellContent(Data) as TextBlock).Text;
+                    txbxUserFirstName.Text = FirstName;
+                    var LastName = (clientGrid.SelectedCells[2].Column.GetCellContent(Data) as TextBlock).Text;
+                    txbxUserLastName.Text = LastName;
+                    var Email = (clientGrid.SelectedCells[3].Column.GetCellContent(Data) as TextBlock).Text;
+                    txbxEmail.Text = Email;
+                    var Password = (clientGrid.SelectedCells[4].Column.GetCellContent(Data) as TextBlock).Text;
+                    txbxPassword.Text = Password;
+                }
+                else
+                {
+                    txbxUserFirstName.Clear();
+                    txbxUserLastName.Clear();
+                    txbxEmail.Clear();
+                    txbxPassword.Clear();
+                }
+            }
 
-            if (Data != null)
-            {
-                var FirstName = (clientGrid.SelectedCells[0].Column.GetCellContent(Data) as TextBlock).Text;
-                txbxUserFirstName.Text = FirstName;
-                var LastName = (clientGrid.SelectedCells[1].Column.GetCellContent(Data) as TextBlock).Text;
-                txbxUserLastName.Text = LastName;
-                
-            }
-            else
-            {
-                txbxUserFirstName.Text = " ";
-                txbxUserLastName.Text = " ";
-                txbxEmail.Text = " ";
-                txbxPassword.Text = " ";
-            }
-            if (Data2 != null)
-            {
-                var Id = (sellerGrid.SelectedCells[0].Column.GetCellContent(Data2) as TextBlock).Text;
-                txbxUserFirstName.Text = Id;
-                var Name = (sellerGrid.SelectedCells[1].Column.GetCellContent(Data2) as TextBlock).Text;
-                txbxUserLastName.Text = Name;
-            }
-            else
-            {
-                txbxUserFirstName.Text = " ";
-                txbxUserLastName.Text = " ";
-                txbxEmail.Text = " ";
-                txbxPassword.Text = " ";
-            }
-            if (Data3 != null)
-            {
-                var Id = (clientGrid.SelectedCells[0].Column.GetCellContent(Data3) as TextBlock).Text;
-                txbxUserFirstName.Text = Id;
-                var Name = (clientGrid.SelectedCells[1].Column.GetCellContent(Data3) as TextBlock).Text;
-                txbxUserLastName.Text = Name;
-                var Price = (clientGrid.SelectedCells[2].Column.GetCellContent(Data3) as TextBlock).Text;
-                txbxEmail.Text = Price;
-                var Count = (clientGrid.SelectedCells[3].Column.GetCellContent(Data3) as TextBlock).Text;
-                txbxPassword.Text = Count;
-            }
-            else
-            {
-                txbxUserFirstName.Text = " ";
-                txbxUserLastName.Text = " ";
-                txbxEmail.Text = " ";
-                txbxPassword.Text = " ";
-            }
+           
         }
+        protected void sellerGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var Data2 = sellerGrid.SelectedItem;
+            if (chkbx2.IsChecked == true)
+            {
+                if (Data2 != null)
+                {
+                    var FirstName = (sellerGrid.SelectedCells[1].Column.GetCellContent(Data2) as TextBlock).Text;
+                    txbxUserFirstName.Text = FirstName;
+                    var LastName = (sellerGrid.SelectedCells[2].Column.GetCellContent(Data2) as TextBlock).Text;
+                    txbxUserLastName.Text = LastName;
+                    var Email = (sellerGrid.SelectedCells[3].Column.GetCellContent(Data2) as TextBlock).Text;
+                    txbxEmail.Text = Email;
+                    var Password = (sellerGrid.SelectedCells[4].Column.GetCellContent(Data2) as TextBlock).Text;
+                    txbxPassword.Text = Password;
+                    var Salary = (sellerGrid.SelectedCells[5].Column.GetCellContent(Data2) as TextBlock).Text;
+                    txbxSalary.Text = Salary;
+                }
+                else
+                {
+                    txbxUserFirstName.Clear();
+                    txbxUserLastName.Clear();
+                    txbxEmail.Clear();
+                    txbxPassword.Clear();
+                    txbxSalary.Clear();
+                }
+            }
+           
+        }
+        protected void storekeeperGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var Data3 = storekeeperGrid.SelectedItem;
+            if(chkbx3.IsChecked == true)
+            {
+                if (Data3 != null)
+                {
+                    var FirstName3 = (storekeeperGrid.SelectedCells[1].Column.GetCellContent(Data3) as TextBlock).Text;
+                    txbxUserFirstName.Text = FirstName3;
+                    var LastName3 = (storekeeperGrid.SelectedCells[2].Column.GetCellContent(Data3) as TextBlock).Text;
+                    txbxUserLastName.Text = LastName3;
+                    var Email3 = (storekeeperGrid.SelectedCells[3].Column.GetCellContent(Data3) as TextBlock).Text;
+                    txbxEmail.Text = Email3;
+                    var Password3 = (storekeeperGrid.SelectedCells[4].Column.GetCellContent(Data3) as TextBlock).Text;
+                    txbxPassword.Text = Password3;
+                    var Salary3 = (storekeeperGrid.SelectedCells[5].Column.GetCellContent(Data3) as TextBlock).Text;
+                    txbxSalary.Text = Salary3;
+                }
+                else
+                {
+                    txbxUserFirstName.Clear();
+                    txbxUserLastName.Clear();
+                    txbxEmail.Clear();
+                    txbxPassword.Clear();
+                    txbxSalary.Clear();
+                }
+            }
+           
+        }
+  
 
         private void History_Click(object sender, RoutedEventArgs e)
         {
             History History = new History();
             History.Show();
             this.Close();
+        }
+
+        List<Client> search = new List<Client>();
+        private void searchClient_Click(object sender, RoutedEventArgs e)
+        {
+            search.Clear();
+            if (txbxUserFirstName.Text.Equals("") && txbxUserFirstName.Text.Equals("") && txbxEmail.Text.Equals(""))
+            {
+                MessageBox.Show("Enter Data search");
+                search.AddRange(dataBase.Clients);
+                clientGrid.ItemsSource = search.ToList();
+                txbxUserFirstName.Clear();
+                txbxUserLastName.Clear();
+                txbxEmail.Clear();
+                txbxPassword.Clear();
+                txbxSalary.Clear();
+            }
+            else
+            {
+                foreach (Client client in dataBase.Clients)
+                {
+                    if (client.FirstName.Equals(txbxUserFirstName.Text) || client.LastName.Equals(txbxUserLastName.Text)
+                        || client.FirstName.Equals(txbxUserFirstName.Text))
+                    {
+                        search.Add(client);
+                    }
+                }
+
+                clientGrid.ItemsSource = search.ToList();
+                clientGrid.RowBackground = new SolidColorBrush(Colors.Yellow);
+                txbxUserFirstName.Clear();
+                txbxUserLastName.Clear();
+                txbxEmail.Clear();
+                txbxPassword.Clear();
+                txbxSalary.Clear();
+            }
+
         }
     }
 }

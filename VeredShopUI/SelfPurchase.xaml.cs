@@ -1,4 +1,5 @@
-﻿using System;
+﻿#region USING
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -6,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using VeredShopBL.VeredShopModel;
 using System.Windows.Media;
+#endregion
 
 
 namespace VeredShopUI

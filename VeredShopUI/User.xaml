@@ -8,7 +8,7 @@
         Title="Users" ResizeMode="NoResize" MouseLeftButtonDown="window_MouseLeftButtonDown" Height="550" Width="970" WindowStyle="None" WindowStartupLocation="CenterScreen">
     <Grid Background="White">
         <DockPanel HorizontalAlignment="Left" Height="550" LastChildFill="False" VerticalAlignment="Top" Width="230" Background="Black">
-            <Button x:Name="btnHistory" Content="History" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="230" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="History_Click"/>
+            
         </DockPanel>
         <DockPanel HorizontalAlignment="Left" Height="124" LastChildFill="False" VerticalAlignment="Top" Width="158" Margin="230,0,0,0" Background="White"/>
         <Image x:Name="imgVered" Source="C:\Users\User\source\repos\VeredShop\Pictures\Vered.png" Margin="225,0,582,436" OpacityMask="#FF290606" RenderTransformOrigin="0.138,0.452"></Image>
@@ -17,26 +17,27 @@
                 <ImageBrush ImageSource="C:\Users\User\source\repos\VeredShop\Pictures\Exit.png"></ImageBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="btnDeleteUser" Content="Delete" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="0,295,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="DeleteUser_Click"/>
-        <Button x:Name="btnUpdateUser" Content="Update" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="0,219,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="UpdateUser_Click"/>
-        <Button x:Name="btnAddUser" Content="Add" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="0,143,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="AddUser_Click"/>
-        <Button x:Name="btnToMainMenuUsers" Content="      To Main Menu" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="OnMain_Click"/>
+        <Button x:Name="btnDeleteUser" Content="Delete" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="0,243,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="DeleteUser_Click"/>
+        <Button x:Name="btnUpdateUser" Content="Update" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="0,165,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="UpdateUser_Click"/>
+        <Button x:Name="btnAddUser" Content="Add" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="0,87,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="AddUser_Click"/>
+        <Button x:Name="btnToMainMenuUsers" Content="      To Main Menu" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="OnMain_Click" Margin="-3,1,0,0"/>
         <Image x:Name="imgHome" Source="C:\Users\User\source\repos\VeredShop\Pictures\home.png" Margin="0,10,890,483"/>
-
+        <Button x:Name="btnHistory" Content="History" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="230" Height="80" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="History_Click"/>
+        <Button x:Name="btnSearchClient" Content="Search Client" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Center" Width="230" Height="75" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="searchClient_Click" Margin="0,321,0,154"/>
 
         <TextBox x:Name="txbxPassword" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="106" Margin="706,150,0,0"/>
-        <Label x:Name="lblName" Content="LastName:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="407,107,0,0" FontSize="16" Width="123" FontFamily="Segoe Print" FontWeight="Bold"/>
-        <Label x:Name="lblPrice" Content="Email:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="575,107,0,0" RenderTransformOrigin="-0.003,0.564" FontSize="16" Width="126" FontFamily="Segoe Print" FontWeight="Bold"/>
-        <TextBox x:Name="txbxUserLastName" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" Margin="407,150,0,0" RenderTransformOrigin="-0.083,0.765"/>
-        <DataGrid  x:Name="clientGrid" HorizontalAlignment="Left" Height="123" Margin="297,214,0,0" VerticalAlignment="Top"  Width="609" AlternatingRowBackground="LightSkyBlue" SelectionChanged="userGrid_SelectionChanged">
+        <Label x:Name="lblName" Content="LastName:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="377,107,0,0" FontSize="16" Width="123" FontFamily="Segoe Print" FontWeight="Bold"/>
+        <Label x:Name="lblPrice" Content="Email:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="513,107,0,0" RenderTransformOrigin="-0.003,0.564" FontSize="16" Width="126" FontFamily="Segoe Print" FontWeight="Bold"/>
+        <TextBox x:Name="txbxUserLastName" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" Margin="377,150,0,0" RenderTransformOrigin="-0.083,0.765"/>
+        <DataGrid  x:Name="clientGrid" HorizontalAlignment="Left" Height="123" AutoGenerateColumns="True" AutoGeneratingColumn="clientGrid_AutoGenerateColumns" Margin="297,214,0,0" VerticalAlignment="Top"  Width="609" AlternatingRowBackground="LightSkyBlue" SelectionChanged="clientGrid_SelectionChanged">
         </DataGrid>
         <Label x:Name="lblCount" Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="706,112,0,0" RenderTransformOrigin="-0.003,0.564" FontSize="16" Width="105" FontFamily="Segoe Print" FontWeight="Bold"></Label>
-        <TextBox x:Name="txbxEmail" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" Margin="575,150,0,0" RenderTransformOrigin="-0.083,0.765"  />
+        <TextBox x:Name="txbxEmail" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="158" Margin="517,150,0,0" RenderTransformOrigin="-0.083,0.765"  />
         <Label x:Name="lblProductID" Content="FirstName:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="244,107,0,0" FontSize="16" Width="123" FontFamily="Segoe Print" FontWeight="Bold"/>
         <Label x:Name="lblUsers" Content="Users" HorizontalAlignment="Left" Margin="518,0,0,0" VerticalAlignment="Top" Width="316" Height="92" FontFamily="Segoe Print" FontSize="48" FontWeight="Bold"/>
-        <TextBox x:Name="txbxUserFirstName" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Margin="244,150,0,0" RenderTransformOrigin="-0.083,0.765" />
-        <DataGrid  x:Name="sellerGrid" HorizontalAlignment="Left" Height="62" Margin="297,371,0,0" VerticalAlignment="Top"  Width="609" AlternatingRowBackground="LightSkyBlue" SelectionChanged="userGrid_SelectionChanged"/>
-        <DataGrid  x:Name="storekeeperGrid" HorizontalAlignment="Left" Height="62" Margin="297,464,0,0" VerticalAlignment="Top"  Width="609" AlternatingRowBackground="LightSkyBlue" SelectionChanged="userGrid_SelectionChanged"/>
+        <TextBox x:Name="txbxUserFirstName" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="106" Margin="244,150,0,0" RenderTransformOrigin="-0.083,0.765" />
+        <DataGrid  x:Name="sellerGrid" HorizontalAlignment="Left" Height="62"  AutoGenerateColumns="True" AutoGeneratingColumn="sellerGrid_AutoGenerateColumns" Margin="297,371,0,0" VerticalAlignment="Top"  Width="609" AlternatingRowBackground="LightSkyBlue" SelectionChanged="sellerGrid_SelectionChanged"/>
+        <DataGrid  x:Name="storekeeperGrid" HorizontalAlignment="Left" Height="62" AutoGenerateColumns="True" AutoGeneratingColumn="storekeeperGrid_AutoGenerateColumns" Margin="297,464,0,0" VerticalAlignment="Top"  Width="609" AlternatingRowBackground="LightSkyBlue" SelectionChanged="storekeeperGrid_SelectionChanged"/>
         <Label x:Name="lblClients" Content="Clients" HorizontalAlignment="Left" Margin="548,175,0,0" VerticalAlignment="Top" Width="89" Height="39" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold"/>
         <Label x:Name="lblSellers" Content="Sellers" HorizontalAlignment="Left" Margin="548,337,0,0" VerticalAlignment="Top" Width="89" Height="39" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold"/>
         <Label x:Name="lblStorekeepers" Content="Storekeepers" HorizontalAlignment="Left" Margin="518,425,0,0" VerticalAlignment="Top" Width="134" Height="39" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold"/>

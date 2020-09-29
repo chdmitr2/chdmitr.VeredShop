@@ -20,6 +20,8 @@ namespace VeredShopBL.VeredShopModel
 
         public DateTime Created { get; set; }
 
+        public decimal Amount { get; set; }
+
         public ICollection<Sell> Sells { get; set; }
 
         #region toString

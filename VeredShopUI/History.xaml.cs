@@ -15,9 +15,6 @@ using VeredShopBL.VeredShopModel;
 
 namespace VeredShopUI
 {
-    /// <summary>
-    /// Interaction logic for History.xaml
-    /// </summary>
     public partial class History : Window
     {
         VeredContext dataBase;
@@ -31,7 +28,14 @@ namespace VeredShopUI
 
         private void showData()
         {
-          historyGrid.ItemsSource = dataBase.Sells.ToList();
+          historyGrid.ItemsSource = dataBase.Orders.ToList();
+        }
+
+        void historyGrid_AutoGenerateColumns(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            string headername = e.Column.Header.ToString();
+            if (headername == "Client" || headername == "Sells" || headername == "Seller")
+                e.Cancel = true;
         }
 
         #region  Allows A Window To Be Dragged By A Mouse
@@ -67,12 +71,89 @@ namespace VeredShopUI
             this.Close();
         }
 
+       
         private void historyGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
 
+        List<Order> search = new List<Order>();
         private void ToShow_Click(object sender, RoutedEventArgs e)
+        {
+            decimal amount = 0;
+            search.Clear();
+
+            if ((chkbxDate.IsChecked == true && chkbxOrder.IsChecked == true) )
+            {
+                MessageBox.Show("You can choose only one search!", "Caution", MessageBoxButton.OK);
+                txbxSearchByOrder.Clear();
+                dtpFrom.SelectedDate = null;
+                dtpTo.SelectedDate = null;
+            }
+            else if (chkbxOrder.IsChecked == true)
+            {
+                if (txbxSearchByOrder.Text.Equals(""))
+                {
+
+                    MessageBox.Show("Enter Number of Order");
+                    search.AddRange(dataBase.Orders);
+                    txbxSearchByOrder.Clear();
+                    dtpFrom.SelectedDate = null;
+                    dtpTo.SelectedDate = null;
+                }
+                else
+                {
+                    foreach (Order order in dataBase.Orders)
+                    {
+                        if (order.OrderId.Equals(Convert.ToInt32(txbxSearchByOrder.Text)))
+                        {
+                            search.Add(order);
+                        }
+                    }
+                    historyGrid.ItemsSource = search.ToList();
+                    historyGrid.RowBackground = new SolidColorBrush(Colors.Yellow);
+                    txbxSearchByOrder.Clear();
+                }
+            }
+            else if (chkbxDate.IsChecked == true)
+            {
+                if(dtpFrom.Text.Equals("") || dtpTo.Text.Equals(""))
+                {
+                    MessageBox.Show("Enter Number of Order");
+                    search.AddRange(dataBase.Orders);
+                    txbxSearchByOrder.Clear();
+                    dtpFrom.SelectedDate = null;
+                    dtpTo.SelectedDate = null;
+                }
+                else if(Convert.ToDateTime(dtpFrom.Text) > Convert.ToDateTime(dtpTo.Text))
+                {
+                    MessageBox.Show("Wrong Range of Dates");
+                    search.AddRange(dataBase.Orders);
+                    txbxSearchByOrder.Clear();
+                    dtpFrom.SelectedDate = null;
+                    dtpTo.SelectedDate = null;
+                }
+                else
+                {
+                    foreach (Order order in dataBase.Orders)
+                    {
+                        if (order.Created >= Convert.ToDateTime(dtpFrom.Text) && 
+                             order.Created <= Convert.ToDateTime(dtpTo.Text))
+                        {
+                            search.Add(order);
+                            amount += order.Amount;
+                        }
+                    }
+                    historyGrid.ItemsSource = search.ToList();
+                    historyGrid.RowBackground = new SolidColorBrush(Colors.Yellow);
+                    dtpFrom.SelectedDate = null;
+                    dtpTo.SelectedDate = null;
+                }
+            }
+            
+        }
+        
+        private void txbxSearchByOrder_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }

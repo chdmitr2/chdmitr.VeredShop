@@ -23,6 +23,8 @@ namespace VeredShopBL.VeredShopModel
 
         Client Client;
 
+        
+
        
 
         #endregion
@@ -40,12 +42,13 @@ namespace VeredShopBL.VeredShopModel
         #endregion
 
        
-        string receipt = "\t\tPurchase in Vered Shop   " + DateTime.Now +  "\t\n\n" + $"{"Barcode",-30}{"Price",-25}{"Product"}\n";
+        string receipt = "\t\tPurchase in Vered Shop   " + DateTime.Now +  "\t\n\n" + $"{"Barcode",-30}{"Price",-25}{"Product"}\n\n";
 
         #region Self Purchase
         public decimal SelfPurchase(Cart cart)
         {
             decimal sum = 0;
+
 
             var order = new Order()
             {
@@ -55,7 +58,6 @@ namespace VeredShopBL.VeredShopModel
 
                 Created = DateTime.Now
             };
-
             dataBase.Orders.Add(order);
             dataBase.SaveChanges();
 
@@ -74,13 +76,14 @@ namespace VeredShopBL.VeredShopModel
                     dataBase.Sells.Add(sell);
                     long barcode = product.Barcode;
                     var productCount = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();
-                    receipt += $"{product.Barcode,-25}{product.Price,-20}{product.Name} \n";
+                    receipt += $"{product.Barcode,-25}{product.Price,-25}{product.Name} \n";
                     productCount.CountInStorage--;
                     sum += product.Price;
                     
                 }
             }
-            receipt +=  "Total price:\t" + sum;
+            receipt += "\nOrder Number: " + order.OrderId + " Status : Closed  Total price:\t" + sum;
+            order.Amount = sum;
             dataBase.SaveChanges();
 
             #region Create A Bill
@@ -150,8 +153,7 @@ namespace VeredShopBL.VeredShopModel
                 ClientId = 5,
 
                 Created = DateTime.Now
-            };
-
+            };           
             dataBase.Orders.Add(order);
             dataBase.SaveChanges();
 
@@ -176,7 +178,8 @@ namespace VeredShopBL.VeredShopModel
 
                 }
             }
-            receipt += "Total price:\t" + sum;
+            receipt += "Order Number: " + order.OrderId + "Status : Closed   Total price:\t" + sum;
+            order.Amount = sum;
             dataBase.SaveChanges();
 
             #region Create A Bill
@@ -188,7 +191,7 @@ namespace VeredShopBL.VeredShopModel
 
                 PdfGraphics graphics = page.Graphics;
 
-                PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
+                PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 10);
 
                 graphics.DrawString(receipt, font, PdfBrushes.Black, new PointF(0, 0));
 

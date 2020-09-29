@@ -19,10 +19,10 @@
         <Button x:Name="btnStorage" Content="Storage" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="225" Margin="0,262,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="Storage_Click"/>
         <Button x:Name="btnBuyThrroughPos" Content="Buy through POS" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="225" Margin="0,185,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="buyThroughPos_Click"/>
         <Button x:Name="btnSelfPurchase" Content="      Self Purchase" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="225" Margin="0,109,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="Self_Purchase_Click"/>
-        <Button Content="         To Main " Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="224" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="OnMain_Click" Margin="-4,0,0,0"/>
+        <Button Content="         To Main " Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="224" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="OnMain_Click"/>
         <Image Source="C:\Users\User\source\repos\VeredShop\Pictures\home.png" Margin="0,10,890,483"></Image>
         <Image Source="C:\Users\User\source\repos\VeredShop\Pictures\arrow.png" Margin="230,123,660,370"></Image>
-        <Image Source="C:\Users\User\source\repos\VeredShop\Pictures\Storage.png" Margin="0,276,890,217"></Image>
+        <Image x:Name="imStorage" Source="C:\Users\User\source\repos\VeredShop\Pictures\Storage.png" Margin="0,276,890,217"></Image>
         <Image Source="C:\Users\User\source\repos\VeredShop\Pictures\Cart.png" Margin="0,109,890,384"></Image>
         <Label Content="Vered Shop" HorizontalAlignment="Left" Margin="449,10,0,0" VerticalAlignment="Top" Width="316" Height="92" FontFamily="Segoe Print" FontSize="48" FontWeight="Bold"/>
         <Label Content="only for Clients use self-purchase  " HorizontalAlignment="Left" Margin="318,124,0,0" VerticalAlignment="Top" Width="447" Height="56" FontFamily="Segoe Print" FontSize="24" FontWeight="Bold"/>

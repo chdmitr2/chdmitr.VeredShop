@@ -30,7 +30,7 @@ namespace VeredShopBL.VeredShopModel
         #region ToString
         public override string ToString()
         {
-            return $"{Name,-17}{"-",-17}{"1",-17}{"-",-17}{Price}";
+            return $"{Price,-17}{"-",-17}{"1",-17}{"-",-17}{Name}";
         }
         #endregion
 

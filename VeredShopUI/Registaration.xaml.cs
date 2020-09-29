@@ -1,41 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region USING
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using VeredShopBL.VeredShopModel;
+#endregion
 
 namespace VeredShopUI
 {
-    /// <summary>
-    /// Interaction logic for Registaration.xaml
-    /// </summary>
     public partial class Registaration : Window
     {
+        #region Defining Object
         VeredContext dataBase;
+        #endregion
+
+        #region Constructor
         public Registaration()
         {
             InitializeComponent();
             dataBase = new VeredContext();
         }
+        #endregion
+
+        #region Allows A Window To Be Dragged By  A Mouse
         private void window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
         }
+        #endregion
 
+        #region Registration Process
         private void Registration_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-
 
                 if (NameBox.Text == "" || SurnameBox.Text == "" || EmailBox.Text == "" || PassBox1.Password == "")
                 {
@@ -86,7 +83,7 @@ namespace VeredShopUI
                             };
                             dataBase.Clients.Add(client);
                             dataBase.SaveChanges();
-                            
+                           
                         }
                         
                         catch (Exception ex)
@@ -106,16 +103,22 @@ namespace VeredShopUI
                 MessageBox.Show("Wrong data!!!.");
             }
         }
+        #endregion
+
+        #region Exit From Application
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+        #endregion
 
+        #region Back To Main window
         private void OnMain_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
         }
+        #endregion
     }
 }

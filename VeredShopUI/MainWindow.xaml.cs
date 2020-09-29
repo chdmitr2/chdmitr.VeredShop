@@ -1,49 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region USING
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using VeredShopBL.VeredShopModel;
+#endregion
 
 namespace VeredShopUI
 {
     public partial class MainWindow : Window
     {
+        #region Defining Objects
         VeredContext DB = new VeredContext();
         Client client;
         Seller seller;
         Storekeeper storekeeper;
+        #endregion
+
+        #region Constructor
         public MainWindow()
         {
-            InitializeComponent();
-           
+            InitializeComponent();           
         }
+        #endregion
+
+        #region Allows A Window To Be Dragged By  A Mouse
         private void window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         { 
             this.DragMove();
         }
+        #endregion
 
+        #region Go To Information Screen
         private void About_Click(object sender, RoutedEventArgs e)
         {
             var about = new About();
             about.Show();
             this.Close();
         }
+        #endregion
 
+        #region Exit From Application
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+        #endregion
 
-
+        #region Enter Email and Password To Log In 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             if (LoginBox.Text == "admin" && PassBox.Password == "admin")
@@ -54,7 +58,6 @@ namespace VeredShopUI
             }
             else
             {
-
                 try
                 {
                     var email = DB.Clients.Where(u => u.Email == LoginBox.Text).FirstOrDefault();
@@ -134,14 +137,15 @@ namespace VeredShopUI
 
                     }
                 }
-
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
             }
         }
+        #endregion
 
+        #region Go To Registration Screen
         private void Registration_Click(object sender, RoutedEventArgs e)
         {
             Registaration registration = new Registaration();
@@ -149,5 +153,6 @@ namespace VeredShopUI
             this.Close();
 
         }
+        #endregion
     }
 }

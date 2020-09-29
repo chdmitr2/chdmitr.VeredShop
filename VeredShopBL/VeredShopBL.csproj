@@ -87,6 +87,10 @@
     <Compile Include="Migrations\202009191414067_VeredShop.designer.cs">
       <DependentUpon>202009191414067_VeredShop.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009291338281_VeredShopConnection.cs" />
+    <Compile Include="Migrations\202009291338281_VeredShopConnection.designer.cs">
+      <DependentUpon>202009291338281_VeredShopConnection.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Cart.cs" />
     <Compile Include="Model\CashDesk.cs" />
@@ -106,6 +110,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202009191414067_VeredShop.resx">
       <DependentUpon>202009191414067_VeredShop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009291338281_VeredShopConnection.resx">
+      <DependentUpon>202009291338281_VeredShopConnection.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,35 +1,31 @@
-﻿using System;
-using System.Collections;
+﻿#region USING
+using System;
 using System.Collections.Generic;
 using System.Data;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
-using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using VeredShopBL.VeredShopModel;
+# endregion
+
 
 namespace VeredShopUI
 {
     public partial class Storage : Window
         
     {
+        #region Defining Object and Variables
         VeredContext dataBase;
         Storekeeper storekeeper1;
-        string getAllProducts = "\t\tProducts State  " + DateTime.Now + "\t\n\n" + $"{"Barcode",-30}{"Price",-20}{"OnShelf",-20}{"InStorage",-20}{"Product",-20}\n";
+        string getAllProducts = "\t\tProducts State  " + DateTime.Now + "\t\n\n" + $"{"Barcode",-30}{"Price",-20}{"OnShelf",-20}{"InStorage",-20}{"Product",-20}\n"
+         #endregion
 
-
+        #region Constructors
         public Storage()
         {
             dataBase = new VeredContext();
@@ -44,15 +40,18 @@ namespace VeredShopUI
             storekeeper1 = storekeeper;
             showData();                  
         }
+        #endregion
 
-
+        #region Built Table of storage in Application
         void storageGrid_AutoGenerateColumns(object sender,DataGridAutoGeneratingColumnEventArgs e)
         {
             string headername = e.Column.Header.ToString();
             if (headername == "ProductId" || headername == "Sells" || headername == "Storekeeper")
                 e.Cancel = true;
         }
-
+        #endregion
+         
+        #region Color Row by Quantity of Products
         void storageGrid_LoadingRowEvent(object sender, DataGridRowEventArgs e)
         {
 
@@ -72,24 +71,32 @@ namespace VeredShopUI
               e.Row.Background = new SolidColorBrush(Colors.Green);
             }
         }
+        #endregion
 
-        
+        #region Show Table of Storage in Application
         private void showData()
         {
             storageGrid.ItemsSource = dataBase.Products.ToList();            
         }
+        #endregion
 
+        #region Allows A Window To Be Dragged By  A Mouse
         private void window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
         }
+        #endregion
+
+        #region Back To Main Menu
         private void OnMain_Click(object sender, RoutedEventArgs e)
         {
             Menu menu = new Menu();
             menu.Show();
             this.Close();
         }
+        #endregion
 
+        #region Add Product To Storage
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             long barcode = Convert.ToInt64(txbxBarcode.Text);
@@ -134,7 +141,10 @@ namespace VeredShopUI
                     txbxBarcode.Clear();
                     txbxCountOnShelf.Clear();
             }
-        }      
+        }
+        #endregion
+
+        #region Update Product In Storage
         private void Update_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -173,7 +183,9 @@ namespace VeredShopUI
             }
 
         }
+        #endregion
 
+        #region Delete Product From Storage
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Are You Sure Want to Delete This Product?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
@@ -200,31 +212,18 @@ namespace VeredShopUI
                 }
             }
         }
+        #endregion
 
+        #region Exit From Application
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-        
-        private void Show_Click(object sender, RoutedEventArgs e)
-        {
+        #endregion
 
-        }
-
-        private void NameBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void PriceBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
+        #region Out Data From Row To Textboxes
         private void storageGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-           
+        {          
             var Data = storageGrid.SelectedItem;
             if (Data != null)
             {
@@ -243,15 +242,19 @@ namespace VeredShopUI
             }
             else 
             {
-                txbxStorekeeperID.Text = "";
-                txbxName.Text = "";
-                txbxBarcode.Text = "";
-                txbxPrice.Text = "";
-                txbxCountInStorage.Text = ""; 
-                txbxCountOnShelf.Text = "";
+                txbxStorekeeperID.Clear();
+                txbxName.Clear();
+                txbxPrice.Clear();
+                txbxCountInStorage.Clear();
+                txbxBarcode.Clear();
+                txbxCountOnShelf.Clear();
             }
 
         }
+        #endregion
+
+        #region Search Product in Storage
+
         List<Product> search = new List<Product>();
         private void Search_Click(object sender, RoutedEventArgs e)
         {
@@ -283,6 +286,9 @@ namespace VeredShopUI
             txbxBarcode.Clear();
 
         }
+        #endregion
+
+        #region Prints Product Report Form
         private void Print_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -312,5 +318,6 @@ namespace VeredShopUI
                 MessageBox.Show(ex.Message);
             }
         }
+        #endregion
     }
 }

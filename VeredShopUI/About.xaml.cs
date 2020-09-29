@@ -1,45 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region USING
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+#endregion
 
 namespace VeredShopUI
 {
-    /// <summary>
-    /// Interaction logic for About.xaml
-    /// </summary>
     public partial class About : Window
     {
+        #region Constructor
         public About()
         {
             InitializeComponent();
         }
+        #endregion
+
+        #region Allows A Window To Be Dragged By  A Mouse
         private void window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
         }
+        #endregion
 
+        #region Back To Main Window
         private void OnMain_Click(object sender, RoutedEventArgs e)
-        {
-           
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.Show();
-                this.Close();
-          
+        {          
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();          
         }
+        #endregion
 
+        #region Exit from Application
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+        #endregion
     }
 }
