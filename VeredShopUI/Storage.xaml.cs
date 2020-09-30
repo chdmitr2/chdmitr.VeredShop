@@ -22,7 +22,7 @@ namespace VeredShopUI
         #region Defining Object and Variables
         VeredContext dataBase;
         Storekeeper storekeeper1;
-        string getAllProducts = "\t\tProducts State  " + DateTime.Now + "\t\n\n" + $"{"Barcode",-30}{"Price",-20}{"OnShelf",-20}{"InStorage",-20}{"Product",-20}\n"
+        string getAllProducts = "\t\tProducts State  " + DateTime.Now + "\t\n\n" + $"{"Barcode",-30}{"Price",-20}{"OnShelf",-20}{"InStorage",-20}{"Product",-20}\n";
          #endregion
 
         #region Constructors

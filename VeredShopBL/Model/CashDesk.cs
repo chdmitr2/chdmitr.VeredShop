@@ -21,18 +21,16 @@ namespace VeredShopBL.VeredShopModel
 
         Seller Seller;
 
-        Client Client;
-
-        
-
-       
+        Client Client;     
 
         #endregion
 
         #region Constructors
-        public CashDesk(Seller seller)
+        public CashDesk(Seller seller,Client client)
         {
             Seller = seller;
+            Client = client;
+
         }
 
         public CashDesk(Client client)
@@ -66,7 +64,7 @@ namespace VeredShopBL.VeredShopModel
 
             foreach (Product product in cart)
             {
-                if (product.CountInStorage > 0)
+                if (product.CountOnShelf > 0)
                 {
                     var sell = new Sell()
                     {
@@ -77,7 +75,7 @@ namespace VeredShopBL.VeredShopModel
                     long barcode = product.Barcode;
                     var productCount = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();
                     receipt += $"{product.Barcode,-25}{product.Price,-25}{product.Name} \n";
-                    productCount.CountInStorage--;
+                    productCount.CountOnShelf--;
                     sum += product.Price;
                     
                 }
@@ -150,7 +148,7 @@ namespace VeredShopBL.VeredShopModel
             {
                 SellerId = Seller.SellerId,
 
-                ClientId = 5,
+                ClientId = Client.ClientId,
 
                 Created = DateTime.Now
             };           
@@ -162,7 +160,7 @@ namespace VeredShopBL.VeredShopModel
 
             foreach (Product product in cart)
             {
-                if (product.CountInStorage > 0)
+                if (product.CountOnShelf > 0)
                 {
                     var sell = new Sell()
                     {
@@ -173,12 +171,12 @@ namespace VeredShopBL.VeredShopModel
                     long barcode = product.Barcode;
                     var productCount = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();
                     receipt += $"{product.Barcode,-20}{product.Price,-20}{product.Name} \n";
-                    productCount.CountInStorage--;
+                    productCount.CountOnShelf--;
                     sum += product.Price;
 
                 }
             }
-            receipt += "Order Number: " + order.OrderId + "Status : Closed   Total price:\t" + sum;
+            receipt += "\nOrder Number: " + order.OrderId + " Status : Closed   Total price:\t" + sum;
             order.Amount = sum;
             dataBase.SaveChanges();
 
@@ -191,7 +189,7 @@ namespace VeredShopBL.VeredShopModel
 
                 PdfGraphics graphics = page.Graphics;
 
-                PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 10);
+                PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
 
                 graphics.DrawString(receipt, font, PdfBrushes.Black, new PointF(0, 0));
 

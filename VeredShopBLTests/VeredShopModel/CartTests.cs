@@ -18,21 +18,21 @@ namespace VeredShopBL.VeredShopModel.Tests
             var client = new Client()
             {
                 ClientId = 1,
-                Name = "testUser"
+                FirstName = "testUser"
             };
             var product1 = new Product()
             {
                 ProductId = 1,
                 Name = "pr1",
                 Price = 100,
-                Count = 10
+                CountOnShelf = 10
             }; 
             var product2 = new Product()
             {
                 ProductId = 2,
                 Name = "pr2",
                 Price = 200,
-                Count = 20
+                CountOnShelf = 20
             };
             var cart = new Cart(client);
            

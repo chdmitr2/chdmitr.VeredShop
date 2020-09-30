@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using VeredShopBL.VeredShopModel;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
+using System.Drawing;
 
 
 namespace VeredShopUI
@@ -22,6 +25,7 @@ namespace VeredShopUI
     public partial class User : Window
     {
         VeredContext dataBase;
+        string getAllClients = "\t\tClients State  " + DateTime.Now + "\t\n\n" + $"{"ClientId",-30}{"FirstName",-20}{"LastName",-30}{"Email"}\n";
 
         public User()
         {
@@ -521,6 +525,39 @@ namespace VeredShopUI
                 txbxSalary.Clear();
             }
 
+        }
+        private void printClients_Click(object sender, RoutedEventArgs e)
+        {
+            int countClients = 0;
+            try
+            {
+                foreach (Client client in dataBase.Clients)
+                {
+                    getAllClients += $"{client.ClientId,-35}{client.FirstName,-22}{client.LastName,-22}{client.Email} \n";
+                    countClients++;
+                }
+                getAllClients += $"\nThe Number of Clients is: " + countClients;
+
+                using (PdfDocument document = new PdfDocument())
+                {
+
+                    PdfPage page = document.Pages.Add();
+
+                    PdfGraphics graphics = page.Graphics;
+
+                    PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 10);
+
+                    graphics.DrawString(getAllClients, font, PdfBrushes.Black, new PointF(0, 0));
+
+                    document.Save("Clients State.pdf");
+                }
+
+                System.Diagnostics.Process.Start("Clients State.pdf");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

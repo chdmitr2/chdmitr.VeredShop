@@ -25,20 +25,7 @@ namespace VeredShopUI
 
         #region Initializing Self Purchase Window (Constructors)
 
-        public SelfPurchase()
-        {
-            dataBase = new VeredContext();
-            InitializeComponent();
-            cart = new Cart(client);
-            cashDesk = new CashDesk(dataBase.Sellers.FirstOrDefault());
-           
-                clientLabel.FontSize = 20;
-                clientLabel.FontFamily = new FontFamily("SegoePrint");
-                clientLabel.FontWeight = FontWeights.Bold;
-                clientLabel.Content = $"Hello, guest";
-           
-        }
-       
+      
         public SelfPurchase(Client client)
         {
             dataBase = new VeredContext();

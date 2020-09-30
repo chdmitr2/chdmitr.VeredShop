@@ -17,13 +17,13 @@
                 <ImageBrush ImageSource="C:\Users\User\source\repos\VeredShop\Pictures\Exit.png"></ImageBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="btnDeleteUser" Content="Delete" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="0,243,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="DeleteUser_Click"/>
-        <Button x:Name="btnUpdateUser" Content="Update" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="0,165,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="UpdateUser_Click"/>
-        <Button x:Name="btnAddUser" Content="Add" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="0,87,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="AddUser_Click"/>
+        <Button x:Name="btnDeleteUser" Content="Delete" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="0,229,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="DeleteUser_Click"/>
+        <Button x:Name="btnUpdateUser" Content="Update" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="0,153,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="UpdateUser_Click"/>
+        <Button x:Name="btnAddUser" Content="Add" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="0,77,0,0" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="AddUser_Click"/>
         <Button x:Name="btnToMainMenuUsers" Content="      To Main Menu" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Height="71" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="OnMain_Click" Margin="-3,1,0,0"/>
         <Image x:Name="imgHome" Source="C:\Users\User\source\repos\VeredShop\Pictures\home.png" Margin="0,10,890,483"/>
         <Button x:Name="btnHistory" Content="History" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="230" Height="80" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="History_Click"/>
-        <Button x:Name="btnSearchClient" Content="Search Client" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Center" Width="230" Height="75" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="searchClient_Click" Margin="0,321,0,154"/>
+        <Button x:Name="btnSearchClient" Content="Search Client" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Center" Width="230" Height="75" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="searchClient_Click" Margin="0,305,0,170"/>
 
         <TextBox x:Name="txbxPassword" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="106" Margin="706,150,0,0"/>
         <Label x:Name="lblName" Content="LastName:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="377,107,0,0" FontSize="16" Width="123" FontFamily="Segoe Print" FontWeight="Bold"/>
@@ -46,5 +46,6 @@
         <CheckBox x:Name="chkbx3"  HorizontalAlignment="Left" Margin="264,492,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txbxSalary" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="106" Margin="840,150,0,0"/>
         <Label x:Name="lblSalary" Content="Salary" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="840,112,0,0" RenderTransformOrigin="-0.003,0.564" FontSize="16" Width="97" FontFamily="Segoe Print" FontWeight="Bold"/>
+        <Button x:Name="btnPrintClients" Content="Print Clients" Foreground="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Center" Width="230" Height="75" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="printClients_Click" Margin="0,387,0,88"/>
     </Grid>
 </Window>

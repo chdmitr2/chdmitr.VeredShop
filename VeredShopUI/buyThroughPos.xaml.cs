@@ -19,40 +19,23 @@ namespace VeredShopUI
         VeredContext dataBase;
         Cart cart;
         Client client;
-        Seller seller;
+        Seller Seller;
         CashDesk cashDesk;
         DispatcherTimer tmrDelay = new DispatcherTimer();
         #endregion
 
-        #region Initializing Buy Through POS Window (Constructors)
-
-        public buyThroughPos()
-        {
-            dataBase = new VeredContext();
-            InitializeComponent();
-            cart = new Cart(seller);
-            cashDesk = new CashDesk(dataBase.Sellers.FirstOrDefault());
-
-            clientLabel.FontSize = 20;
-            clientLabel.FontFamily = new FontFamily("SegoePrint");
-            clientLabel.FontWeight = FontWeights.Bold;
-            clientLabel.Content = $"Hello, guest";
-
-        }
+        #region Initializing Buy Through POS Window (Constructor)
 
         public buyThroughPos(Seller seller)
         {
             dataBase = new VeredContext();
             InitializeComponent();
+            Seller = seller;
             cart = new Cart(seller);
-            cashDesk = new CashDesk(seller);
-
             clientLabel.Content = $"Seller {seller.FirstName}";
             clientLabel.FontSize = 16;
             clientLabel.FontFamily = new FontFamily("SegoePrint");
             clientLabel.FontWeight = FontWeights.Bold;
-
-
         }
         #endregion
 
@@ -116,18 +99,27 @@ namespace VeredShopUI
         #region Payment
         private void To_Payment_Click(object sender, RoutedEventArgs e)
         {
+         if (client != null) 
+         { 
             var price = cashDesk.buyThroughPos(cart);
-            MessageBox.Show("Congratulations on your purchase!  Price: " + price + " Wait to your bill, please ", "Purchase succeed! ", MessageBoxButton.OK);        
+            MessageBox.Show("Congratulations on your purchase!  Price: " + price + " Wait to your bill, please ", "Purchase succeed! ", MessageBoxButton.OK);
+                txbxClientId.Clear();
                 try
-                {
-                    System.Diagnostics.Process.Start("Bill.pdf");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+            {
+                System.Diagnostics.Process.Start("Bill.pdf");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             ltbxCart.Items.Clear();
-            cart = new Cart(seller);
+            cart = new Cart(Seller);
+        }
+            else
+            {
+                MessageBox.Show("Wrong Client ID");
+                txbxClientId.Clear();
+            }
 
         }
         #endregion
@@ -135,25 +127,32 @@ namespace VeredShopUI
         #region ListBox Cart
         private void ltbxCart_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            
         }
         #endregion
 
         #region Add Products To Cart
         private void txbxBarcode_TextChanged(object sender, TextChangedEventArgs e)
         {
-            try
+            if (txbxClientId.Text == "")
             {
-                if (txbxBarcode.Text.Trim().Length == 1)
-                {
-                    tmrDelay.Start();
-                    tmrDelay.Tick += new EventHandler(tmrDelay_Tick);
-                }
+                MessageBox.Show("Enter Client ID Please");
             }
-
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
+                try
+                {
+                    if (txbxBarcode.Text.Trim().Length == 1)
+                    {
+                        tmrDelay.Start();
+                        tmrDelay.Tick += new EventHandler(tmrDelay_Tick);
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
         void tmrDelay_Tick(object sender, EventArgs e)
@@ -215,5 +214,27 @@ namespace VeredShopUI
         }
         #endregion
 
+        private void txbxClientId_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                if (int.Parse(txbxClientId.Text) > 0)
+                {
+
+                    int clientId = Convert.ToInt32(txbxClientId.Text);
+
+                    client = dataBase.Clients.Where(i => i.ClientId == clientId).FirstOrDefault();
+
+                    cashDesk = new CashDesk(Seller, client);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                txbxClientId.Clear();
+            }
+
+        }
     }
 }
