@@ -536,6 +536,7 @@ namespace VeredShopUI
                     getAllClients += $"{client.ClientId,-35}{client.FirstName,-22}{client.LastName,-22}{client.Email} \n";
                     countClients++;
                 }
+                countClients--;
                 getAllClients += $"\nThe Number of Clients is: " + countClients;
 
                 using (PdfDocument document = new PdfDocument())

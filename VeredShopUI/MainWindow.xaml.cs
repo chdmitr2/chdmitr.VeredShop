@@ -154,5 +154,10 @@ namespace VeredShopUI
 
         }
         #endregion
+
+        private void Forgot_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Enter to the screen About to contact with store Vered and change password", "Caution", MessageBoxButton.OK);
+        }
     }
 }

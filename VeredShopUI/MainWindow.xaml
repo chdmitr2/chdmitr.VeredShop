@@ -14,7 +14,7 @@
         <DockPanel Background="Black" HorizontalAlignment="Left" Width="225"/>
         <Button Content=" About" Foreground="AliceBlue" HorizontalAlignment="Left" Width="225" Background="#FF020101" IsCancel="True" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Click="About_Click" Margin="0,420,0,47" RenderTransformOrigin="0.601,0.562"/>
         <PasswordBox x:Name="PassBox"  HorizontalAlignment="Right" Height="43" Margin="0,286,38,0" Background="AntiqueWhite" PasswordChar="•" VerticalAlignment="Top" Width="334" FontSize="22" Grid.ColumnSpan="2" />
-        <Label Content="Enter  email :" HorizontalAlignment="Left" Margin="230,204,0,0" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Width="377" FontStyle="Italic" Height="58" Grid.ColumnSpan="2"/>
+        <Label Content="Enter  email :" HorizontalAlignment="Left" Margin="230,204,0,0" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Width="250" FontStyle="Italic" Height="58"/>
         <Button Content="Log in" Foreground="White" HorizontalAlignment="Left" Margin="51,364,0,0" VerticalAlignment="Top" Width="222" Height="54" Background="#FF080303" FontSize="24" Click="Login_Click" Grid.Column="1"/>
         <Button Content="Registration" Foreground="White" HorizontalAlignment="Left" Margin="51,441,0,0" VerticalAlignment="Top" Width="222" Height="54" Background="#FF060202" FontSize="24" Click="Registration_Click" Grid.Column="1"/>
         <TextBox x:Name="LoginBox"  HorizontalAlignment="Left" Height="43" Margin="598,219,0,0" Background="AntiqueWhite" VerticalAlignment="Top" Width="334" FontSize="22" Grid.ColumnSpan="2" />
@@ -27,5 +27,7 @@
                 <ImageBrush ImageSource=" C:\Users\User\source\repos\VeredShop\Pictures\Exit.png"/>
             </Button.Background>
         </Button>
+        <Button Content="Forgot Password?"  HorizontalAlignment="Left" BorderThickness="0,0,0,0" Margin="273,441,0,0" VerticalAlignment="Top" Width="222" Height="54" Foreground ="Blue" Background="White" FontSize="24" Click="Forgot_Click"/>
+
     </Grid>
 </Window>
