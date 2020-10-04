@@ -25,9 +25,11 @@ namespace VeredShopUI
 
         #region Initializing Self Purchase Window (Constructors)
 
+
       
         public SelfPurchase(Client client)
         {
+            
             dataBase = new VeredContext();
             InitializeComponent();
             cart = new Cart(client);
@@ -36,9 +38,7 @@ namespace VeredShopUI
                 clientLabel.Content = $"Hello, {client.FirstName}";
                 clientLabel.FontSize = 16;
                 clientLabel.FontFamily = new FontFamily("SegoePrint");
-                clientLabel.FontWeight = FontWeights.Bold;
-           
-            
+                clientLabel.FontWeight = FontWeights.Bold;           
         }
         #endregion
 

@@ -19,9 +19,9 @@ namespace VeredShopBL.VeredShopModel
 
         VeredContext dataBase = new VeredContext();
 
-        Seller Seller;
+        public Client Client { get; set; }
 
-        Client Client;     
+        public Seller Seller { get; set; }
 
         #endregion
 
@@ -30,7 +30,6 @@ namespace VeredShopBL.VeredShopModel
         {
             Seller = seller;
             Client = client;
-
         }
 
         public CashDesk(Client client)

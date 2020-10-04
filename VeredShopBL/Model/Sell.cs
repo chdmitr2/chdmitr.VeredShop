@@ -17,6 +17,5 @@ namespace VeredShopBL.VeredShopModel
         public Order Order { get; set; }
 
         public Product Product { get; set; }
-
     }
 }

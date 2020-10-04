@@ -2,6 +2,8 @@
 using System;
 using System.Windows;
 using System.Windows.Input;
+using System.Net.Mail;
+using System.Net;
 using VeredShopBL.VeredShopModel;
 #endregion
 
@@ -74,6 +76,26 @@ namespace VeredShopUI
                         try
                         {
 
+                            MailAddress from = new MailAddress("chdmitr2@gmail.com", "Vered Shop");
+
+                            MailAddress to = new MailAddress(EmailBox.Text);
+
+                            MailMessage mail = new MailMessage(from, to);
+
+                            mail.Subject = "New Client of Vered Shop!!!";
+
+                            mail.Body = $"<h2>Hello, You are new Client of Vered Shop!!! </h2>";
+
+                            mail.IsBodyHtml = true;
+
+                            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+
+                            smtp.Credentials = new NetworkCredential("chdmitr2@gmail.com", "algebra12");
+                            smtp.EnableSsl = true;
+                            smtp.Send(mail);
+
+                            MessageBox.Show("Message has been sent.", "Message", MessageBoxButton.OK);
+
                             var client = new Client()
                             {
                                 FirstName = NameBox.Text,
@@ -88,7 +110,8 @@ namespace VeredShopUI
                         
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message);
+                            MessageBox.Show(ex.Message, "Message", MessageBoxButton.OK);
+                            EmailBox.Text = "";
                         }
                         MessageBox.Show("You are successfully registred!");
 

@@ -8,7 +8,7 @@ namespace VeredShopBL.VeredShopModel
 {
     public class Product
     {
-
+       
         public int ProductId { get; set; }
 
         public string Name { get; set; }
@@ -51,5 +51,6 @@ namespace VeredShopBL.VeredShopModel
             return false;
         }
         #endregion
+
     }
 }
