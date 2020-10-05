@@ -25,8 +25,20 @@ namespace VeredShopUI
 
         #region Initializing Self Purchase Window (Constructors)
 
+        public SelfPurchase()
+        {
 
-      
+            dataBase = new VeredContext();
+            InitializeComponent();
+            cart = new Cart();
+            cashDesk = new CashDesk();
+
+            clientLabel.Content = $"Hello, guest";
+            clientLabel.FontSize = 16;
+            clientLabel.FontFamily = new FontFamily("SegoePrint");
+            clientLabel.FontWeight = FontWeights.Bold;
+        }
+
         public SelfPurchase(Client client)
         {
             
@@ -102,24 +114,47 @@ namespace VeredShopUI
         #region Payment
         private void To_Payment_Click(object sender, RoutedEventArgs e)
         {
+            if (client != null)
+            {
                 var price = cashDesk.SelfPurchase(cart);
-                MessageBox.Show("Congratulations on your purchase!  Price: " + price + " Check email to see your bill ", "Purchase succeed! ", MessageBoxButton.OK);              
-              
-               if (MessageBox.Show("Do you want to view the bill which send in mail?", "Bill has been created",MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
-               { 
+                MessageBox.Show("Congratulations on your purchase!  Price: " + price + " Check email to see your bill ", "Purchase succeed! ", MessageBoxButton.OK);
+
+                if (MessageBox.Show("Do you want to view the bill which send in mail?", "Bill has been created", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                {
                     try
-                    {                   
-                      System.Diagnostics.Process.Start("Bill.pdf");
+                    {
+                        System.Diagnostics.Process.Start("Bill.pdf");
                     }
                     catch (Exception ex)
                     {
-                    MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message);
                     }
-               }
-            
-           
+                }
+
+
                 ltbxCart.Items.Clear();
                 cart = new Cart(client);
+            }
+            else
+            {
+                var price = cashDesk.SelfPurchase(cart);
+                MessageBox.Show("Congratulations on your purchase!  Price: " + price , "Purchase succeed! ", MessageBoxButton.OK);
+
+                if (MessageBox.Show("Do you want to view the bill ?", "Bill has been created", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        System.Diagnostics.Process.Start("Bill.pdf");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+
+                ltbxCart.Items.Clear();
+                cart = new Cart();
+            }
 
         }
         #endregion

@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
-using System.ComponentModel;
 using System.Drawing;
 
 
@@ -26,6 +23,10 @@ namespace VeredShopBL.VeredShopModel
         #endregion
 
         #region Constructors
+        public CashDesk()
+        {
+            
+        }
         public CashDesk(Seller seller,Client client)
         {
             Seller = seller;
@@ -46,42 +47,113 @@ namespace VeredShopBL.VeredShopModel
         {
             decimal sum = 0;
 
-
-            var order = new Order()
+            if (Client != null)
             {
-                SellerId = 4,
-
-                ClientId = Client.ClientId,
-
-                Created = DateTime.Now
-            };
-            dataBase.Orders.Add(order);
-            dataBase.SaveChanges();
-
-
-            var sells = new List<Sell>();
-
-            foreach (Product product in cart)
-            {
-                if (product.CountOnShelf > 0)
+                var order = new Order()
                 {
-                    var sell = new Sell()
+                    SellerId = 4,
+
+                    ClientId = Client.ClientId,
+
+                    Created = DateTime.Now
+                };
+                dataBase.Orders.Add(order);
+                dataBase.SaveChanges();
+                var sells = new List<Sell>();
+
+                foreach (Product product in cart)
+                {
+                    if (product.CountOnShelf > 0)
                     {
-                        OrderId = order.OrderId,
-                        ProductId = product.ProductId,
-                    };
-                    dataBase.Sells.Add(sell);
-                    long barcode = product.Barcode;
-                    var productCount = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();
-                    receipt += $"{product.Barcode,-25}{product.Price,-25}{product.Name} \n";
-                    productCount.CountOnShelf--;
-                    sum += product.Price;
-                    
+                        var sell = new Sell()
+                        {
+                            OrderId = order.OrderId,
+                            ProductId = product.ProductId,
+                        };
+                        dataBase.Sells.Add(sell);
+                        long barcode = product.Barcode;
+                        var productCount = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();
+                        receipt += $"{product.Barcode,-25}{product.Price,-25}{product.Name} \n";
+                        productCount.CountOnShelf--;
+                        sum += product.Price;
+
+                    }
                 }
+                receipt += "\nOrder Number: " + order.OrderId + " Status : Closed  Total price:\t" + sum;
+                order.Amount = sum;
+                dataBase.SaveChanges();
+                #region Send Mail With Bill To Client
+                if (Client.Email != null)
+                {
+                    try
+                    {
+                        MailAddress from = new MailAddress("chdmitr2@gmail.com", "Vered Shop");
+
+                        MailAddress to = new MailAddress("chdmitr2@gmail.com");
+
+                        MailMessage mail = new MailMessage(from, to);
+
+                        mail.Subject = "Veres Shop Purchase";
+
+                        mail.Body = $"<h2>Hello, {Client}. You made a purchase on the date {order.Created}. The sum of purchase is {sum}. Thanks for purchase! </h2>";
+
+                        mail.IsBodyHtml = true;
+
+                        SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+
+                        smtp.Credentials = new NetworkCredential("chdmitr2@gmail.com", "algebra12");
+                        smtp.EnableSsl = true;
+                        smtp.Send(mail);
+                    }
+                    catch
+                    {
+
+                    }
+
+
+                }
+                #endregion
             }
-            receipt += "\nOrder Number: " + order.OrderId + " Status : Closed  Total price:\t" + sum;
-            order.Amount = sum;
-            dataBase.SaveChanges();
+            else
+            {
+                var order = new Order()
+                {
+                    SellerId = 4,
+
+                    ClientId = 5,
+
+                    Created = DateTime.Now
+                };
+                dataBase.Orders.Add(order);
+                dataBase.SaveChanges();
+
+                var sells = new List<Sell>();
+
+                foreach (Product product in cart)
+                {
+                    if (product.CountOnShelf > 0)
+                    {
+                        var sell = new Sell()
+                        {
+                            OrderId = order.OrderId,
+                            ProductId = product.ProductId,
+                        };
+                        dataBase.Sells.Add(sell);
+                        long barcode = product.Barcode;
+                        var productCount = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();
+                        receipt += $"{product.Barcode,-25}{product.Price,-25}{product.Name} \n";
+                        productCount.CountOnShelf--;
+                        sum += product.Price;
+
+                    }
+                }
+                receipt += "\nOrder Number: " + order.OrderId + " Status : Closed  Total price:\t" + sum;
+                order.Amount = sum;
+                dataBase.SaveChanges();
+            }
+
+
+            
 
             #region Create A Bill
 
@@ -101,37 +173,7 @@ namespace VeredShopBL.VeredShopModel
             }
             #endregion
 
-            #region Send Mail With Bill To Client
-            if (Client.Email != null)
-            {
-                try
-                {
-                    MailAddress from = new MailAddress("chdmitr2@gmail.com", "Vered Shop");
-
-                    MailAddress to = new MailAddress("chdmitr2@gmail.com");
-
-                    MailMessage mail = new MailMessage(from, to);
-
-                    mail.Subject = "Veres Shop Purchase";
-
-                    mail.Body = $"<h2>Hello, {Client}. You made a purchase on the date {order.Created}. The sum of purchase is {sum}. Thanks for purchase! </h2>";
-
-                    mail.IsBodyHtml = true;
-
-                    SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-
-                    smtp.Credentials = new NetworkCredential("chdmitr2@gmail.com", "algebra12");
-                    smtp.EnableSsl = true;
-                    smtp.Send(mail);
-                }
-                catch 
-                {
-                   
-                }
-               
-
-            }
-            #endregion
+            
 
             return sum;
         }
@@ -142,42 +184,83 @@ namespace VeredShopBL.VeredShopModel
         public decimal buyThroughPos(Cart cart)
         {
             decimal sum = 0;
-
-            var order = new Order()
+            if (Seller != null)
             {
-                SellerId = Seller.SellerId,
 
-                ClientId = Client.ClientId,
-
-                Created = DateTime.Now
-            };           
-            dataBase.Orders.Add(order);
-            dataBase.SaveChanges();
-
-
-            var sells = new List<Sell>();
-
-            foreach (Product product in cart)
-            {
-                if (product.CountOnShelf > 0)
+                var order = new Order()
                 {
-                    var sell = new Sell()
-                    {
-                        OrderId = order.OrderId,
-                        ProductId = product.ProductId,
-                    };
-                    dataBase.Sells.Add(sell);
-                    long barcode = product.Barcode;
-                    var productCount = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();
-                    receipt += $"{product.Barcode,-20}{product.Price,-20}{product.Name} \n";
-                    productCount.CountOnShelf--;
-                    sum += product.Price;
+                    SellerId = Seller.SellerId,
 
+                    ClientId = Client.ClientId,
+
+                    Created = DateTime.Now
+                };
+                dataBase.Orders.Add(order);
+                dataBase.SaveChanges();
+
+
+                var sells = new List<Sell>();
+
+                foreach (Product product in cart)
+                {
+                    if (product.CountOnShelf > 0)
+                    {
+                        var sell = new Sell()
+                        {
+                            OrderId = order.OrderId,
+                            ProductId = product.ProductId,
+                        };
+                        dataBase.Sells.Add(sell);
+                        long barcode = product.Barcode;
+                        var productCount = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();
+                        receipt += $"{product.Barcode,-20}{product.Price,-20}{product.Name} \n";
+                        productCount.CountOnShelf--;
+                        sum += product.Price;
+
+                    }
                 }
+                receipt += "\nOrder Number: " + order.OrderId + " Status : Closed   Total price:\t" + sum;
+                order.Amount = sum;
+                dataBase.SaveChanges();
             }
-            receipt += "\nOrder Number: " + order.OrderId + " Status : Closed   Total price:\t" + sum;
-            order.Amount = sum;
-            dataBase.SaveChanges();
+            else
+            {
+                var order = new Order()
+                {
+                    SellerId = 4,
+
+                    ClientId = Client.ClientId,
+
+                    Created = DateTime.Now
+                };
+                dataBase.Orders.Add(order);
+                dataBase.SaveChanges();
+
+
+                var sells = new List<Sell>();
+
+                foreach (Product product in cart)
+                {
+                    if (product.CountOnShelf > 0)
+                    {
+                        var sell = new Sell()
+                        {
+                            OrderId = order.OrderId,
+                            ProductId = product.ProductId,
+                        };
+                        dataBase.Sells.Add(sell);
+                        long barcode = product.Barcode;
+                        var productCount = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();
+                        receipt += $"{product.Barcode,-20}{product.Price,-20}{product.Name} \n";
+                        productCount.CountOnShelf--;
+                        sum += product.Price;
+
+                    }
+                }
+                receipt += "\nOrder Number: " + order.OrderId + " Status : Closed   Total price:\t" + sum;
+                order.Amount = sum;
+                dataBase.SaveChanges();
+            }
 
             #region Create A Bill
 

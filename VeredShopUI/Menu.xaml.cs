@@ -71,9 +71,18 @@ namespace VeredShopUI
         #region Go To Buy Through POS Screen
         private void buyThroughPos_Click(object sender, RoutedEventArgs e)
         {
-            var buyThroughPos = new buyThroughPos(seller1);
-            buyThroughPos.Show();
-            this.Close();
+            if (seller1 != null)
+            {
+                var buyThroughPos = new buyThroughPos(seller1);
+                buyThroughPos.Show();
+                this.Close();
+            }
+            else
+            {
+                var buyThroughPos = new buyThroughPos();
+                buyThroughPos.Show();
+                this.Close();
+            }
         }
         #endregion
 
@@ -87,9 +96,18 @@ namespace VeredShopUI
         #region Go To Storage Screen
         private void Storage_Click(object sender, RoutedEventArgs e)
         {
+            if (storekeeper1 != null)
+            { 
             var storageProduct = new Storage(storekeeper1);
             storageProduct.Show();
             this.Close();
+            }
+            else
+            {
+                var storageProduct = new Storage();
+                storageProduct.Show();
+                this.Close();
+            }
         }
         #endregion
 
@@ -105,9 +123,18 @@ namespace VeredShopUI
         #region Go To Self Purchase Screen
         private void Self_Purchase_Click(object sender, RoutedEventArgs e)
         {
+            if (client1 != null)
+            { 
             var selfPurchase = new SelfPurchase(client1);
             selfPurchase.Show();
             this.Close();
+            }
+            else
+            {
+              var selfPurchase = new SelfPurchase();
+              selfPurchase.Show();
+              this.Close();
+            }
         }
         #endregion
     }

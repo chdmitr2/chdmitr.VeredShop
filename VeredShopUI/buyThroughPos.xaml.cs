@@ -26,6 +26,16 @@ namespace VeredShopUI
 
         #region Initializing Buy Through POS Window (Constructor)
 
+        public buyThroughPos()
+        {
+            dataBase = new VeredContext();
+            InitializeComponent();
+            cart = new Cart();
+            clientLabel.Content = $"Hello Manager!";
+            clientLabel.FontSize = 16;
+            clientLabel.FontFamily = new FontFamily("SegoePrint");
+            clientLabel.FontWeight = FontWeights.Bold;
+        }
         public buyThroughPos(Seller seller)
         {
             dataBase = new VeredContext();
