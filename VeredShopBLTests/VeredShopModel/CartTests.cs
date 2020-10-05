@@ -25,14 +25,16 @@ namespace VeredShopBL.VeredShopModel.Tests
                 ProductId = 1,
                 Name = "pr1",
                 Price = 100,
-                CountOnShelf = 10
+                CountOnShelf = 10,
+                CountInStorage = 100
             }; 
             var product2 = new Product()
             {
                 ProductId = 2,
                 Name = "pr2",
                 Price = 200,
-                CountOnShelf = 20
+                CountOnShelf = 20,
+                CountInStorage = 100
             };
             var cart = new Cart(client);
            

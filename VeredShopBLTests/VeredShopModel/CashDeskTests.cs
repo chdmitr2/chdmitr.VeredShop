@@ -1,84 +1,67 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VeredShopBL.VeredShopModel;
-using System;
-using System.Collections.Generic;
+
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace VeredShopBL.VeredShopModel.Tests
 {
     [TestClass()]
     public class CashDeskTests
     {
+        
+
         [TestMethod()]
         public void CashDeskTest()
         {
+             
             // arrange
-           // var client1 = new Client()
-           // {
-          //      Name = "client1",
-           //     ClientId = 1
-         //   };
 
-          //  var client2 = new Client()
-          //  {
-          //      Name = "client2",
-         //       ClientId = 2
-         //   };
+            VeredContext dataBase = new VeredContext();
 
-         //   var seller = new Seller()
-         //   {
-         //       Name = "sellername",
-          //      SellerId = 1,
-         //   };
+            var client1 = dataBase.Clients.Where(i => i.ClientId == 1).FirstOrDefault();
 
-         //   var product1 = new Product()
-          //  {
-          //       ProductId = 1,
-           //      Name = "pr1",
-            //     Price = 100,
-            //     Count = 10
-           // };
+            var client2 = dataBase.Clients.Where(i => i.ClientId == 2).FirstOrDefault();
 
-          //  var product2 = new Product()
-          ///  {
-          //      ProductId = 2,
-          //      Name = "pr2",
-         //       Price = 200,
-          //      Count = 20
-          //  };
+            var seller = dataBase.Sellers.Where(i => i.SellerId == 3).FirstOrDefault();
 
-           // var cart1 = new Cart(client1);
-          //  cart1.Add(product1);
-          //  cart1.Add(product1);
-            //cart1.Add(product2);
+            var product1 = dataBase.Products.Where(i => i.ProductId == 4).FirstOrDefault();
 
-          //  var cart2 = new Cart(client2);
-          //  cart2.Add(product1);
-          //  cart2.Add(product2);
-          //  cart2.Add(product2);
+            var product2 = dataBase.Products.Where(i => i.ProductId == 5).FirstOrDefault();
+           
+            var cart1 = new Cart(client1);
+            cart1.Add(product1);
+            cart1.Add(product1);
+            cart1.Add(product2);
 
-         //   var cashdesk = new CashDesk(1, seller);
-          //  cashdesk.MaxQueueLength = 10;
-         //   cashdesk.Enqueue(cart1);
-          //  cashdesk.Enqueue(cart2);
-//
-           // var cart1ExpectedResult = 400;
-          //  var cart2ExpectedResult = 500;
+            var cart2 = new Cart(client2);
+            cart2.Add(product1);
+            cart2.Add(product2);
+            cart2.Add(product2);
+
+            var cashdesk1 = new CashDesk(seller, client1);
+            var cashdesk2 = new CashDesk(seller, client2);
 
 
-            //act
+            decimal cart1ExpectedResult = 18.50M;
+            decimal cart2ExpectedResult = 13.00M;
 
-           // var cart1ActualResult = cashdesk.Dequeue();
-           // var cart2ActualResult = cashdesk.Dequeue();
 
-            //assert
+            // act
 
-           // Assert.AreEqual(cart1ExpectedResult, cart1ActualResult);
-           // Assert.AreEqual(cart2ExpectedResult, cart2ActualResult);
-           // Assert.AreEqual(7, product1.Count);
-            //Assert.AreEqual(17, product2.Count);
+            decimal cart1ActualResult = cashdesk1.buyThroughPos(cart1);
+            decimal cart2ActualResult = cashdesk2.buyThroughPos(cart2);
+
+          //  assert
+
+            Assert.AreEqual(cart1ExpectedResult, cart1ActualResult);
+            Assert.AreEqual(cart2ExpectedResult, cart2ActualResult);
+            VeredContext dataBase2 = new VeredContext();
+            var product3 = dataBase2.Products.Where(i => i.ProductId == 4).FirstOrDefault();
+            var product4 = dataBase2.Products.Where(i => i.ProductId == 5).FirstOrDefault();
+            Assert.AreEqual(31, product3.CountOnShelf);
+            Assert.AreEqual(74, product4.CountOnShelf);
+
+
         }
 
        
