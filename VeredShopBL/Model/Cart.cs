@@ -53,7 +53,7 @@ namespace VeredShopBL.VeredShopModel
             }
             else
             {
-                Products.Remove(product);
+                Products.Remove(product);               
             }
         }
 
@@ -79,7 +79,6 @@ namespace VeredShopBL.VeredShopModel
             }
             return result;
         }
-
 
     }
 }
