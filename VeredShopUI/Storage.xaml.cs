@@ -100,6 +100,13 @@ namespace VeredShopUI
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             long barcode = Convert.ToInt64(txbxBarcode.Text);
+            if((barcode < 1000000000000) && (barcode > 9999999999999))
+            {
+                {
+                    MessageBox.Show("Wrong Barcode", "Warning!", MessageBoxButton.OK);
+                    txbxBarcode.Focus();
+                }
+            }
             int count = Convert.ToInt32(txbxCountInStorage.Text);
             var product1 = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();
             if (txbxBarcode.Text == "")
@@ -164,7 +171,7 @@ namespace VeredShopUI
                 }
                 else
                 {
-                    update.CountInStorage = Convert.ToInt32(txbxCountInStorage.Text);
+                    update.CountInStorage += Convert.ToInt32(txbxCountInStorage.Text);
                     update.CountOnShelf = Convert.ToInt32(txbxCountOnShelf.Text);
                 }               
                 dataBase.SaveChanges();

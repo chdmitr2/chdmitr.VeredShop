@@ -219,7 +219,7 @@ namespace VeredShopBL.VeredShopModel
 
                     }
                 }
-                receipt += "\nOrder Number: " + order.OrderId + " Status : Closed   Total price:\t" + sum;
+                receipt += "\nOrder Number: " + order.OrderId + " Status : Closed   Total price:\t" + sum + "\n\n";
                 order.Amount = sum;
                 dataBase.SaveChanges();
             }

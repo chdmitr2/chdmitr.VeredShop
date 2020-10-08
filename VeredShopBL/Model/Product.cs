@@ -8,7 +8,7 @@ namespace VeredShopBL.VeredShopModel
 {
     public class Product
     {
-       
+        static Product productBarcode;
         public int ProductId { get; set; }
 
         public string Name { get; set; }
@@ -26,6 +26,7 @@ namespace VeredShopBL.VeredShopModel
         public Storekeeper Storekeeper { get; set; }
 
         public ICollection<Sell> Sells { get; set; }
+
 
         #region ToString
         public override string ToString()
