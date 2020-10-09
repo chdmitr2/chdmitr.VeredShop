@@ -59,9 +59,18 @@ namespace VeredShopUI
         #region Back To Main Menu
         private void ToMenu_Click(object sender, RoutedEventArgs e)
         {
-            Menu menu = new Menu();
-            menu.Show();
-            this.Close();
+            if (Seller != null)
+            {
+                Menu menu = new Menu(Seller);
+                menu.Show();
+                this.Close();
+            }
+            else 
+            {               
+                Menu menu = new Menu();
+                menu.Show();
+                this.Close();
+            }
         }
         #endregion
 
@@ -109,12 +118,12 @@ namespace VeredShopUI
         #region Payment
         private void To_Payment_Click(object sender, RoutedEventArgs e)
         {
-         if (client != null) 
-         { 
+          if (client != null) 
+          { 
             var price = cashDesk.buyThroughPos(cart);
             MessageBox.Show("Congratulations on your purchase!  Price: " + price + " Wait to your bill, please ", "Purchase succeed! ", MessageBoxButton.OK);
                 txbxClientId.Clear();
-                try
+            try
             {
                 System.Diagnostics.Process.Start("Bill.pdf");
             }
@@ -122,14 +131,15 @@ namespace VeredShopUI
             {
                 MessageBox.Show(ex.Message);
             }
+            lblPrice.Content = 0;
             ltbxCart.Items.Clear();
             cart = new Cart(Seller);
-        }
-            else
-            {
+          }
+          else
+          {
                 MessageBox.Show("Wrong Client ID");
                 txbxClientId.Clear();
-            }
+          }
 
         }
         #endregion
@@ -239,10 +249,9 @@ namespace VeredShopUI
                 }
                 
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                txbxClientId.Clear();
+            catch 
+            {               
+               txbxClientId.Clear();
             }
 
         }

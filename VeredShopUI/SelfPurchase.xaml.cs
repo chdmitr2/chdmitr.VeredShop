@@ -18,7 +18,7 @@ namespace VeredShopUI
         #region Defining Objets
         VeredContext dataBase; 
         Cart cart;
-        Client client;
+        Client Client;
         CashDesk cashDesk;
         DispatcherTimer tmrDelay = new DispatcherTimer();
         #endregion
@@ -44,8 +44,9 @@ namespace VeredShopUI
             
             dataBase = new VeredContext();
             InitializeComponent();
-            cart = new Cart(client);
-            cashDesk = new CashDesk(client);
+            Client = client;
+            cart = new Cart(Client);
+            cashDesk = new CashDesk(Client);
             
                 clientLabel.Content = $"Hello, {client.FirstName}";
                 clientLabel.FontSize = 16;
@@ -64,9 +65,18 @@ namespace VeredShopUI
         #region Back To Main Menu
         private void ToMenu_Click(object sender, RoutedEventArgs e)
         {
-            Menu menu = new Menu();
+            if (Client != null)
+            { 
+            Menu menu = new Menu(Client);
             menu.Show();
             this.Close();
+            }
+            else
+            {
+              MainWindow menu = new MainWindow();
+              menu.Show();
+              this.Close();
+            }
         }
         #endregion
 
@@ -114,7 +124,7 @@ namespace VeredShopUI
         #region Payment
         private void To_Payment_Click(object sender, RoutedEventArgs e)
         {
-            if (client != null)
+            if (Client != null)
             {
                 var price = cashDesk.SelfPurchase(cart);
                 MessageBox.Show("Congratulations on your purchase!  Price: " + price + " Check email to see your bill ", "Purchase succeed! ", MessageBoxButton.OK);
@@ -131,9 +141,9 @@ namespace VeredShopUI
                     }
                 }
 
-
+                lblPrice.Content = 0;
                 ltbxCart.Items.Clear();
-                cart = new Cart(client);
+                cart = new Cart(Client);
             }
             else
             {
@@ -152,6 +162,7 @@ namespace VeredShopUI
                     }
                 }
 
+                lblPrice.Content = 0;
                 ltbxCart.Items.Clear();
                 cart = new Cart();
             }
@@ -191,23 +202,26 @@ namespace VeredShopUI
                     string strCurrentString = txbxBarcode.Text.Trim().ToString();
                     if (strCurrentString != "")
                     {
-                    if (long.Parse(txbxBarcode.Text) > 999999999999)
-                    {
-                        long barcode = Convert.ToInt64(txbxBarcode.Text);
+                        if (long.Parse(txbxBarcode.Text) > 999999999999)
+                        {
+                          long barcode = Convert.ToInt64(txbxBarcode.Text);
 
-                        Product product = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();
+                          Product product = dataBase.Products.Where(i => i.Barcode == barcode).FirstOrDefault();
 
-                        cart.Add(product);
+                          cart.Add(product);
                        
-                        UpdateLists();
+                           UpdateLists();
                         
-                    }
-                    else
-                    {
+                        }
+                        else
+                        {
                         MessageBox.Show("Enter Barcode of Product.", "Caution", MessageBoxButton.OK);
+                        }
+
+                        txbxBarcode.Text = "";
+
                     }
-                    txbxBarcode.Text = "";
-                    }
+
                     txbxBarcode.Focus();
                 }
                 catch (Exception ex)

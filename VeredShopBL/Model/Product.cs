@@ -8,7 +8,6 @@ namespace VeredShopBL.VeredShopModel
 {
     public class Product
     {
-        static Product productBarcode;
         public int ProductId { get; set; }
 
         public string Name { get; set; }

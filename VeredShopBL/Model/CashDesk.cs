@@ -20,6 +20,8 @@ namespace VeredShopBL.VeredShopModel
 
         public Seller Seller { get; set; }
 
+        public string receipt = "";
+
         #endregion
 
         #region Constructors
@@ -38,14 +40,13 @@ namespace VeredShopBL.VeredShopModel
             Client = client;
         }
         #endregion
-
-       
-        string receipt = "\t\tPurchase in Vered Shop   " + DateTime.Now +  "\t\n\n" + $"{"Barcode",-30}{"Price",-25}{"Product"}\n\n";
-
+      
         #region Self Purchase
         public decimal SelfPurchase(Cart cart)
         {
             decimal sum = 0;
+
+            receipt = "\t\tPurchase in Vered Shop   " + DateTime.Now + "\t\n\n" + $"{"Barcode",-30}{"Price",-25}{"Product"}\n\n";
 
             if (Client != null)
             {
@@ -82,6 +83,7 @@ namespace VeredShopBL.VeredShopModel
                 receipt += "\nOrder Number: " + order.OrderId + " Status : Closed  Total price:\t" + sum;
                 order.Amount = sum;
                 dataBase.SaveChanges();
+
                 #region Send Mail With Bill To Client
                 if (Client.Email != null)
                 {
@@ -184,6 +186,9 @@ namespace VeredShopBL.VeredShopModel
         public decimal buyThroughPos(Cart cart)
         {
             decimal sum = 0;
+
+            receipt = "\t\tPurchase in Vered Shop   " + DateTime.Now + "\t\n\n" + $"{"Barcode",-30}{"Price",-25}{"Product"}\n\n";
+
             if (Seller != null)
             {
 

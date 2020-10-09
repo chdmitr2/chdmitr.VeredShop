@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using VeredShopBL.Model;
 using VeredShopBL.VeredShopModel;
 #endregion
 
@@ -50,7 +51,12 @@ namespace VeredShopUI
         #region Enter Email and Password To Log In 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            if (LoginBox.Text == "admin" && PassBox.Password == "admin")
+            Manager manager = Manager.Instance();
+            manager.ManagerOperation();
+            string managerEmail = manager.GetManagerEmail();
+            string managerPassword = manager.GetManagerPassword();
+
+            if (LoginBox.Text == managerEmail && PassBox.Password == managerPassword)
             {
                 var menu = new Menu();
                 menu.Show();

@@ -90,9 +90,18 @@ namespace VeredShopUI
         #region Back To Main Menu
         private void OnMain_Click(object sender, RoutedEventArgs e)
         {
-            Menu menu = new Menu();
-            menu.Show();
-            this.Close();
+            if (storekeeper1 != null)
+            { 
+              Menu menu = new Menu(storekeeper1);
+              menu.Show();
+              this.Close();
+            }
+            else
+            {
+               Menu menu = new Menu();
+               menu.Show();
+               this.Close();
+            }
         }
         #endregion
 

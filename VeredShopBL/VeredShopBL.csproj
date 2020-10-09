@@ -95,6 +95,7 @@
     <Compile Include="Model\Cart.cs" />
     <Compile Include="Model\CashDesk.cs" />
     <Compile Include="Model\Client.cs" />
+    <Compile Include="Model\Manager.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Sell.cs" />
