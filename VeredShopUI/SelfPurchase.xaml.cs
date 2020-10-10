@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using VeredShopBL.VeredShopModel;
 using System.Windows.Media;
+using VeredShopUI.Pattern;
 #endregion
 
 
@@ -16,7 +17,8 @@ namespace VeredShopUI
     public partial class SelfPurchase : Window
     {
         #region Defining Objets
-        VeredContext dataBase; 
+        VeredContext dataBase;
+        Context context;
         Cart cart;
         Client Client;
         CashDesk cashDesk;
@@ -65,16 +67,16 @@ namespace VeredShopUI
         #region Back To Main Menu
         private void ToMenu_Click(object sender, RoutedEventArgs e)
         {
-            if (Client != null)
+            if (Client != null) 
             { 
-            Menu menu = new Menu(Client);
-            menu.Show();
+            context = new Context(new ConcreteStrategyE(Client));
+            context.ContextInterface();
             this.Close();
             }
             else
             {
-              MainWindow menu = new MainWindow();
-              menu.Show();
+              context = new Context(new ConcreteStrategyF());
+              context.ContextInterface();
               this.Close();
             }
         }

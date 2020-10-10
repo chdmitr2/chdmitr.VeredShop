@@ -8,12 +8,14 @@ using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
 using System.Drawing;
 using VeredShopBL.VeredShopModel;
+using VeredShopUI.Pattern;
 
 namespace VeredShopUI
 {
     public partial class History : Window
     {
         VeredContext dataBase;
+        Context context;
         string getOrders = "";
         string getAllClientPurchase = "";
 
@@ -112,8 +114,8 @@ namespace VeredShopUI
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            var shopUsers = new User();
-            shopUsers.Show();
+            context = new Context(new ConcreteStrategyD());
+            context.ContextInterface();
             this.Close();
         }
 

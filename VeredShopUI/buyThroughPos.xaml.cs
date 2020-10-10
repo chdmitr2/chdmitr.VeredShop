@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using VeredShopBL.VeredShopModel;
+using VeredShopUI.Pattern;
 #endregion
 
 namespace VeredShopUI
@@ -17,6 +18,7 @@ namespace VeredShopUI
       
         #region Defining Objets
         VeredContext dataBase;
+        Context context;
         Cart cart;
         Client client;
         Seller Seller;
@@ -59,18 +61,9 @@ namespace VeredShopUI
         #region Back To Main Menu
         private void ToMenu_Click(object sender, RoutedEventArgs e)
         {
-            if (Seller != null)
-            {
-                Menu menu = new Menu(Seller);
-                menu.Show();
-                this.Close();
-            }
-            else 
-            {               
-                Menu menu = new Menu();
-                menu.Show();
-                this.Close();
-            }
+            context = new Context(new ConcreteStrategyE(Seller));
+            context.ContextInterface();
+            this.Close();
         }
         #endregion
 

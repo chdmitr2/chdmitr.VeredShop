@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using VeredShopBL.VeredShopModel;
+using VeredShopUI.Pattern;
 #endregion
 
 namespace VeredShopUI
@@ -10,6 +11,7 @@ namespace VeredShopUI
     {
         #region Defining Objects
         VeredContext dataBase;
+        Context context;
         Client client1;
         Seller seller1;
         Storekeeper storekeeper1;
@@ -62,8 +64,8 @@ namespace VeredShopUI
         #region Back To Main Window
         private void OnMain_Click(object sender, RoutedEventArgs e)
         {
-             MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
+            context = new Context(new ConcreteStrategyF());
+            context.ContextInterface();
             this.Close();
         }
         #endregion
@@ -71,18 +73,9 @@ namespace VeredShopUI
         #region Go To Buy Through POS Screen
         private void buyThroughPos_Click(object sender, RoutedEventArgs e)
         {
-            if (seller1 != null)
-            {
-                var buyThroughPos = new buyThroughPos(seller1);
-                buyThroughPos.Show();
-                this.Close();
-            }
-            else
-            {
-                var buyThroughPos = new buyThroughPos();
-                buyThroughPos.Show();
-                this.Close();
-            }
+            context = new Context(new ConcreteStrategyB(seller1));
+            context.ContextInterface();
+            this.Close();
         }
         #endregion
 
@@ -96,45 +89,27 @@ namespace VeredShopUI
         #region Go To Storage Screen
         private void Storage_Click(object sender, RoutedEventArgs e)
         {
-            if (storekeeper1 != null)
-            { 
-            var storageProduct = new Storage(storekeeper1);
-            storageProduct.Show();
+            context = new Context(new ConcreteStrategyC(storekeeper1));
+            context.ContextInterface();
             this.Close();
-            }
-            else
-            {
-                var storageProduct = new Storage();
-                storageProduct.Show();
-                this.Close();
-            }
         }
         #endregion
 
         #region Go To Users Screen
         private void Users_Click(object sender, RoutedEventArgs e)
         {
-            var shopUsers = new User();
-            shopUsers.Show();
+            context = new Context(new ConcreteStrategyD());
+            context.ContextInterface();
             this.Close();
         }
         #endregion
 
         #region Go To Self Purchase Screen
         private void Self_Purchase_Click(object sender, RoutedEventArgs e)
-        {
-            if (client1 != null)
-            { 
-            var selfPurchase = new SelfPurchase(client1);
-            selfPurchase.Show();
-            this.Close();
-            }
-            else
-            {
-              var selfPurchase = new SelfPurchase();
-              selfPurchase.Show();
-              this.Close();
-            }
+        {           
+                context = new Context(new ConcreteStrategyA(client1));
+                context.ContextInterface();
+                this.Close();          
         }
         #endregion
     }

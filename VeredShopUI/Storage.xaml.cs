@@ -11,7 +11,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using VeredShopBL.VeredShopModel;
-# endregion
+using VeredShopUI.Pattern;
+#endregion
 
 
 namespace VeredShopUI
@@ -21,6 +22,7 @@ namespace VeredShopUI
     {
         #region Defining Object and Variables
         VeredContext dataBase;
+        Context context;
         Storekeeper storekeeper1;
         string getAllProducts = "\t\tProducts State  " + DateTime.Now + "\t\n\n" + $"{"Barcode",-30}{"Price",-20}{"OnShelf",-20}{"InStorage",-20}{"Product",-20}\n";
          #endregion
@@ -90,18 +92,9 @@ namespace VeredShopUI
         #region Back To Main Menu
         private void OnMain_Click(object sender, RoutedEventArgs e)
         {
-            if (storekeeper1 != null)
-            { 
-              Menu menu = new Menu(storekeeper1);
-              menu.Show();
-              this.Close();
-            }
-            else
-            {
-               Menu menu = new Menu();
-               menu.Show();
-               this.Close();
-            }
+            context = new Context(new ConcreteStrategyE(storekeeper1));
+            context.ContextInterface();
+            this.Close();
         }
         #endregion
 

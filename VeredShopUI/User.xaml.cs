@@ -1,21 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using VeredShopBL.VeredShopModel;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
 using System.Drawing;
-
+using VeredShopUI.Pattern;
 
 namespace VeredShopUI
 {
@@ -23,6 +17,7 @@ namespace VeredShopUI
     public partial class User : Window
     {
         VeredContext dataBase;
+        Context context;
         string getAllClients = "\t\tClients State  " + DateTime.Now + "\t\n\n" + $"{"ClientId",-30}{"FirstName",-20}{"LastName",-30}{"Email"}\n";
 
         public User()
@@ -378,8 +373,8 @@ namespace VeredShopUI
         #region Back To Main Menu
         private void OnMain_Click(object sender, RoutedEventArgs e)
         {
-            Menu menu = new Menu();
-            menu.Show();
+            context = new Context(new ConcreteStrategyE());
+            context.ContextInterface();
             this.Close();
         }
 

@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using VeredShopBL.Model;
 using VeredShopBL.VeredShopModel;
+using VeredShopUI.Pattern;
 #endregion
 
 namespace VeredShopUI
@@ -13,6 +14,7 @@ namespace VeredShopUI
     {
         #region Defining Objects
         VeredContext DB = new VeredContext();
+        Context context;
         Client client;
         Seller seller;
         Storekeeper storekeeper;
@@ -58,8 +60,8 @@ namespace VeredShopUI
 
             if (LoginBox.Text == managerEmail && PassBox.Password == managerPassword)
             {
-                var menu = new Menu();
-                menu.Show();
+                context = new Context(new ConcreteStrategyE());
+                context.ContextInterface();
                 this.Close();
             }
             else
@@ -93,8 +95,8 @@ namespace VeredShopUI
                             {
                                 MessageBox.Show("Login Successfully!", "Login Success", MessageBoxButton.OK);
                                 client = DB.Clients.Where(u => u.Email == LoginBox.Text).FirstOrDefault();
-                                var menu = new Menu(client);
-                                menu.Show();
+                                context = new Context(new ConcreteStrategyE(client));
+                                context.ContextInterface();
                                 this.Close();
                             }
                             else
@@ -110,8 +112,8 @@ namespace VeredShopUI
                             {
                                 MessageBox.Show("Login Successfully!", "Login Success", MessageBoxButton.OK);
                                 seller = DB.Sellers.Where(u => u.Email == LoginBox.Text).FirstOrDefault();
-                                var menu = new Menu(seller);
-                                menu.Show();
+                                context = new Context(new ConcreteStrategyE(seller));
+                                context.ContextInterface();
                                 this.Close();
                             }
                             else
@@ -127,8 +129,8 @@ namespace VeredShopUI
                             {
                                 MessageBox.Show("Login Successfully!", "Login Success", MessageBoxButton.OK);
                                 storekeeper = DB.Storekeepers.Where(u => u.Email == LoginBox.Text).FirstOrDefault();
-                                var menu = new Menu(storekeeper);
-                                menu.Show();
+                                context = new Context(new ConcreteStrategyE(storekeeper));
+                                context.ContextInterface();
                                 this.Close();
                             }
                             else

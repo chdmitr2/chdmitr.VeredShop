@@ -5,6 +5,7 @@ using System.Windows.Input;
 using System.Net.Mail;
 using System.Net;
 using VeredShopBL.VeredShopModel;
+using VeredShopUI.Pattern;
 #endregion
 
 namespace VeredShopUI
@@ -13,6 +14,7 @@ namespace VeredShopUI
     {
         #region Defining Object
         VeredContext dataBase;
+        Context context;
         #endregion
 
         #region Constructor
@@ -115,8 +117,8 @@ namespace VeredShopUI
                         }
                         MessageBox.Show("You are successfully registred!");
 
-                        MainWindow main = new MainWindow();
-                        main.Show();
+                        context = new Context(new ConcreteStrategyF());
+                        context.ContextInterface();
                         this.Close();
                     }
                 }
@@ -138,8 +140,8 @@ namespace VeredShopUI
         #region Back To Main window
         private void OnMain_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
+            context = new Context(new ConcreteStrategyF());
+            context.ContextInterface();
             this.Close();
         }
         #endregion
