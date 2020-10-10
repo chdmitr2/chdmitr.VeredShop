@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using VeredShopBL.VeredShopModel;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
@@ -421,6 +425,8 @@ namespace VeredShopUI
             var Data2 = sellerGrid.SelectedItem;
             if (chkbx2.IsChecked == true)
             {
+                txbxSalary.Visibility = Visibility.Visible;
+                lblSalary.Visibility = Visibility.Visible;
                 if (Data2 != null)
                 {
                     var FirstName = (sellerGrid.SelectedCells[1].Column.GetCellContent(Data2) as TextBlock).Text;
@@ -450,6 +456,8 @@ namespace VeredShopUI
             var Data3 = storekeeperGrid.SelectedItem;
             if(chkbx3.IsChecked == true)
             {
+                txbxSalary.Visibility = Visibility.Visible;
+                lblSalary.Visibility = Visibility.Visible;
                 if (Data3 != null)
                 {
                     var FirstName3 = (storekeeperGrid.SelectedCells[1].Column.GetCellContent(Data3) as TextBlock).Text;

@@ -173,7 +173,7 @@ namespace VeredShopUI
                 }
                 else
                 {
-                    update.CountInStorage += Convert.ToInt32(txbxCountInStorage.Text);
+                    update.CountInStorage = Convert.ToInt32(txbxCountInStorage.Text);
                     update.CountOnShelf = Convert.ToInt32(txbxCountOnShelf.Text);
                 }               
                 dataBase.SaveChanges();
